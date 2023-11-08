@@ -8,6 +8,8 @@ const Detail = () => {
         <div className="header">
           <div className="headerTitle">Class Page</div>
         </div>
+
+        <div className="content">컨텐츠</div>
       </div>
     </div>
   );
