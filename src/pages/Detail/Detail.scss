@@ -1,3 +1,26 @@
-.Detail {
+.detail {
   width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .header {
+      background-color: beige;
+      display: flex;
+      justify-content: center;
+      align-self: stretch;
+
+      .headerTitle {
+        font-size: 55px;
+        font-weight: 500;
+        line-height: 95px;
+        margin: 125px 0;
+      }
+    }
+  }
 }
