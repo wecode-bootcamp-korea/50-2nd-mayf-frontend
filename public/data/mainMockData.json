@@ -1,0 +1,83 @@
+{
+  "bestClass": [
+    {
+      "id": 1,
+      "title": "인기순",
+      "class": "코딩 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    },
+
+    {
+      "id": 2,
+      "title": "인기순",
+      "class": "백엔드 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    },
+    {
+      "id": 3,
+      "title": "인기순",
+      "class": "프론트엔드 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    },
+    {
+      "id": 4,
+      "title": "인기순",
+      "class": "프론트엔드 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    }
+  ],
+  "newClass": [
+    {
+      "id": 1,
+      "title": "최신순",
+      "class": "코딩 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    },
+
+    {
+      "id": 2,
+      "title": "최신순",
+      "class": "백엔드 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    },
+    {
+      "id": 3,
+      "title": "최신순",
+      "class": "프론트엔드 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    },
+    {
+      "id": 4,
+      "title": "최신순",
+      "class": "프론트엔드 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    }
+  ],
+  "deadlineClass": [
+    {
+      "id": 1,
+      "title": "마감임박순",
+      "class": "코딩 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    },
+
+    {
+      "id": 2,
+      "title": "마감임박순",
+      "class": "백엔드 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    },
+    {
+      "id": 3,
+      "title": "마감 임박순",
+      "class": "프론트엔드 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    },
+    {
+      "id": 4,
+      "title": "마감 임박순",
+      "class": "프론트엔드 체험",
+      "image": "https://cdn.class101.net/images/4f58afa9-c054-4fe8-b59f-bb9d0fa1ac6f/1920xauto.webp"
+    }
+  ]
+}
