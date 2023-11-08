@@ -1,3 +1,38 @@
 .Login {
   width: 100%;
+  min-height: 80vh;
+
+  .container {
+    display: inline-grid;
+    grid-template-columns: repeat(2, minmax(50%, auto));
+    width: 60%;
+    margin: 10vh 20% 10vh 20%;
+    min-height: 70vh;
+    border: 1px solid black;
+
+    .loginBtn {
+      width: 150px;
+      height: 80px;
+      border-radius: 6px;
+    }
+    .user {
+      display: flex;
+      margin: 40% 0 0 10%;
+      justify-content: center;
+      align-items: center;
+      padding: 10%;
+    }
+    .event {
+      display: flex;
+      float: right;
+      margin: 40% 10% 0 0;
+      justify-content: center;
+      align-items: center;
+      padding: 10%;
+    }
+    .signup {
+      width: 200%;
+      text-align: center;
+    }
+  }
 }
