@@ -8,7 +8,7 @@
     width: 60%;
     margin: 10vh 20% 10vh 20%;
     min-height: 70vh;
-    border: 1px solid gray;
+    // border: 1px solid gray;
     border-radius: 16px;
 
     .user {
@@ -41,9 +41,12 @@
       }
     }
     .hline {
+      position: relative;
       width: 0;
+      height: 80%;
       border: 1px solid #ddd;
       margin: 40% 0 20% 0;
+      top: 10%;
     }
     .event {
       display: grid;
