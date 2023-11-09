@@ -8,17 +8,15 @@
     width: 60%;
     margin: 10vh 20% 10vh 20%;
     min-height: 70vh;
-    // border: 1px solid gray;
     border-radius: 16px;
 
     .user {
       display: grid;
-      margin: 30% 0 20% 10%;
+      margin: 30% 0 20% 0;
       justify-content: center;
       align-items: center;
       padding: 10%;
-      // width: 50%;
-      .textbox {
+      .textBox {
         text-align: center;
         font-size: 24px;
         margin-top: 20px;
@@ -26,13 +24,10 @@
         border-bottom: 2px solid #ddd;
       }
       .text {
-        // height:;
         text-align: center;
-        p {
-          margin: 10px 0 10px 0;
-        }
+        line-height: 30px;
       }
-      .imgbox {
+      .imgBox {
         text-align: center;
         button {
           border: none;
@@ -50,12 +45,11 @@
     }
     .event {
       display: grid;
-      margin: 30% 10% 20% 0;
+      margin: 30% 0 20% 0;
       justify-content: center;
       align-items: center;
       padding: 10%;
-      // width: 50%;
-      .textbox {
+      .textBox {
         text-align: center;
         font-size: 24px;
         margin-top: 20px;
@@ -64,11 +58,9 @@
       }
       .text {
         text-align: center;
-        p {
-          margin: 10px 0 10px 0;
-        }
+        line-height: 30px;
       }
-      .imgbox {
+      .imgBox {
         text-align: center;
         button {
           border: none;
