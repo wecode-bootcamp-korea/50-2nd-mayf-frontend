@@ -19,11 +19,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+    margin-right: 8px;
     .icon {
       padding: 20px;
+      aspect-ratio: 2/3;
       object-fit: cover;
-      height: 300px;
-      width: 300px;
+      height: 100px;
+      width: 100px;
+    }
+    .holdingCredit {
+      font-size: 20px;
+      font-weight: 600;
     }
   }
   .selectBox {
@@ -38,10 +45,17 @@
       text-align: center;
       line-height: 55px;
       height: 60px;
-      background-color: burlywood;
+      border: none;
+      background-color: beige;
       border-radius: 6px;
       cursor: pointer;
     }
+  }
+  .paymentBox {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .agreeLabel {
     height: 100px;
@@ -60,7 +74,7 @@
       height: 60px;
       width: 430px;
       cursor: pointer;
-      background-color: burlywood;
+      background-color: beige;
       font-size: 20px;
       font-weight: 600;
     }

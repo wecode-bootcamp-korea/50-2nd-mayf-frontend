@@ -1,4 +1,5 @@
 import React from 'react';
+import Payment from './toss임시.png';
 import CreditIcon from './credit.png';
 import './Credit.scss';
 
@@ -10,13 +11,33 @@ const Credit = () => {
       </div>
       <div className="iconBox">
         <img className="icon" src={CreditIcon} alt="class" />
+        <p className="holdingCredit">보유 크레딧 0 C</p>
       </div>
       <div className="selectBox">
-        <div className="amount">10,000원</div>
-        <div className="amount">30,000원</div>
-        <div className="amount">50,000원</div>
+        <button type="button" className="amount">
+          5,000원
+        </button>
+        <button type="button" className="amount">
+          10,000원
+        </button>
+        <button type="button" className="amount">
+          15,000원
+        </button>
       </div>
-      <div>결제위젯(토스)</div>
+      <div className="selectBox">
+        <button type="button" className="amount">
+          20,000원
+        </button>
+        <button type="button" className="amount">
+          30,000원
+        </button>
+        <button type="button" className="amount">
+          50,000원
+        </button>
+      </div>
+      <div className="paymentBox">
+        <img className="payment" src={Payment} alt="toss" />
+      </div>
       <label className="agreeLabel">
         <input type="checkbox"></input>
         약관동의
