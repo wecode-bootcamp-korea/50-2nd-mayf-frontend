@@ -18,22 +18,11 @@
       margin: auto;
       height: 40px;
       width: 40px;
+      cursor: pointer;
     }
     .logo {
       display: block;
       text-align: center;
-    }
-  }
-
-  .content {
-    display: flex;
-
-    .header {
-      width: 190px;
-      padding: 30px;
-      text-align: center;
-      font-size: 23px;
-      font-weight: bold;
     }
   }
 
@@ -45,21 +34,14 @@
     .icon {
       height: 70px;
       padding: 15px;
-    }
-
-    .point {
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 20px;
+      cursor: pointer;
     }
   }
 
-  p {
+  .login {
     font-weight: bold;
     font-size: 20px;
-    width: 200px;
+    cursor: pointer;
+    margin-right: 20px;
   }
 }
