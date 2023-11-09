@@ -4,45 +4,73 @@
 
   .container {
     display: inline-grid;
-    grid-template-columns: repeat(2, minmax(50%, auto));
+    grid-template-columns: 50% 0 50%;
     width: 60%;
     margin: 10vh 20% 10vh 20%;
     min-height: 70vh;
-    border: 1px solid black;
+    border: 1px solid gray;
+    border-radius: 16px;
 
     .user {
       display: grid;
-      margin: 30% 0 0 10%;
+      margin: 30% 0 20% 10%;
       justify-content: center;
       align-items: center;
       padding: 10%;
+      // width: 50%;
       .textbox {
         text-align: center;
-        font-size: 20px;
+        font-size: 24px;
         margin-top: 20px;
         padding-bottom: 10px;
         border-bottom: 2px solid #ddd;
       }
+      .text {
+        // height:;
+        text-align: center;
+        p {
+          margin: 10px 0 10px 0;
+        }
+      }
+      .imgbox {
+        text-align: center;
+        button {
+          border: none;
+          background-color: white;
+        }
+      }
+    }
+    .hline {
+      width: 0;
+      border: 1px solid #ddd;
+      margin: 40% 0 20% 0;
     }
     .event {
       display: grid;
-      margin: 30% 10% 0 0;
+      margin: 30% 10% 20% 0;
       justify-content: center;
       align-items: center;
       padding: 10%;
+      // width: 50%;
       .textbox {
         text-align: center;
-        font-size: 20px;
+        font-size: 24px;
         margin-top: 20px;
         padding-bottom: 10px;
         border-bottom: 2px solid #ddd;
       }
-    }
-    .signup {
-      width: 200%;
-      text-align: center;
-      .link {
-        color: blue;
+      .text {
+        text-align: center;
+        p {
+          margin: 10px 0 10px 0;
+        }
+      }
+      .imgbox {
+        text-align: center;
+        button {
+          border: none;
+          background-color: white;
+        }
       }
     }
   }
