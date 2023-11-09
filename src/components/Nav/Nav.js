@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Sidebar from './Sidebar';
 import Logo from '../Nav/navImg/logo.png';
 import Category from '../Nav/navImg/category.png';
 import './Nav.scss';
@@ -23,11 +24,3 @@ const Nav = () => {
 };
 
 export default Nav;
-
-{
-  /* <div className="icons">
-<img className="icon" src={User} alt="user" />
-<img className="icon" src={Heart} alt="heart" />
-<img className="icon" src={Coin} alt="credit" />
-</div> */
-}
