@@ -30,14 +30,9 @@ const Login = () => {
             <br />
             꿈꾸는 당신
           </div>
-          <div className="imgBox">
-            <button onClick={handleClickUser}>
-              <img
-                src="/images/kakao_login_medium_narrow.png"
-                alt="login_user"
-              />
-            </button>
-          </div>
+          <button className="imgBox" onClick={handleClickUser}>
+            <img src="/images/kakao_login_medium_narrow.png" alt="login_user" />
+          </button>
         </div>
         <div className="hline" />
         <div className="event">
@@ -49,14 +44,12 @@ const Login = () => {
             <br />
             빛을 비춰줄 당신
           </div>
-          <div className="imgBox">
-            <button onClick={handleClickEvent}>
-              <img
-                src="/images/kakao_login_medium_narrow.png"
-                alt="login_event"
-              />
-            </button>
-          </div>
+          <button className="imgBox" onClick={handleClickEvent}>
+            <img
+              src="/images/kakao_login_medium_narrow.png"
+              alt="login_event"
+            />
+          </button>
         </div>
       </div>
     </div>
