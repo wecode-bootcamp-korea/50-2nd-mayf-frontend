@@ -1,18 +1,23 @@
-import React, { useEffect } from 'react';
-import './Check.scss';
+import React, { useEffect, useRef } from 'react';
 import CheckImage from './Left arrow long.png';
+import './Check.scss';
 const { kakao } = window;
 
 const Check = () => {
-  useEffect(() => {
-    const container = document.getElementById('map');
+  const container = useRef(null);
+
+  const initMap = () => {
     const options = {
       center: new kakao.maps.LatLng(37.50637032453994, 127.05365992775118),
-      level: 3,
+      level: 1,
     };
+    const map = new kakao.maps.Map(container.current, options);
+  };
 
-    const map = new kakao.maps.Map(container, options);
+  useEffect(() => {
+    initMap();
   }, []);
+
   return (
     <div className="check">
       <div className="container">
@@ -35,7 +40,7 @@ const Check = () => {
                 <div>강의 위치</div>
                 <button>주소 복사</button>
               </div>
-              <div className="map" id="map" />
+              <div className="map" id="map" ref={container} />
             </div>
             <div className="contentCategory">강의 카테고리</div>
           </div>
