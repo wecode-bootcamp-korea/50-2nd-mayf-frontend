@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import './Detail.scss';
+import React, { useEffect, useState, useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale';
+import './Detail.scss';
 import 'react-datepicker/dist/react-datepicker.module.css';
 
 const { kakao } = window;
 
 const Detail = () => {
   const [startDate, setStartDate] = useState(new Date());
-  useEffect(() => {
-    const container = document.getElementById('map');
+  const container = useRef();
+
+  const initMap = () => {
     const options = {
       center: new kakao.maps.LatLng(37.50637032453994, 127.05365992775118),
       level: 1,
     };
+    const map = new kakao.maps.Map(container.current, options);
+  };
 
-    const map = new kakao.maps.Map(container, options);
+  useEffect(() => {
+    initMap();
   }, []);
 
   return (
@@ -37,10 +41,10 @@ const Detail = () => {
             <div className="classTitle">강의 1</div>
             <div className="classLocation">
               <div className="locationWriting">
-                <div>강의 위치</div>
-                <button>주소 복사</button>
+                <div className="locationLabel">강의 위치</div>
+                <button className="copyAddress">주소 복사</button>
               </div>
-              <div className="map" id="map" />
+              <div className="map" id="map" ref={container} />
             </div>
             <div className="classCategory">강의 카테고리</div>
             <div className="selectPeople">
