@@ -1,0 +1,26 @@
+.categoryList {
+  display: block;
+  width: 500px;
+  top: 60px;
+  left: 0;
+  overflow: hidden;
+  background-color: burlywood;
+  opacity: 0.6;
+  position: absolute;
+
+  .topCategory {
+    font-weight: 600;
+    font-size: 22px;
+    text-align: center;
+    padding-top: 10px;
+
+    .categoryMenu {
+      margin-bottom: 20px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: white;
+      }
+    }
+  }
+}
