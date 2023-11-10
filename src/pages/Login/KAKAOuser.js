@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Spinner from '../../components/Spinner/Spinner';
 
 const KAKAOuser = () => {
   const params = new URL(document.location.toString()).searchParams;
@@ -17,8 +18,7 @@ const KAKAOuser = () => {
   });
   return (
     <div>
-      <div>user 로딩중입니다...</div>
-      <div>{code}</div>
+      <Spinner />
     </div>
   );
 };
