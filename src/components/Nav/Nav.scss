@@ -1,4 +1,4 @@
-.Nav {
+.nav {
   display: flex;
   padding: 8px 12px;
   justify-content: space-between;
@@ -23,25 +23,24 @@
     .logo {
       display: block;
       text-align: center;
-    }
-  }
-
-  .icons {
-    display: flex;
-    justify-content: space-around;
-    padding: 5px;
-
-    .icon {
-      height: 70px;
-      padding: 15px;
       cursor: pointer;
     }
   }
-
-  .login {
-    font-weight: bold;
-    font-size: 20px;
-    cursor: pointer;
-    margin-right: 20px;
+  .loginLogo {
+    margin-right: 25px;
+    position: relative;
+    .login {
+      font-weight: bold;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .user {
+      display: block;
+      margin: auto;
+      height: 40px;
+      width: 40px;
+      z-index: 2;
+      cursor: pointer;
+    }
   }
 }
