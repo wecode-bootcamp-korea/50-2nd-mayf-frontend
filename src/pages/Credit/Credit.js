@@ -4,6 +4,14 @@ import CreditIcon from './credit.png';
 import './Credit.scss';
 
 const Credit = () => {
+  const amountList = [
+    { id: 1, amount: '5,000' },
+    { id: 2, amount: '10,000' },
+    { id: 3, amount: '15,000' },
+    { id: 4, amount: '20,000' },
+    { id: 5, amount: '30,000' },
+    { id: 6, amount: '50,000' },
+  ];
   return (
     <div className="credit">
       <div className="header">
@@ -14,17 +22,13 @@ const Credit = () => {
         <p className="holdingCredit">보유 크레딧 0 C</p>
       </div>
       <div className="selectBox">
-        <button type="button" className="amount">
-          5,000원
-        </button>
-        <button type="button" className="amount">
-          10,000원
-        </button>
-        <button type="button" className="amount">
-          15,000원
-        </button>
+        {amountList.map((item) => (
+          <div>
+            <input className="amount" type="radio" />
+          </div>
+        ))}
       </div>
-      <div className="selectBox">
+      {/* <div className="selectBox">
         <button type="button" className="amount">
           20,000원
         </button>
@@ -34,12 +38,12 @@ const Credit = () => {
         <button type="button" className="amount">
           50,000원
         </button>
-      </div>
+      </div> */}
       <div className="paymentBox">
         <img className="payment" src={Payment} alt="toss" />
       </div>
       <label className="agreeLabel">
-        <input type="checkbox"></input>
+        <input type="checkbox" />
         약관동의
       </label>
 
