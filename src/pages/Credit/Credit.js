@@ -22,23 +22,13 @@ const Credit = () => {
         <p className="holdingCredit">보유 크레딧 0 C</p>
       </div>
       <div className="selectBox">
-        {amountList.map((item) => (
-          <div>
-            <input className="amount" type="radio" />
+        {amountList.map((list) => (
+          <div key={list.id}>
+            <input className="radioInput" type="radio" value={list.amount} />
+            <label className="amount">{list.amount}</label>
           </div>
         ))}
       </div>
-      {/* <div className="selectBox">
-        <button type="button" className="amount">
-          20,000원
-        </button>
-        <button type="button" className="amount">
-          30,000원
-        </button>
-        <button type="button" className="amount">
-          50,000원
-        </button>
-      </div> */}
       <div className="paymentBox">
         <img className="payment" src={Payment} alt="toss" />
       </div>
@@ -57,3 +47,17 @@ const Credit = () => {
 };
 
 export default Credit;
+
+{
+  /* <div className="selectBox">
+        <button type="button" className="amount">
+          20,000원
+        </button>
+        <button type="button" className="amount">
+          30,000원
+        </button>
+        <button type="button" className="amount">
+          50,000원
+        </button>
+      </div> */
+}
