@@ -35,7 +35,7 @@ const Login = () => {
           </button>
         </div>
         <div className="hline" />
-        <div className="event">
+        <div className="user">
           <div className="textBox">for 등대지기</div>
           <div className="text">
             누군가의 새로운
