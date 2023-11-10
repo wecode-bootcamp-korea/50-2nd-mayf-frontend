@@ -32,7 +32,7 @@ const Main = () => {
           {deadlineClass?.map((pro) => (
             <div key={pro.id} className="class">
               <div className="imgBox">
-                <img className="classImg" alt="class" src={pro.image}></img>
+                <img className="classImg" alt="class" src={pro.image} />
               </div>
               <p className="sectionTitle">{pro.class}</p>
             </div>
