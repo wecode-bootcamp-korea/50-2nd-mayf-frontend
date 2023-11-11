@@ -10,11 +10,6 @@ const Sort = () => {
     { id: 3, text: '인기순', value: 'salesDesc' },
   ];
 
-  // const handleFilter = (value) => {
-  //   searchParams.set('sortBy', value);
-  //   setSearchParams(searchParams);
-  // };
-
   const handleFilter = (value) => {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set('sortBy', value);

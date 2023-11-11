@@ -26,6 +26,7 @@ const List = () => {
     }
   };
 
+  //임시 목데이타 fetch
   // useEffect(() => {
   //   fetch('/data/listMockData.json', {
   //     method: 'GET',
@@ -51,7 +52,7 @@ const List = () => {
     };
     fetchData();
   }, [queryString]);
-  // console.log(queryString);
+
   //const { message = [] } = classList;
   return (
     <div className="list">
