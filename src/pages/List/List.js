@@ -1,7 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import Sort from './components/Sort';
+import Search from './components/Search';
+import { GET_LIST_API } from '../../config';
 import './List.scss';
 
 const List = () => {
+  const [classList, setClassList] = useState({});
+  const [filterSearch, setFilterSearch] = useState([]);
+  const location = useLocation();
+  const queryString = location.search;
+  // 검색어가 변경될 때마다 호출되는 콜백 함수
+  const handleSearchChange = (search) => {
+    if (!search) {
+      // 검색어가 없는경우(!serach) 전체 리스트 표시
+      setFilterSearch(classList.message || []);
+    } else {
+      // 검색어가 포함된 아이템만 필터링하는 변수 생성
+      const filteredResults = classList.message.filter(
+        (item) =>
+          item.title.toLowerCase().includes(search.toLowerCase()) ||
+          item.name.toLowerCase().includes(search.toLowerCase()),
+      );
+      setFilterSearch(filteredResults);
+    }
+  };
+
+  // useEffect(() => {
+  //   fetch('/data/listMockData.json', {
+  //     method: 'GET',
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       setClassList(result);
+  //       setFilterSearch(result.message || []);
+  //     });
+  // }, []);
+
+  //백엔드 통신 데이터
+  useEffect(() => {
+    const fetchData = () => {
+      fetch(`${GET_LIST_API}${queryString}`, {
+        method: 'GET',
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          setClassList(result);
+          setFilterSearch(result.message || []);
+        });
+    };
+    fetchData();
+  }, [queryString]);
+  // console.log(queryString);
+  //const { message = [] } = classList;
   return (
     <div className="list">
       <div className="container">
@@ -61,108 +112,36 @@ const List = () => {
                 <input type="checkbox" />
                 충청
               </div>
-              <div>
-                <input type="checkbox" />
-                전라
-              </div>
-              <div>
-                <input type="checkbox" />
-                강원
-              </div>
-              <div>
-                <input type="checkbox" />
-                경상
-              </div>
-              <div>
-                <input type="checkbox" />
-                제주
-              </div>
             </ul>
           </div>
 
           <div className="classTab">
             <div className="labels">
               <div className="labelTitle">클래스 타이틀</div>
-              <select>
-                <option>최신순</option>
-                <option>오래된순</option>
-                <option>가격 낮은 순</option>
-                <option>가격 높은 순</option>
-                <option>인기순</option>
-              </select>
+              <Search onSearchChange={handleSearchChange} />
+              <Sort />
             </div>
             <div className="classList">
-              <div className="class">
-                <div className="picture">
-                  <img
-                    alt="상품이미지"
-                    src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
-                  />
-                </div>
-                <div className="classTitle">강의 1</div>
-                <div className="classLocation">서울</div>
-                <div className="classCredit">10,000P</div>
-              </div>
-
-              <div className="class">
-                <div className="picture">
-                  <img
-                    alt="상품이미지"
-                    src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
-                  />
-                </div>
-                <div className="classTitle">강의 1</div>
-                <div className="classLocation">서울</div>
-                <div className="classCredit">10,000P</div>
-              </div>
-
-              <div className="class">
-                <div className="picture">
-                  <img
-                    alt="상품이미지"
-                    src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
-                  />
-                </div>
-                <div className="classTitle">강의 1</div>
-                <div className="classLocation">서울</div>
-                <div className="classCredit">10,000P</div>
-              </div>
-
-              <div className="class">
-                <div className="picture">
-                  <img
-                    alt="상품이미지"
-                    src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
-                  />
-                </div>
-                <div className="classTitle">강의 1</div>
-                <div className="classLocation">서울</div>
-                <div className="classCredit">10,000P</div>
-              </div>
-
-              <div className="class">
-                <div className="picture">
-                  <img
-                    alt="상품이미지"
-                    src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
-                  />
-                </div>
-                <div className="classTitle">강의 1</div>
-                <div className="classLocation">서울</div>
-                <div className="classCredit">10,000P</div>
-              </div>
-
-              <div className="class">
-                <div className="picture">
-                  <img
-                    alt="상품이미지"
-                    src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
-                  />
-                </div>
-                <div className="classTitle">강의 1</div>
-                <div className="classLocation">서울</div>
-                <div className="classCredit">10,000P</div>
-              </div>
+              {filterSearch.map((list, index) => {
+                const {
+                  title,
+                  summery,
+                  name,
+                  image_source,
+                  top_category_name,
+                  sub_category_name,
+                } = list;
+                return (
+                  <div key={index} className="class">
+                    <div className="picture">
+                      <img alt="상품이미지" src={image_source} />
+                    </div>
+                    <div className="classTitle">{title}</div>
+                    <div className="classLocation">{summery}</div>
+                    <div className="classCredit">등대 : {name} </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
