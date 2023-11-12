@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Sort from './components/Sort';
 import Search from './components/Search';
+import SubCategories from './components/SubCategories';
 import { GET_LIST_API } from '../../config';
 import './List.scss';
 
 const List = () => {
   const [classList, setClassList] = useState({});
   const [filterSearch, setFilterSearch] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
   const location = useLocation();
   const queryString = location.search;
   // 검색어가 변경될 때마다 호출되는 콜백 함수
@@ -27,28 +29,14 @@ const List = () => {
   };
 
   //임시 목데이타 fetch
-  useEffect(() => {
-    const fetchData = () => {
-      fetch(`/data/listMockData.json${queryString}`, {
-        method: 'GET',
-      })
-        .then((res) => res.json())
-        .then((result) => {
-          setClassList(result);
-          setFilterSearch(result.message || []);
-        });
-    };
-    fetchData();
-  }, [queryString]);
-
-  //백엔드 통신 데이터
   // useEffect(() => {
   //   const fetchData = () => {
-  //     fetch(`${GET_LIST_API}${queryString}`, {
+  //     fetch(`/data/listMockData.json${queryString}`, {
   //       method: 'GET',
   //     })
   //       .then((res) => res.json())
   //       .then((result) => {
+  //         setSubCategories(result.message);
   //         setClassList(result);
   //         setFilterSearch(result.message || []);
   //       });
@@ -56,7 +44,22 @@ const List = () => {
   //   fetchData();
   // }, [queryString]);
 
-  //const { message = [] } = classList;
+  // 백엔드 통신 데이터
+  useEffect(() => {
+    const fetchData = () => {
+      fetch(`${GET_LIST_API}${queryString}`, {
+        method: 'GET',
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          setSubCategories(result.message);
+          setClassList(result);
+          setFilterSearch(result.message || []);
+        });
+    };
+    fetchData();
+  }, [queryString]);
+
   return (
     <div className="list">
       <div className="container">
@@ -65,59 +68,7 @@ const List = () => {
         </div>
 
         <div className="content">
-          <div className="tab">
-            <div className="labelTitle class">클라스 카테고리</div>
-            <ul className="categories">
-              <div>
-                <input type="checkbox" />
-                운동
-              </div>
-              <div>
-                <input type="checkbox" />
-                공예
-              </div>
-              <div>
-                <input type="checkbox" />
-                예술
-              </div>
-              <div>
-                <input type="checkbox" />
-                요리
-              </div>
-              <div>
-                <input type="checkbox" />
-                외국어
-              </div>
-              <div>
-                <input type="checkbox" />
-                프로그래밍
-              </div>
-              <div>
-                <input type="checkbox" />
-                게임
-              </div>
-              <div>
-                <input type="checkbox" />
-                기타
-              </div>
-            </ul>
-
-            <div className="labelTitle location">지역</div>
-            <ul className="categories">
-              <div>
-                <input type="checkbox" />
-                서울
-              </div>
-              <div>
-                <input type="checkbox" />
-                경기
-              </div>
-              <div>
-                <input type="checkbox" />
-                충청
-              </div>
-            </ul>
-          </div>
+          <SubCategories subCategories={subCategories} />
 
           <div className="classTab">
             <div className="labels">
@@ -127,15 +78,7 @@ const List = () => {
             </div>
             <div className="classList">
               {filterSearch.map((list) => {
-                const {
-                  id,
-                  title,
-                  summery,
-                  name,
-                  image_source,
-                  top_category_name,
-                  sub_category_name,
-                } = list;
+                const { id, title, summery, name, image_source } = list;
                 return (
                   <div key={id} className="class">
                     <div className="picture">
