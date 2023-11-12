@@ -1,12 +1,12 @@
 .categoryList {
-  display: block;
-  width: 500px;
+  position: absolute;
   top: 60px;
   left: 0;
+  display: block;
+  width: 500px;
   overflow: hidden;
-  background-color: burlywood;
-  opacity: 0.6;
-  position: absolute;
+  background-color: white;
+  opacity: 0.8;
 
   .topCategory {
     font-weight: 600;

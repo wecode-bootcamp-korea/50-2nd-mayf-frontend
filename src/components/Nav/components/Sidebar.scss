@@ -1,12 +1,12 @@
 .sideBar {
-  display: block;
-  width: 250px;
+  position: absolute;
   top: 45px;
   right: 0;
+  display: block;
+  width: 250px;
   overflow: hidden;
   background-color: white;
   opacity: 0.8;
-  position: absolute;
 
   .userMenu {
     font-size: 18px;
