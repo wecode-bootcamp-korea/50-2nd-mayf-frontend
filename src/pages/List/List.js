@@ -27,21 +27,9 @@ const List = () => {
   };
 
   //임시 목데이타 fetch
-  // useEffect(() => {
-  //   fetch('/data/listMockData.json', {
-  //     method: 'GET',
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       setClassList(result);
-  //       setFilterSearch(result.message || []);
-  //     });
-  // }, []);
-
-  //백엔드 통신 데이터
   useEffect(() => {
     const fetchData = () => {
-      fetch(`${GET_LIST_API}${queryString}`, {
+      fetch(`/data/listMockData.json${queryString}`, {
         method: 'GET',
       })
         .then((res) => res.json())
@@ -52,6 +40,21 @@ const List = () => {
     };
     fetchData();
   }, [queryString]);
+
+  //백엔드 통신 데이터
+  // useEffect(() => {
+  //   const fetchData = () => {
+  //     fetch(`${GET_LIST_API}${queryString}`, {
+  //       method: 'GET',
+  //     })
+  //       .then((res) => res.json())
+  //       .then((result) => {
+  //         setClassList(result);
+  //         setFilterSearch(result.message || []);
+  //       });
+  //   };
+  //   fetchData();
+  // }, [queryString]);
 
   //const { message = [] } = classList;
   return (
@@ -123,8 +126,9 @@ const List = () => {
               <Sort />
             </div>
             <div className="classList">
-              {filterSearch.map((list, index) => {
+              {filterSearch.map((list) => {
                 const {
+                  id,
                   title,
                   summery,
                   name,
@@ -133,7 +137,7 @@ const List = () => {
                   sub_category_name,
                 } = list;
                 return (
-                  <div key={index} className="class">
+                  <div key={id} className="class">
                     <div className="picture">
                       <img alt="상품이미지" src={image_source} />
                     </div>

@@ -11,17 +11,19 @@ const Sort = () => {
   ];
 
   const handleFilter = (value) => {
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('sortBy', value);
-    setSearchParams(newSearchParams);
+    // const newSearchParams = new URLSearchParams(searchParams);
+    searchParams.set('sortBy', value);
+    setSearchParams(searchParams);
   };
+
+  const getSearchParams = searchParams.get('sortBy');
 
   return (
     <div className="sort">
       <div className="selectBox">
         <select
           onChange={(e) => handleFilter(e.target.value)}
-          value={searchParams.get('sortBy')}
+          value={getSearchParams}
         >
           {FILTER.map((filter) => {
             return (

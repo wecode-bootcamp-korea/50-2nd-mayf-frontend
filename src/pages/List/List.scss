@@ -59,7 +59,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 1000px;
+        width: 100%;
+        max-width: 1000px;
         border: 1px solid #fbf3fa;
 
         .labels {
@@ -79,9 +80,9 @@
         }
 
         .classList {
-          width: 1000px;
+          padding-left: 50px;
+          width: 100%;
           display: flex;
-          justify-content: center;
           flex-direction: row;
           flex-wrap: wrap;
 
