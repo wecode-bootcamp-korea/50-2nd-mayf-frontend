@@ -18,9 +18,8 @@ const Nav = () => {
     setIsOpen(!isOpen);
   };
 
-  const [categories, setCategories] = useState([]);
-
   //햄버거 버튼 카테고리 구현
+  const [categories, setCategories] = useState([]);
   const [showCategories, setShowCategories] = useState(false);
   const handleLogoClick = () => {
     setShowCategories(!showCategories);
@@ -32,6 +31,9 @@ const Nav = () => {
     })
       .then((res) => res.json())
       .then((result) => {
+        // const uniqueCategories = Array.from(
+        //   new Set(result.message.top_category_name),
+        // );
         setCategories(result.message);
       });
   }, []);

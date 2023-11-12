@@ -3,12 +3,16 @@
   top: 60px;
   left: 0;
   display: block;
-  width: 500px;
+  width: 800px;
   overflow: hidden;
   background-color: white;
   opacity: 0.8;
 
   .topCategory {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
     font-weight: 600;
     font-size: 22px;
     text-align: center;
