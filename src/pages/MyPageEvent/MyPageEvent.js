@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './MyPageEvent.scss';
+import TabContentEvent from '../../components/TabContentEvent/TabContentEvent';
 
 const MyPageEvent = () => {
+  let [tab, setTab] = useState(0);
+
   return (
     <div className="myPageEvent">
       <div className="container">
@@ -10,32 +13,13 @@ const MyPageEvent = () => {
         </div>
 
         <div className="contents">
-          <div className="content">
-            <div className="contentTitle">정보 수정</div>
-            <img
-              src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg"
-              alt="예시 이미지"
-            />
-            <button className="pageMove">페이지 이동</button>
+          <div className="contentCategory">
+            <button onClick={() => setTab(0)}>정보 수정</button>
+            <button onClick={() => setTab(1)}>강의 내역</button>
+            <button onClick={() => setTab(2)}>채팅</button>
+            <button onClick={() => setTab(3)}>정산</button>
           </div>
-
-          <div className="content">
-            <div className="contentTitle">강의 내역</div>
-            <img
-              src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg"
-              alt="예시 이미지"
-            />
-            <button className="pageMove">페이지 이동</button>
-          </div>
-
-          <div className="content">
-            <div className="contentTitle">정산</div>
-            <img
-              src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg"
-              alt="예시 이미지"
-            />
-            <button className="pageMove">페이지 이동</button>
-          </div>
+          <TabContentEvent tab={tab} setTab={setTab} />
         </div>
       </div>
     </div>
