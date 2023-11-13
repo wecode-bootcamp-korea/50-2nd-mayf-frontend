@@ -17,7 +17,7 @@ const Slide = () => {
           prevEl: '.swiper-button-prev',
         }}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 2000 }}
+        autoplay={{ delay: 3000 }}
       >
         <SwiperSlide>
           <img
