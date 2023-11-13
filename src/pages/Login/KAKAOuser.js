@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import Spinner from '../../components/Spinner/Spinner';
+import { useSearchParams } from 'react-router-dom';
 
 const KAKAOuser = () => {
-  const params = new URL(document.location.toString()).searchParams;
-  const code = params.get('code');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const code = searchParams.get('code');
 
   useEffect(() => {
     fetch('api address', {
@@ -17,9 +18,9 @@ const KAKAOuser = () => {
       .then((data) => console.log(data));
   });
   return (
-    <div>
+    <>
       <Spinner />
-    </div>
+    </>
   );
 };
 
