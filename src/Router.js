@@ -28,8 +28,8 @@ const Router = () => {
         <Route path="/my-page-event" element={<MyPageEvent />} />
         <Route path="/manage" element={<Manage />} />
         <Route path="/credit" element={<Credit />} />
-        <Route path="/users/signup" element={<KAKAOuser />} />
-        <Route path="/hosts/signup" element={<KAKAOevent />} />
+        {/* <Route path="/users/signup" element={<KAKAOuser />} />
+        <Route path="/hosts/signup" element={<KAKAOevent />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>
