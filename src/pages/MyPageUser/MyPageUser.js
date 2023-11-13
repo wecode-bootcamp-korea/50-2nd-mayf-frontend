@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './MyPageUser.scss';
+import TabContent from '../../components/TabContent/TabContent';
 
 const MyPageUser = () => {
+  let [tab, setTab] = useState(0);
+
   return (
     <div className="myPageUser">
       <div className="container">
@@ -10,40 +13,17 @@ const MyPageUser = () => {
         </div>
 
         <div className="contents">
-          <div className="content">
-            <div className="contentTitle">정보 수정</div>
-            <img
-              src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg"
-              alt="예시 이미지"
-            />
-            <button className="pageMove">페이지 이동</button>
-          </div>
+          <div className="contentCategory">
+            <button onClick={() => setTab(0)}>정보 수정</button>
 
-          <div className="content">
-            <div className="contentTitle">예약 내역</div>
-            <img
-              src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg"
-              alt="예시 이미지"
-            />
-            <button className="pageMove">페이지 이동</button>
-          </div>
+            <button onClick={() => setTab(1)}>예약 내역</button>
 
-          <div className="content">
-            <div className="contentTitle">위시 리스트</div>
-            <img
-              src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg"
-              alt="예시 이미지"
-            />
-            <button className="pageMove">페이지 이동</button>
-          </div>
+            <button onClick={() => setTab(2)}>위시 리스트</button>
 
+            <button onClick={() => setTab(3)}>크레딧</button>
+          </div>
           <div className="content">
-            <div className="contentTitle">크레딧 페이지</div>
-            <img
-              src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg"
-              alt="예시 이미지"
-            />
-            <button className="pageMove">페이지 이동</button>
+            <TabContent tab={tab} />
           </div>
         </div>
       </div>
