@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
+  const navigate = useNavigate();
   const [admin, setAdmin] = useState({
-    id: '',
+    admin_id: '',
     password: '',
   });
   const handleLogin = () => {
-    // fetch('api address', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    //   body: JSON.stringify(admin),
-    // });
-    console.log(admin);
+    fetch('http://10.58.52.190:8000/admins/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(admin),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if ((data.message = 'login_success')) {
+          localStorage.setItem('token', data.accessToken);
+          navigate('/');
+        }
+      });
   };
   return (
     <div className="Admin">
@@ -22,7 +30,7 @@ const Admin = () => {
         <input
           className="adminId"
           type="email"
-          onChange={(e) => setAdmin({ ...admin, id: e.target.value })}
+          onChange={(e) => setAdmin({ ...admin, admin_id: e.target.value })}
         />
       </div>
       <div>
