@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Sort from './components/Sort';
 import Search from './components/Search';
 import SubCategories from './components/SubCategories';
-import { GET_LIST_API } from '../../config';
+import API from '../../config';
 import './List.scss';
 
 const List = () => {
@@ -28,26 +28,13 @@ const List = () => {
     }
   };
 
-  //임시 목데이타 fetch
-  // useEffect(() => {
-  //   const fetchData = () => {
-  //     fetch(`/data/listMockData.json${queryString}`, {
-  //       method: 'GET',
-  //     })
-  //       .then((res) => res.json())
-  //       .then((result) => {
-  //         setSubCategories(result.message);
-  //         setClassList(result);
-  //         setFilterSearch(result.message || []);
-  //       });
-  //   };
-  //   fetchData();
-  // }, [queryString]);
+  //임시 목데이타 api
+  // fetch(`/data/listMockData.json${queryString}`,
 
   // 백엔드 통신 데이터
   useEffect(() => {
     const fetchData = () => {
-      fetch(`${GET_LIST_API}${queryString}`, {
+      fetch(`${API.list}${queryString}`, {
         method: 'GET',
       })
         .then((res) => res.json())
