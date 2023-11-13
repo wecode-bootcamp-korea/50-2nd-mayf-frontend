@@ -20,6 +20,8 @@ const Admin = () => {
         if ((data.message = 'login_success')) {
           localStorage.setItem('token', data.accessToken);
           navigate('/');
+        } else {
+          alert('error');
         }
       });
   };
