@@ -13,6 +13,8 @@ import MyPageEvent from './pages/MyPageEvent/MyPageEvent';
 import Manage from './pages/Manage/Manage';
 import Credit from './pages/Credit/Credit';
 import Admin from './pages/Admin/Admin';
+import KAKAOuser from './pages/Login/KAKAOuser';
+import KAKAOevent from './pages/Login/KAKAOevent';
 
 const Router = () => {
   return (
@@ -30,6 +32,8 @@ const Router = () => {
         <Route path="/manage" element={<Manage />} />
         <Route path="/credit" element={<Credit />} />
         <Route path="/admin-login" element={<Admin />} />
+        <Route path="/users/signup" element={<KAKAOuser />} />
+        <Route path="/hosts/signup" element={<KAKAOevent />} />
       </Routes>
       <Footer />
     </BrowserRouter>
