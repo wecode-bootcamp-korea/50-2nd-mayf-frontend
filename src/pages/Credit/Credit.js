@@ -24,7 +24,12 @@ const Credit = () => {
       <div className="selectBox">
         {amountList.map((list) => (
           <div key={list.id}>
-            <input className="radioInput" type="radio" value={list.amount} />
+            <input
+              className="radioInput"
+              type="radio"
+              name="radio"
+              value={list.amount}
+            />
             <label className="amount">{list.amount}</label>
           </div>
         ))}
