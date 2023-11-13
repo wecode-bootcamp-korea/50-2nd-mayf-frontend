@@ -20,12 +20,11 @@ const SubCategories = ({ subCategories }) => {
         <div className="labelTitle class">클라스 카테고리</div>
         <ul className="categories">
           {uniqueSubCategories.map((subName) => (
-            <div>
+            <div key={subName}>
               <input
                 onChange={() => handleSubilter(subName)}
                 value={getSearchParams}
                 className={subName}
-                key={subName}
                 type="checkbox"
               />
               {subName}

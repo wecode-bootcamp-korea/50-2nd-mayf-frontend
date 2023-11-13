@@ -6,4 +6,3 @@ const API = {
 };
 
 export default API;
-export const GET_TOP_CATEGORY_LIST_API = `${BASE_URL2}/classes/classeslist`;
