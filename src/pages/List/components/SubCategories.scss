@@ -1,0 +1,25 @@
+.subcategories {
+  .tab {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 300px;
+
+    .labelTitle {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .Class {
+      padding: 16px 0 0px 13px;
+
+      .categories {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+    }
+  }
+}
