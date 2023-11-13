@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Payment from './toss임시.png';
 import CreditIcon from './credit.png';
 import './Credit.scss';
 
@@ -13,9 +12,10 @@ const Credit = () => {
     { id: 6, amount: '50,000' },
   ];
   const [amount, setAmount] = useState(0);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handlePay = () => {
-    if (amount !== 0) {
+    if (amount !== 0 && isChecked) {
       fetch('https://kapi.kakao.com/v1/payment/ready', {
         method: 'POST',
         headers: {
@@ -54,28 +54,30 @@ const Credit = () => {
       </div>
       <div className="selectBox">
         {amountList.map((list) => (
-          <div key={list.id} onChange={() => setAmount(list.amount)}>
-            <input
-              className="radioInput"
-              type="radio"
-              name="radio"
-              value={list.amount}
-            />
-            <label className="amount">{list.amount}</label>
+          <div key={list.id}>
+            <label className="amount" onChange={() => setAmount(list.amount)}>
+              <input
+                className="radioInput"
+                type="radio"
+                name="radio"
+                value={list.amount}
+              />
+              {list.amount}
+            </label>
           </div>
         ))}
       </div>
-      <div className="paymentBox">
+      {/* <div className="paymentBox">
         <img className="payment" src={Payment} alt="toss" />
-      </div>
+      </div> */}
       <label className="agreeLabel">
-        <input type="checkbox" />
+        <input type="checkbox" onChange={() => setIsChecked(!isChecked)} />
         약관동의
       </label>
 
       <div className="chargeBtnBox">
         <button type="button" className="btn" onClick={handlePay}>
-          <span>충전하기</span>
+          <img src="/images/payment_icon_yellow_large.png" alt="pay_btn" />
         </button>
       </div>
     </div>
