@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ClassList.scss';
+import { useNavigate } from 'react-router-dom';
 
 const ClassList = ({ setTab }) => {
+  const [classList, setClassList] = useState([]);
+  const navigate = useNavigate();
+
   return (
     <div className="classList">
       <div className="container">
         <div className="label">
           <div className="pageTitle">강의 내역</div>
           <button
-            className="addClass"
+            className="addClassBtn"
             onClick={() => {
               setTab(4);
             }}

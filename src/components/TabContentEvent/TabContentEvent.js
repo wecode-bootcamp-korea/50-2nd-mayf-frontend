@@ -15,7 +15,7 @@ const TabContentEvent = ({ tab, setTab }) => {
   } else if (tab === 3) {
     return <Calculate />;
   } else if (tab === 4) {
-    return <AddClass />;
+    return <AddClass setTab={setTab} />;
   }
 };
 
