@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Payment from './toss임시.png';
 import CreditIcon from './credit.png';
 import './Credit.scss';
@@ -12,6 +12,37 @@ const Credit = () => {
     { id: 5, amount: '30,000' },
     { id: 6, amount: '50,000' },
   ];
+  const [amount, setAmount] = useState(0);
+
+  const handlePay = () => {
+    if (amount !== 0) {
+      fetch('https://kapi.kakao.com/v1/payment/ready', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+          Authorization: `KakaoAK ${process.env.REACT_APP_PAY_ADMIN_KEY}`,
+        },
+        body: new URLSearchParams({
+          cid: 'TC0ONETIME',
+          partner_order_id: 'partner_order_id',
+          partner_user_id: 'partner_user_id',
+          item_name: '하루살이 크레딧 충전',
+          quantity: 1,
+          total_amount: parseInt(amount) * 1000,
+          tax_free_amount: 0,
+          approval_url: 'http://localhost:3000/credit/KAKAOcredit',
+          fail_url: 'http://localhost:3000/credit',
+          cancel_url: 'http://localhost:3000/credit',
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const { next_redirect_pc_url, tid } = data;
+          localStorage.setItem('tid', tid);
+          window.location.href = next_redirect_pc_url;
+        });
+    }
+  };
   return (
     <div className="credit">
       <div className="header">
@@ -23,7 +54,7 @@ const Credit = () => {
       </div>
       <div className="selectBox">
         {amountList.map((list) => (
-          <div key={list.id}>
+          <div key={list.id} onChange={() => setAmount(list.amount)}>
             <input
               className="radioInput"
               type="radio"
@@ -43,7 +74,7 @@ const Credit = () => {
       </label>
 
       <div className="chargeBtnBox">
-        <button type="button" className="btn">
+        <button type="button" className="btn" onClick={handlePay}>
           <span>충전하기</span>
         </button>
       </div>
@@ -52,17 +83,3 @@ const Credit = () => {
 };
 
 export default Credit;
-
-{
-  /* <div className="selectBox">
-        <button type="button" className="amount">
-          20,000원
-        </button>
-        <button type="button" className="amount">
-          30,000원
-        </button>
-        <button type="button" className="amount">
-          50,000원
-        </button>
-      </div> */
-}
