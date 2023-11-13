@@ -17,6 +17,14 @@ const Detail = () => {
       level: 1,
     };
     const map = new kakao.maps.Map(container.current, options);
+
+    const markerPosition = new kakao.maps.LatLng(37.572662, 126.979295);
+
+    const marker = new kakao.maps.Marker({
+      position: markerPosition,
+    });
+
+    marker.setMap(map);
   };
 
   useEffect(() => {
@@ -30,6 +38,17 @@ const Detail = () => {
   const subPeople = () => {
     if (people > 1) {
       setPeople(people - 1);
+    }
+  };
+
+  const address = '서울특별시 강남구 테헤란로 340';
+
+  const copyClipBoard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('클립보드에 링크가 복사되었습니다.');
+    } catch (error) {
+      alert('클립보드 복사에 실패하였습니다.');
     }
   };
 
@@ -53,8 +72,13 @@ const Detail = () => {
             <div className="classCategory">강의 카테고리</div>
             <div className="classLocation">
               <div className="locationWriting">
-                <div className="locationLabel">강의 위치</div>
-                <button className="copyAddress">주소 복사</button>
+                <div className="locationLabel">{address}</div>
+                <button
+                  className="copyAddress"
+                  onClick={() => copyClipBoard(address)}
+                >
+                  주소 복사
+                </button>
               </div>
               <div className="map" id="map" ref={container} />
             </div>
