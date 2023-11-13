@@ -4,6 +4,10 @@ import './CategoryList.scss';
 
 const CategoryList = ({ categories }) => {
   const navigate = useNavigate();
+  const handleCategoryClick = (categoryName) => {
+    navigate(`/list/${categoryName}`);
+  };
+
   const uniqueCategories = Array.from(
     new Set(categories.map((category) => category.top_category_name)),
   );
@@ -15,9 +19,7 @@ const CategoryList = ({ categories }) => {
           <li
             key={categoryName}
             className="categoryMenu"
-            onClick={() => {
-              navigate('./list');
-            }}
+            onClick={() => handleCategoryClick(categoryName)}
           >
             {categoryName}
           </li>

@@ -12,7 +12,6 @@ import MyPageUser from './pages/MyPageUser/MyPageUser';
 import MyPageEvent from './pages/MyPageEvent/MyPageEvent';
 import Manage from './pages/Manage/Manage';
 import Credit from './pages/Credit/Credit';
-
 const Router = () => {
   return (
     <BrowserRouter>

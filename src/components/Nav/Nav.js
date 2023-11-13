@@ -12,7 +12,7 @@ const Nav = () => {
   const navigate = useNavigate();
   //login여부 확인 state, 나중에는 토큰 불러올 예정
   const [login, setLogin] = useState(true);
-  //마이페이지 사이드바 구현
+  //유저 페이지 이동 사이드바 구현
   const [isOpen, setIsOpen] = useState(false);
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -24,29 +24,19 @@ const Nav = () => {
   const handleLogoClick = () => {
     setShowCategories(!showCategories);
   };
-  // 백엔드 통신 데이터(MOCK DATA)
+
+  //   fetch('/data/dummy.json', {
+
+  // 백엔드 통신 데이터
   useEffect(() => {
-    fetch('/data/dummy.json', {
+    fetch(`${GET_TOP_CATEGORY_LIST_API}`, {
       method: 'GET',
     })
       .then((res) => res.json())
       .then((result) => {
-        // const uniqueCategories = Array.from(
-        //   new Set(result.message.top_category_name),
-        // );
         setCategories(result.message);
       });
   }, []);
-  // 백엔드 통신 데이터
-  // useEffect(() => {
-  //   fetch(`${GET_TOP_CATEGORY_LIST_API}`, {
-  //     method: 'GET',
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       setCategories(result.message);
-  //     });
-  // }, []);
 
   return (
     <div className="nav">
