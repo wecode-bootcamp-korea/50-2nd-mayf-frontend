@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CategoryList from './components/CategoryList';
 import Sidebar from './components/Sidebar';
+import API from '../../config';
 import Logo from '../Nav/navImg/logo.png';
 import Category from '../Nav/navImg/category.png';
 import UserIcon from '../Nav/navImg/user.png';
 import './Nav.scss';
-import { GET_TOP_CATEGORY_LIST_API } from '../../config';
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Nav = () => {
 
   // 백엔드 통신 데이터
   useEffect(() => {
-    fetch(`${GET_TOP_CATEGORY_LIST_API}`, {
+    fetch(`${API.nav}`, {
       method: 'GET',
     })
       .then((res) => res.json())

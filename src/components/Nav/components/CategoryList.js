@@ -5,7 +5,7 @@ import './CategoryList.scss';
 const CategoryList = ({ categories }) => {
   const navigate = useNavigate();
   const handleCategoryClick = (categoryName) => {
-    navigate(`/list/${categoryName}`);
+    navigate(`/list?topCategoryName=${categoryName}`);
   };
 
   const uniqueCategories = Array.from(
