@@ -11,7 +11,7 @@ const Slide = () => {
       <Swiper
         modules={[Autoplay, A11y]}
         spaceBetween={50}
-        slidesPerView={1}
+        slidesPerView={2}
         navigation={{
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
