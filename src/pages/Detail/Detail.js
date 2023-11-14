@@ -10,6 +10,7 @@ const { kakao } = window;
 const Detail = () => {
   const [people, setPeople] = useState(1);
   const [reservations, setReservations] = useState([]);
+  const [classDetail, setClassDetail] = useState({});
   const container = useRef();
 
   const formatDate = (date) => {
@@ -23,14 +24,37 @@ const Detail = () => {
     setReservations([...reservations, reservation]);
   };
 
+  useEffect(() => {
+    initMap();
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://10.58.52.181:8000/classes/194`, {
+      headers: {
+        // Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setClassDetail(data.message[0]);
+        console.log(data);
+      });
+  }, []);
+
   const initMap = () => {
     const options = {
-      center: new kakao.maps.LatLng(37.572662, 126.979295),
+      center: new kakao.maps.LatLng(
+        classDetail.latitude,
+        classDetail.longitude,
+      ),
       level: 1,
     };
     const map = new kakao.maps.Map(container.current, options);
 
-    const markerPosition = new kakao.maps.LatLng(37.572662, 126.979295);
+    const markerPosition = new kakao.maps.LatLng(
+      classDetail.latitude,
+      classDetail.longitude,
+    );
 
     const marker = new kakao.maps.Marker({
       position: markerPosition,
@@ -38,11 +62,6 @@ const Detail = () => {
 
     marker.setMap(map);
   };
-
-  useEffect(() => {
-    initMap();
-  }, []);
-
   const addPeople = () => {
     setPeople(people + 1);
   };
@@ -52,8 +71,6 @@ const Detail = () => {
       setPeople(people - 1);
     }
   };
-
-  const address = '서울특별시 강남구 테헤란로 340';
 
   const copyClipBoard = async (text) => {
     try {
@@ -73,21 +90,21 @@ const Detail = () => {
 
         <div className="content">
           <img
-            src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
+            src={classDetail.sub_image_source}
             alt="클래스 사진"
             className="classImage"
           />
 
           <div className="simpleDetail">
-            <div className="classTitle">강의 1</div>
-            <div className="classOpener">강의자</div>
-            <div className="classCategory">강의 카테고리</div>
+            <div className="classTitle">{classDetail.title}</div>
+            <div className="classOpener">{classDetail.name}</div>
+            <div className="classCategory">{classDetail.top_category_name}</div>
             <div className="classLocation">
               <div className="locationWriting">
-                <div className="locationLabel">{address}</div>
+                <div className="locationLabel">{classDetail.address}</div>
                 <button
                   className="copyAddress"
-                  onClick={() => copyClipBoard(address)}
+                  onClick={() => copyClipBoard(classDetail.address)}
                 >
                   주소 복사
                 </button>
