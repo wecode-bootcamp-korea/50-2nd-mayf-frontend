@@ -36,7 +36,7 @@ const KAKAOuser = () => {
           localStorage.setItem('token', data.accessToken);
           navigate('/');
         } else {
-          alert('error');
+          alert('로그인에 실패했습니다');
         }
       });
   };
