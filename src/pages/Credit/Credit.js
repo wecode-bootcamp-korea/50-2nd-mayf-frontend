@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CreditIcon from './credit.png';
 import './Credit.scss';
 
@@ -12,7 +12,25 @@ const Credit = () => {
     { id: 6, amount: '50,000' },
   ];
   const [amount, setAmount] = useState(0);
+  const [credit, setCredit] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    fetch('http://10.58.52.144:8000/users/credit', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const tmp = data.userCreditList[0].credit;
+        const result = String(tmp).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        setCredit(result);
+      });
+  }, []);
 
   const handlePay = () => {
     if (amount !== 0 && isChecked) {
@@ -50,7 +68,7 @@ const Credit = () => {
       </div>
       <div className="iconBox">
         <img className="icon" src={CreditIcon} alt="class" />
-        <p className="holdingCredit">보유 크레딧 0 C</p>
+        <p className="holdingCredit">보유 크레딧 {credit} C</p>
       </div>
       <div className="selectBox">
         {amountList.map((list) => (
@@ -67,9 +85,6 @@ const Credit = () => {
           </div>
         ))}
       </div>
-      {/* <div className="paymentBox">
-        <img className="payment" src={Payment} alt="toss" />
-      </div> */}
       <label className="agreeLabel">
         <input type="checkbox" onChange={() => setIsChecked(!isChecked)} />
         약관동의
