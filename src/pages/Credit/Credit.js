@@ -12,7 +12,7 @@ const Credit = () => {
     { id: 6, amount: '50,000' },
   ];
   const [amount, setAmount] = useState(0);
-  const [credit, setCredit] = useState('');
+  const [credit, setCredit] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
   const token = localStorage.getItem('token');
 
@@ -24,11 +24,21 @@ const Credit = () => {
         Authorization: token,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
         const tmp = data.userCreditList[0].credit;
-        const result = String(tmp).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        setCredit(result);
+        if (tmp !== 0) {
+          const result = String(tmp).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          setCredit(result);
+        }
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
       });
   }, []);
 

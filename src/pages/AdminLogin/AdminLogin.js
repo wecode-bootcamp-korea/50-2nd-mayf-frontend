@@ -12,7 +12,7 @@ const AdminLogin = () => {
     e.preventDefault();
 
     if (adminUserInfo.admin_id && adminUserInfo.password) {
-      fetch('http://10.58.52.190:8000/admins/login', {
+      fetch('http://10.58.52.144:8000/admins/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
