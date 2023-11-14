@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-//import Timer from './components/Timer';
+import Moment from 'react-moment';
 import Slide from './components/Slide';
 import API from '../../config';
 import './Main.scss';
@@ -7,10 +7,11 @@ import './Main.scss';
 const Main = () => {
   const [classListData, setClassListData] = useState({});
   const [count, setCount] = useState([]);
+  // console.log(typeof count)= object
+  //console.log(typeof new Date()); = object
+  const date = new Date();
+  // 변환의 변환의 연속 초단위까지 구할거면 ml
 
-  // 초단위까지 구할거면 ml
-  // 변환의 변환의 연속
-  // const date = new Date();
   // const time = date - count;
   // //const countTime = count.length > 0 ? count[0] - date : NaN;
   // console.log(time);
@@ -31,7 +32,7 @@ const Main = () => {
           (pro) => pro.class_day,
         );
         setCount(classDays);
-        console.log(count);
+        //console.log(count);
       });
   }, []);
   const { newProductOrder, salesOrder, upcomingClasses } = classListData;
