@@ -9,7 +9,19 @@ const { kakao } = window;
 
 const Detail = () => {
   const [people, setPeople] = useState(1);
+  const [reservations, setReservations] = useState([]);
   const container = useRef();
+
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const reserveSubmit = (reservation) => {
+    setReservations([...reservations, reservation]);
+  };
 
   const initMap = () => {
     const options = {
@@ -95,31 +107,23 @@ const Detail = () => {
 
           <div className="calendar">
             <div className="reserve">
-              <CalendarApp />
-
-              <div className="time">
-                <button className="timeOption">
-                  <div>08:00 ~ 12:00 (8/10명)</div>
-                </button>
-
-                <button className="timeOption">
-                  <div>12:00 ~ 16:00 (5/10명)</div>
-                </button>
-
-                <button className="timeOption">
-                  <div>16:00 ~ 20:00 (4/10명)</div>
-                </button>
-
-                <button className="timeOption">
-                  <div>20:00 ~ 24:00 (마감)</div>
-                </button>
+              <h1>예약 관리 시스템</h1>
+              <CalendarApp onReserve={reserveSubmit} />
+              <div>
+                <h2>예약 목록</h2>
+                <ul>
+                  {reservations.map((reservation, index) => (
+                    <li key={index}>
+                      {`날짜: ${formatDate(reservation.date)}, 시간: ${
+                        reservation.time
+                      }`}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-
-            <div className="classPrice">가격</div>
           </div>
         </div>
-
         <div className="classDetail">상세 정보</div>
 
         <Refund />
