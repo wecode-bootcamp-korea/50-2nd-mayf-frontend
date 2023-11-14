@@ -45,7 +45,7 @@ const AdminLogin = () => {
       <form onSubmit={handleLogin} onChange={handleChange}>
         <div>
           <span>관리자 ID : </span>
-          <input className="adminUserInfo" type="id" name="admin_id" />
+          <input className="adminUserInfo" type="text" name="admin_id" />
         </div>
         <div>
           <span>비밀번호 : </span>
