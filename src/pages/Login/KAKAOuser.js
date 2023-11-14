@@ -21,7 +21,11 @@ const KAKAOuser = () => {
           localStorage.setItem('token', data.jwtToken);
           navigate('/');
         } else {
-          alert('error');
+          if (data.message === 'CODE ERROR') {
+            alert('로그인 과정에서 오류가 발생했습니다');
+          } else {
+            alert('서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요');
+          }
         }
       });
   });
