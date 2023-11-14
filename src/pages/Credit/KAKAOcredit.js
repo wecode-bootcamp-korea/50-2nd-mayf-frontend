@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import Spinner from '../../components/Spinner/Spinner';
 
 const KAKAOcredit = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -29,7 +30,7 @@ const KAKAOcredit = () => {
         }
       });
   });
-  return <></>;
+  return <Spinner />;
 };
 
 export default KAKAOcredit;
