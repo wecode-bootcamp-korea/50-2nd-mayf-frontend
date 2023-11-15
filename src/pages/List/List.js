@@ -39,6 +39,7 @@ const List = () => {
   const subCategories = Array.from(
     new Set(classList.map((name) => name.sub_category_name)),
   );
+  console.log(classList);
 
   return (
     <div className="list">

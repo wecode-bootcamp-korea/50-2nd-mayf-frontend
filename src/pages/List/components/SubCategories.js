@@ -5,7 +5,7 @@ const SubCategories = ({ subCategories }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [selectedSubCategory, setSelectedSubCategory] = useState(
-    searchParams.getAll('subCategoryName'),
+    searchParams.get('subCategoryName'),
   );
 
   const handleSubFilter = (subCategory) => {
@@ -13,6 +13,8 @@ const SubCategories = ({ subCategories }) => {
     searchParams.set('subCategoryName', subCategory);
     setSearchParams(searchParams);
   };
+
+  console.log(subCategories);
 
   return (
     <div className="subcategories">
@@ -26,7 +28,7 @@ const SubCategories = ({ subCategories }) => {
                 checked={selectedSubCategory === subName}
                 className={subName}
                 type="radio"
-                name="subCategory"
+                name={subName}
               />
               {subName}
             </div>
