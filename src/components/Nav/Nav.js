@@ -35,7 +35,7 @@ const Nav = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        setCategories(result.message);
+        setCategories(result.result.classList);
       });
   }, []);
 

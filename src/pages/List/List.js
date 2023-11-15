@@ -8,6 +8,8 @@ import './List.scss';
 
 const List = () => {
   const [classList, setClassList] = useState([]);
+  //topCate를 눌렀을때 해당하는 subCate를 저장하는 state 생성
+  const [cateName, setCateName] = useState([]);
   const [search, setSearch] = useState('');
   //sortBy, subCategories를 필터링 하기위해 만든 queryString
   const location = useLocation();
@@ -18,8 +20,6 @@ const List = () => {
       item.title.toLowerCase().includes(search.toLowerCase()) ||
       item.name.toLowerCase().includes(search.toLowerCase()),
   );
-
-  //임시 목데이타 api
   // fetch(`/data/listMockData.json${queryString}`,
   // `${API.list}${queryString}`
   // 백엔드 통신 데이터
@@ -30,16 +30,14 @@ const List = () => {
       })
         .then((res) => res.json())
         .then((result) => {
-          setClassList(result.message);
+          setClassList(result.result.classList);
+          setCateName(result.result.subCategoriesName);
         });
     };
     fetchData();
   }, [queryString]);
 
-  const subCategories = Array.from(
-    new Set(classList.map((name) => name.sub_category_name)),
-  );
-  console.log(classList);
+  const subCategories = Array.from(new Set(cateName.map((res) => res.name)));
 
   return (
     <div className="list">

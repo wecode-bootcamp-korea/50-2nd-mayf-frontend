@@ -14,8 +14,6 @@ const SubCategories = ({ subCategories }) => {
     setSearchParams(searchParams);
   };
 
-  console.log(subCategories);
-
   return (
     <div className="subcategories">
       <div className="tab">
