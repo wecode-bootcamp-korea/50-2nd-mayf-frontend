@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Sort from './components/Sort';
 import Search from './components/Search';
 import SubCategories from './components/SubCategories';
@@ -57,12 +57,14 @@ const List = () => {
             </div>
             <div className="classList">
               {filterSearch.map((list, i) => {
-                const { title, summery, name, image_source } = list;
+                const { id, title, summery, name, image_source } = list;
                 return (
                   <div key={i} className="class">
-                    <div className="picture">
-                      <img alt="상품이미지" src={image_source} />
-                    </div>
+                    <Link to={`/detail/${list.id}`} className="detailLink">
+                      <div className="picture">
+                        <img alt="상품이미지" src={image_source} />
+                      </div>
+                    </Link>
                     <div className="classTitle">{title}</div>
                     <div className="classLocation">{summery}</div>
                     <div className="classCredit">등대 : {name} </div>
