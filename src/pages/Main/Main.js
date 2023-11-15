@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Slide from './components/Slide';
+import Carousel from '../../components/Carousel/Carousel';
 import API from '../../config';
 import Timer from './components/Timer';
 import './Main.scss';
@@ -21,7 +21,7 @@ const Main = () => {
 
   return (
     <div className="main">
-      <Slide />
+      <Carousel />
       <div className="proudct">
         <p className="classTitle">😯마감임박순😯</p>
         <div className="classContainer">
