@@ -25,7 +25,9 @@ const Timer = ({ endDate }) => {
     return () => clearInterval(intervalId);
   }, [endDate]);
   //moment.unix 사용하여 초를 날짜 및 시간으로 변환,  내가 원하는 형식으로 포맷
-  const formattedTime = moment.unix(remainingTime).format('DD일 hh:mm:ss 남음');
+  const formattedTime = moment
+    .unix(remainingTime)
+    .format('🧭DD일 hh:mm:ss 남음🧭');
 
   return (
     <>

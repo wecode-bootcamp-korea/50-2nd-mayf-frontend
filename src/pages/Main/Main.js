@@ -23,7 +23,7 @@ const Main = () => {
     <div className="main">
       <Slide />
       <div className="proudct">
-        <p className="clssTitle">😯마감임박순😯</p>
+        <p className="classTitle">😯마감임박순😯</p>
         <div className="classContainer">
           {upcomingClasses?.map((pro) => (
             <div key={pro.id} className="class">
@@ -31,6 +31,7 @@ const Main = () => {
                 <img className="classImg" alt="class" src={pro.image_source} />
               </div>
               <p className="sectionTitle">{pro.title}</p>
+
               <Timer endDate={pro.class_day} />
             </div>
           ))}
