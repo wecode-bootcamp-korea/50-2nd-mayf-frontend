@@ -1,0 +1,15 @@
+.Admin {
+  display: flex;
+
+  .category {
+    display: flex;
+    flex-direction: column; // 버튼을 세로로 정렬
+    align-items: center; // 가운데 정렬
+    padding: 20px 20px 0 20px;
+
+    button {
+      margin-bottom: 10px; // 버튼 간 간격 조절
+      width: 150px;
+    }
+  }
+}

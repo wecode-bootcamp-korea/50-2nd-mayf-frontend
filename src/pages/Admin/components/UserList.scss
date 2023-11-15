@@ -1,0 +1,15 @@
+.UserList {
+  display: table; // 컨테이너를 테이블로 설정
+
+  div {
+    display: table-row; // 각 div를 테이블 행으로 설정
+    border: 1px solid #ddd; // 테두리 스타일 지정
+    margin: 5px; // 행 간격 조절
+
+    p {
+      display: table-cell; // 각 p를 테이블 셀로 설정
+      padding: 10px; // 셀 안의 여백 지정
+      border: 1px solid #ddd; // 셀 테두리 스타일 지정
+    }
+  }
+}
