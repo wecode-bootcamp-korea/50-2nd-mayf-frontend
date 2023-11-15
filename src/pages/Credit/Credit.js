@@ -63,11 +63,21 @@ const Credit = () => {
           cancel_url: 'http://localhost:3000/credit',
         }),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return res.json();
+        })
         .then((data) => {
           const { next_redirect_pc_url, tid } = data;
           localStorage.setItem('tid', tid);
           window.location.href = next_redirect_pc_url;
+        })
+        .catch((error) => {
+          console.error('Error during payment preparation:', error);
+          alert('카카오페이 결제 준비 중 오류가 발생했습니다.');
+          window.location.href = 'http://localhost:3000/credit';
         });
     }
   };

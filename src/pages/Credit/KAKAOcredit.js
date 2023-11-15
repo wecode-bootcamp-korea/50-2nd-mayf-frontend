@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
 
 const KAKAOcredit = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const pg_token = searchParams.get('pg_token');
   const tid = localStorage.getItem('tid');
