@@ -8,27 +8,10 @@ import './List.scss';
 
 const List = () => {
   const [classList, setClassList] = useState([]);
-  // const [filterSearch, setFilterSearch] = useState([]);
   const [search, setSearch] = useState('');
   //sortBy, subCategories를 필터링 하기위해 만든 queryString
   const location = useLocation();
   const queryString = location.search;
-
-  // 검색어가 변경될 때마다 호출되는 콜백 함수
-  // const handleSearchChange = (search) => {
-  //   if (!search) {
-  //     // 검색어가 없는경우(!serach) 전체 리스트 표시
-  //     setFilterSearch(classList.message || []);
-  //   } else {
-  //     // 검색어가 포함된 아이템만 필터링하는 변수 생성
-  //     const filteredResults = classList.message.filter(
-  //       (item) =>
-  //         item.title.toLowerCase().includes(search.toLowerCase()) ||
-  //         item.name.toLowerCase().includes(search.toLowerCase()),
-  //     );
-  //     setFilterSearch(filteredResults);
-  //   }
-  // };
 
   const filterSearch = classList.filter(
     (item) =>
@@ -38,6 +21,7 @@ const List = () => {
 
   //임시 목데이타 api
   // fetch(`/data/listMockData.json${queryString}`,
+  // `${API.list}${queryString}`
   // 백엔드 통신 데이터
   useEffect(() => {
     const fetchData = () => {
@@ -74,7 +58,7 @@ const List = () => {
             </div>
             <div className="classList">
               {filterSearch.map((list, i) => {
-                const { id, title, summery, name, image_source } = list;
+                const { title, summery, name, image_source } = list;
                 return (
                   <div key={i} className="class">
                     <div className="picture">

@@ -25,8 +25,8 @@ const Nav = () => {
     setShowCategories(!showCategories);
   };
 
-  //   fetch('/data/dummy.json', {
-
+  //  '/data/dummy.json'
+  //`${API.nav}`;
   // 백엔드 통신 데이터
   useEffect(() => {
     fetch(`${API.nav}`, {

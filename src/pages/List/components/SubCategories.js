@@ -4,9 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 const SubCategories = ({ subCategories }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // const getSearchParams = searchParams.get('subCategories');
   const [selectedSubCategory, setSelectedSubCategory] = useState(
-    searchParams.get('subCategoryName') || '',
+    searchParams.getAll('subCategoryName'),
   );
 
   const handleSubFilter = (subCategory) => {
@@ -14,6 +13,21 @@ const SubCategories = ({ subCategories }) => {
     searchParams.set('subCategoryName', subCategory);
     setSearchParams(searchParams);
   };
+
+  // const selectedSubCategories = searchParams.get('subCategoryName');
+
+  // const handleSubFilter = (subCategory) => {
+  //   const isSelected = selectedSubCategories.includes(subCategory);
+
+  //   if (isSelected) {
+  //     const updatedSelections = selectedSubCategories.filter(
+  //       (selected) => selected !== subCategory,
+  //     );
+  //     setSearchParams('subCategoryName', updatedSelections);
+  //   } else {
+  //     setSearchParams('subCategoryName', [selectedSubCategories, subCategory]);
+  //   }
+  // };
 
   return (
     <div className="subcategories">
@@ -27,6 +41,7 @@ const SubCategories = ({ subCategories }) => {
                 checked={selectedSubCategory === subName}
                 className={subName}
                 type="radio"
+                name="subCategory"
               />
               {subName}
             </div>
