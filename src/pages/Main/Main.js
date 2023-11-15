@@ -8,7 +8,7 @@ const Main = () => {
   const [classListData, setClassListData] = useState({});
 
   useEffect(() => {
-    fetch(`${API.main}`, {
+    fetch(API.main, {
       method: 'GET',
     })
       .then((res) => res.json())

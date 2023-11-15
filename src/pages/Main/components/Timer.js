@@ -29,11 +29,7 @@ const Timer = ({ endDate }) => {
     .unix(remainingTime)
     .format('🧭DD일 hh:mm:ss 남음🧭');
 
-  return (
-    <>
-      <p className="countTime">{formattedTime}</p>
-    </>
-  );
+  return <p className="countTime">{formattedTime}</p>;
 };
 
 export default Timer;
