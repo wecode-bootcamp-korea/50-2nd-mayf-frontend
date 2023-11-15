@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CategoryList from './components/CategoryList';
+import EventUser from './components/EventUser';
 import Sidebar from './components/Sidebar';
 import API from '../../config';
 import Logo from '../Nav/navImg/logo.png';
@@ -26,10 +27,10 @@ const Nav = () => {
   };
 
   //  '/data/dummy.json'
-  //`${API.nav}`;
+  //API.nav;
   // 백엔드 통신 데이터
   useEffect(() => {
-    fetch(`${API.nav}`, {
+    fetch(API.nav, {
       method: 'GET',
     })
       .then((res) => res.json())
@@ -67,7 +68,7 @@ const Nav = () => {
         ) : (
           <p className="login"> 로그인 </p>
         )}
-        {isOpen && <Sidebar />}
+        {isOpen && <EventUser />}
       </div>
     </div>
   );

@@ -10,14 +10,15 @@
     width: 100%;
 
     .header {
-      background-color: beige;
+      background-color: #ffdab9;
       display: flex;
       justify-content: center;
       align-self: stretch;
 
       .headerTitle {
+        color: white;
         font-size: 55px;
-        font-weight: 500;
+        font-weight: 600;
         line-height: 95px;
         margin: 125px 0;
       }
