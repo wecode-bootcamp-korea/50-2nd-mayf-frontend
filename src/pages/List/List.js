@@ -54,10 +54,10 @@ const List = () => {
               <Sort />
             </div>
             <div className="classList">
-              {filterSearch.map((list, i) => {
+              {filterSearch.map((list) => {
                 const { id, title, summery, name, image_source } = list;
                 return (
-                  <div key={i} className="class">
+                  <div key={id} className="class">
                     <Link to={`/detail/${id}`} className="detailLink">
                       <div className="picture">
                         <img alt="상품이미지" src={image_source} />

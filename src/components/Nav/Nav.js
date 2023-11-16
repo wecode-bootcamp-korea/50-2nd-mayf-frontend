@@ -18,24 +18,11 @@ const Nav = () => {
     setIsOpen(!isOpen);
   };
   //햄버거 버튼 카테고리 구현
-  const [categories, setCategories] = useState([]);
   const [showCategories, setShowCategories] = useState(true);
   const handleLogoClick = () => {
     setShowCategories(!showCategories);
   };
 
-  //  '/data/dummy.json'
-  //API.nav;
-  // 백엔드 통신 데이터
-  useEffect(() => {
-    fetch(API.nav, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        setCategories(result.result.classList);
-      });
-  }, []);
   //문영님, 보유 크레딧 정보 불러오기
   useEffect(() => {
     fetch('http://10.58.52.195:8000/users', {
@@ -50,6 +37,7 @@ const Nav = () => {
         setCredit(result.userGetInfoList[0].credit);
       });
   }, []);
+  //하드코딩으로 배열 맵 또는 백엔드에서 TOP만 주는 API 새로 생성..
 
   return (
     <div className="nav">
@@ -60,7 +48,7 @@ const Nav = () => {
           alt="categoryIcon"
           onClick={handleLogoClick}
         />
-        {showCategories && <CategoryList categories={categories} />}
+        {showCategories && <CategoryList />}
         <img
           className="logo"
           onClick={() => {
@@ -82,7 +70,7 @@ const Nav = () => {
           <p
             className="login"
             onClick={() => {
-              navigate('./login');
+              navigate('/login');
             }}
           >
             로그인

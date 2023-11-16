@@ -2,19 +2,27 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CategoryList.scss';
 
-const CategoryList = ({ categories }) => {
+const CATEGORIES = [
+  '운동',
+  '예술',
+  '공예',
+  '외국어',
+  '요리',
+  '게임',
+  '프로그래밍',
+  '기타',
+];
+
+const CategoryList = () => {
   const navigate = useNavigate();
   const handleCategoryClick = (categoryName) => {
     navigate(`/list?topCategoryName=${categoryName}`);
   };
-  const uniqueCategories = Array.from(
-    new Set(categories.map((category) => category.top_category_name)),
-  );
 
   return (
     <div className="categoryList">
       <ul className="topCategory">
-        {uniqueCategories.map((categoryName) => (
+        {CATEGORIES.map((categoryName) => (
           <li
             key={categoryName}
             className="categoryMenu"
