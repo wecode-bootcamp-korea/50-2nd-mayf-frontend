@@ -35,31 +35,32 @@ function AddClass({ setTab }) {
   };
 
   const addClassButton = () => {
-    console.log(userInput);
-    // fetch(`http://10.58.52.181:8000/classes/createclass`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //     Authorization:
-    //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsIm5hbWUiOiLsnoTsi5ztmIQiLCJlbWFpbCI6ImpzbTAwOTI5QG5hdmVyLmNvbSIsInBob25lX251bWJlciI6Iis4MiAxMC05MTU5LTA1MDYiLCJpYXQiOjE2OTk5MzUyODMsImV4cCI6MTcwMDY1NTI4M30.oXtoBY1SoujOKSClsVQf2JM9QoBuhajNV1EVC3b3R4o',
-    //   },
-    //   body: JSON.stringify({
-    //     title: userInput.title,
-    //     topCategoryName: userInput.topCategoryName,
-    //     subCategoryName: userInput.subCategoryName,
-    //     summary: userInput.summary,
-    //     content: userInput.content,
-    //     price: userInput.price,
-    //     mainImageSource: userInput.mainImageSource,
-    //     subImageSource: userInput.subImageSource,
-    //     address: userInput.address,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.result === 'CREATE_CLASS_SUCCESS')
-    //       return alert('강의 생성 완료');
-    //   });
+    // console.log(userInput);
+    fetch(`http://10.58.52.154:8000/classes/createclass`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsIm5hbWUiOiLsnoTsi5ztmIQiLCJlbWFpbCI6ImpzbTAwOTI5QG5hdmVyLmNvbSIsInBob25lX251bWJlciI6Iis4MiAxMC05MTU5LTA1MDYiLCJpYXQiOjE2OTk5MzUyODMsImV4cCI6MTcwMDY1NTI4M30.oXtoBY1SoujOKSClsVQf2JM9QoBuhajNV1EVC3b3R4o',
+      },
+      body: JSON.stringify({
+        title: userInput.title,
+        topCategoryName: userInput.topCategoryName,
+        subCategoryName: userInput.subCategoryName,
+        summary: userInput.summary,
+        content: userInput.content,
+        price: userInput.price,
+        mainImageSource: userInput.mainImageSource,
+        subImageSource: userInput.subImageSource,
+        address: userInput.address,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result.message === 'CREATE_CLASS_SUCCESS') {
+          alert('강의 생성 완료');
+        }
+      });
   };
   return (
     <div className="addClass">

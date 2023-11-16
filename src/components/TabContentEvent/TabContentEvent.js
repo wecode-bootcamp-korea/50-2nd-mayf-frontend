@@ -12,9 +12,11 @@ const TabContentEvent = ({ tab, setTab }) => {
     return <ClassList setTab={setTab} />;
   } else if (tab === 2) {
     return <ClassChat />;
-  } else if (tab === 3) {
-    return <Calculate />;
-  } else if (tab === 4) {
+  }
+  // else if (tab === 3) {
+  //   return <Calculate />;
+  // }
+  else if (tab === 4) {
     return <AddClass setTab={setTab} />;
   }
 };
