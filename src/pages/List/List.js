@@ -9,7 +9,7 @@ import './List.scss';
 const List = () => {
   const [classList, setClassList] = useState([]);
   //topCate를 눌렀을때 해당하는 subCate를 저장하는 state 생성
-  const [cateName, setCateName] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
   const [search, setSearch] = useState('');
   //sortBy, subCategories를 필터링 하기위해 만든 queryString
   const location = useLocation();
@@ -31,13 +31,11 @@ const List = () => {
         .then((res) => res.json())
         .then((result) => {
           setClassList(result.result.classList);
-          setCateName(result.result.subCategoriesName);
+          setSubCategories(result.result.subCategoriesName);
         });
     };
     fetchData();
   }, [queryString]);
-
-  const subCategories = Array.from(new Set(cateName.map((res) => res.name)));
 
   return (
     <div className="list">
@@ -60,7 +58,7 @@ const List = () => {
                 const { id, title, summery, name, image_source } = list;
                 return (
                   <div key={i} className="class">
-                    <Link to={`/detail/${list.id}`} className="detailLink">
+                    <Link to={`/detail/${id}`} className="detailLink">
                       <div className="picture">
                         <img alt="상품이미지" src={image_source} />
                       </div>

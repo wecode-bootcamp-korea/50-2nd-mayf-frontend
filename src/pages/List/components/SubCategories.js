@@ -19,16 +19,16 @@ const SubCategories = ({ subCategories }) => {
       <div className="tab">
         <div className="labelTitle class">클라스 카테고리</div>
         <ul className="categories">
-          {subCategories.map((subName) => (
-            <div key={subName}>
+          {subCategories.map(({ name }) => (
+            <div key={name}>
               <input
-                onChange={() => handleSubFilter(subName)}
-                checked={selectedSubCategory === subName}
-                className={subName}
+                onChange={() => handleSubFilter(name)}
+                checked={selectedSubCategory === name}
+                className={name}
                 type="radio"
-                name={subName}
+                name={name}
               />
-              {subName}
+              {name}
             </div>
           ))}
         </ul>

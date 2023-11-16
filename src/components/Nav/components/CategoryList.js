@@ -7,7 +7,6 @@ const CategoryList = ({ categories }) => {
   const handleCategoryClick = (categoryName) => {
     navigate(`/list?topCategoryName=${categoryName}`);
   };
-  console.log(categories);
   const uniqueCategories = Array.from(
     new Set(categories.map((category) => category.top_category_name)),
   );
