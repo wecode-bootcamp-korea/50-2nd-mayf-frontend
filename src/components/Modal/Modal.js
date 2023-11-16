@@ -43,7 +43,7 @@ const Modal = ({ isOpen, closeModal, itemId, itemData }) => {
             <div className="row">
               <div className="cell">
                 <div className="label">가격</div>
-                <div className="data">{itemData.price} 크레딧</div>
+                <div className="data">{parseInt(itemData.price)} 크레딧</div>
               </div>
             </div>
           </div>

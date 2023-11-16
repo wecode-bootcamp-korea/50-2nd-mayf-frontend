@@ -3,6 +3,7 @@ import ClassList from './components/ClassList';
 import HostList from './components/HostList';
 import UserList from './components/UserList';
 import './Admin.scss';
+import Adjustment from './components/Adjustment';
 
 //관리자가 로그인하면 들어오게 될 페이지.
 //구현목표
@@ -26,6 +27,11 @@ const Admin = () => {
       id: 3,
       btnText: '클래스 목록 조회',
       component: <ClassList />,
+    },
+    {
+      id: 4,
+      btnText: '정산 관련 페이지',
+      component: <Adjustment />,
     },
   ];
 
