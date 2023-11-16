@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Carousel from '../../components/Carousel/Carousel';
 import API from '../../config';
 import Timer from './components/Timer';
@@ -27,11 +28,16 @@ const Main = () => {
         <div className="classContainer">
           {upcomingClasses?.map((pro) => (
             <div key={pro.id} className="class">
-              <div className="imgBox">
-                <img className="classImg" alt="class" src={pro.image_source} />
-              </div>
-              <p className="sectionTitle">{pro.title}</p>
-
+              <Link to={`/detail/${pro.id}`} className="detailLink">
+                <div className="imgBox">
+                  <img
+                    className="classImg"
+                    alt="class"
+                    src={pro.image_source}
+                  />
+                </div>
+                <p className="sectionTitle">{pro.title}</p>
+              </Link>
               <Timer endDate={pro.class_day} />
             </div>
           ))}
@@ -42,10 +48,16 @@ const Main = () => {
         <div className="classContainer">
           {salesOrder?.map((pro) => (
             <div key={pro.id} className="class">
-              <div className="imgBox">
-                <img className="classImg" alt="class" src={pro.image_source} />
-              </div>
-              <p className="sectionTitle">{pro.title}</p>
+              <Link to={`/detail/${pro.id}`} className="detailLink">
+                <div className="imgBox">
+                  <img
+                    className="classImg"
+                    alt="class"
+                    src={pro.image_source}
+                  />
+                </div>
+                <p className="sectionTitle">{pro.title}</p>
+              </Link>
             </div>
           ))}
         </div>
@@ -55,10 +67,16 @@ const Main = () => {
         <div className="classContainer">
           {newProductOrder?.map((pro) => (
             <div key={pro.id} className="class">
-              <div className="imgBox">
-                <img className="classImg" alt="class" src={pro.image_source} />
-              </div>
-              <p className="sectionTitle">{pro.title}</p>
+              <Link to={`/detail/${pro.id}`} className="detailLink">
+                <div className="imgBox">
+                  <img
+                    className="classImg"
+                    alt="class"
+                    src={pro.image_source}
+                  />
+                </div>
+                <p className="sectionTitle">{pro.title}</p>
+              </Link>
             </div>
           ))}
         </div>
