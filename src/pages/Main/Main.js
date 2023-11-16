@@ -43,11 +43,7 @@ const Main = () => {
           {salesOrder?.map((pro) => (
             <div key={pro.id} className="class">
               <div className="imgBox">
-                <img
-                  className="classImg"
-                  alt="class"
-                  src={pro.image_source}
-                ></img>
+                <img className="classImg" alt="class" src={pro.image} />
               </div>
               <p className="sectionTitle">{pro.title}</p>
             </div>
@@ -60,11 +56,7 @@ const Main = () => {
           {newProductOrder?.map((pro) => (
             <div key={pro.id} className="class">
               <div className="imgBox">
-                <img
-                  className="classImg"
-                  alt="class"
-                  src={pro.image_source}
-                ></img>
+                <img className="classImg" alt="class" src={pro.image} />
               </div>
               <p className="sectionTitle">{pro.title}</p>
             </div>
