@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import Pagination from '../../../components/Pagination/Pagination';
 import './HostList.scss';
 
 const HostList = () => {
   const [hostList, setHostList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = hostList.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWRtaW5faWQiOiJhZG1pbjExMDgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTk5NTU1MDB9.MjN3UL4Ie0qnk2owFiqy0cONldqVNtbjFjZj9zJK6Ig';
 
   useEffect(() => {
-    fetch('http://10.58.52.80:8000/admins/hosts', {
+    fetch('http://10.58.52.195:8000/admins/hosts', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -22,7 +31,7 @@ const HostList = () => {
 
   return (
     <div className="HostList">
-      {hostList.map((item) => {
+      {currentItems.map((item) => {
         return (
           <div key={item.id}>
             <p>{item.name}</p>
@@ -33,6 +42,15 @@ const HostList = () => {
           </div>
         );
       })}
+      <div className="page-container">
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={hostList.length}
+          paginate={paginate}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </div>
   );
 };

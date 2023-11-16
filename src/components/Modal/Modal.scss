@@ -19,14 +19,33 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    h1 {
-      font-size: x-large;
-      padding-bottom: 15px;
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
     }
 
     .cell {
-      border: 1px solid black;
-      height: 25px;
+      // border: 1px solid black;
+      min-height: 25px;
+      display: flex;
+      flex: 2;
+      margin: 0;
+
+      .label {
+        padding: 5px;
+        margin: 0;
+        width: 90px;
+        min-height: 20px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .data {
+        margin: 0;
+        padding: 5px 5px 5px 10px;
+        width: 100%;
+      }
     }
   }
 }

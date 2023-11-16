@@ -11,6 +11,10 @@
       padding: 10px; // 셀 안의 여백 지정
       border: 1px solid #ddd; // 셀 테두리 스타일 지정
 
+      &.title {
+        min-width: 500px;
+      }
+
       &.top-category {
         text-align: center;
       }
@@ -19,5 +23,12 @@
         text-align: center;
       }
     }
+  }
+
+  .page-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
   }
 }

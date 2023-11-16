@@ -17,8 +17,16 @@ const Admin = () => {
   // const token = localStorage.getItem('token');
   const ADMIN_TAB_LIST = [
     { id: 1, btnText: '하루살이 목록 조회', component: <UserList /> },
-    { id: 2, btnText: '등대지기 목록 조회', component: <HostList /> },
-    { id: 3, btnText: '클래스 목록 조회', component: <ClassList /> },
+    {
+      id: 2,
+      btnText: '등대지기 목록 조회',
+      component: <HostList />,
+    },
+    {
+      id: 3,
+      btnText: '클래스 목록 조회',
+      component: <ClassList />,
+    },
   ];
 
   const [categoryId, setCategoryId] = useState(ADMIN_TAB_LIST[0].id);
@@ -31,16 +39,9 @@ const Admin = () => {
             {btnText}
           </button>
         ))}
-        {/* <button onClick={() => setCategoryId('1')}>하루살이 목록 조회</button>
-        <button onClick={() => setCategoryId('2')}>등대지기 목록 조회</button>
-        <button onClick={() => setCategoryId('3')}>클래스 목록 조회</button>
-        <button onClick={() => setCategoryId('0')}>테스트용 리셋버튼</button> */}
       </div>
       <div className="container">
         {ADMIN_TAB_LIST.find(({ id }) => id === categoryId).component}
-        {/* {category === '1' && <UserList />}
-        {category === '2' && <HostList />}
-        {category === '3' && <ClassList />} */}
       </div>
     </div>
   );
