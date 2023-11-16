@@ -7,9 +7,10 @@ const ClassList = ({ setTab }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${URL.Main}`, {
+    fetch(`http://10.58.52.181:8000/classes/hostclass`, {
       headers: {
-        Authorization: '',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsIm5hbWUiOiLsnoTsi5ztmIQiLCJlbWFpbCI6ImpzbTAwOTI5QG5hdmVyLmNvbSIsInBob25lX251bWJlciI6Iis4MiAxMC05MTU5LTA1MDYiLCJpYXQiOjE2OTk5MzUyODMsImV4cCI6MTcwMDY1NTI4M30.oXtoBY1SoujOKSClsVQf2JM9QoBuhajNV1EVC3b3R4o',
       },
     })
       .then((res) => res.json())
@@ -18,9 +19,9 @@ const ClassList = ({ setTab }) => {
       });
   }, []);
 
-  const viewSpecify = () => {
-    navigate(`/detail/${id}`);
-  };
+  // const viewSpecify = () => {
+  //   navigate(`/detail/${id}`);
+  // };
 
   return (
     <div className="classList">

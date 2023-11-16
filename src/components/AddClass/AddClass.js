@@ -14,8 +14,6 @@ function AddClass({ setTab }) {
     mainImageSource: '',
     subImageSource: '',
     address: '',
-    latitude: '',
-    longitude: '',
   });
 
   useEffect(() => {
@@ -37,32 +35,31 @@ function AddClass({ setTab }) {
   };
 
   const addClassButton = () => {
-    fetch(`http://10.58.52.181:8000/classes/createclass`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODUyOTIyLCJleHAiOjE3MDA1NzI5MjJ9.xXkTtAVKIt20xCfIUbOvSeoY44pi-ScH6Agy9jdd4fE',
-      },
-      body: JSON.stringify({
-        title: userInput.title,
-        topCategoryName: userInput.topCategoryName,
-        subCategoryName: userInput.subCategoryName,
-        summary: userInput.summary,
-        content: userInput.content,
-        price: userInput.price,
-        mainImageSource: userInput.mainImageSource,
-        subImageSource: userInput.subImageSource,
-        address: userInput.address,
-        latitude: 32,
-        longitude: 127,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.result === 'CREATE_CLASS_SUCCESS')
-          return alert('강의 생성 완료');
-      });
+    console.log(userInput);
+    // fetch(`http://10.58.52.181:8000/classes/createclass`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json;charset=utf-8',
+    //     Authorization:
+    //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsIm5hbWUiOiLsnoTsi5ztmIQiLCJlbWFpbCI6ImpzbTAwOTI5QG5hdmVyLmNvbSIsInBob25lX251bWJlciI6Iis4MiAxMC05MTU5LTA1MDYiLCJpYXQiOjE2OTk5MzUyODMsImV4cCI6MTcwMDY1NTI4M30.oXtoBY1SoujOKSClsVQf2JM9QoBuhajNV1EVC3b3R4o',
+    //   },
+    //   body: JSON.stringify({
+    //     title: userInput.title,
+    //     topCategoryName: userInput.topCategoryName,
+    //     subCategoryName: userInput.subCategoryName,
+    //     summary: userInput.summary,
+    //     content: userInput.content,
+    //     price: userInput.price,
+    //     mainImageSource: userInput.mainImageSource,
+    //     subImageSource: userInput.subImageSource,
+    //     address: userInput.address,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.result === 'CREATE_CLASS_SUCCESS')
+    //       return alert('강의 생성 완료');
+    //   });
   };
   return (
     <div className="addClass">
@@ -130,11 +127,7 @@ function AddClass({ setTab }) {
           <div className="info">
             <div className="label">강의 장소</div>
             <div className="addressInfo">
-              {popup && (
-                <div>
-                  <Post company={userInput.address} setCompany={setUserInput} />
-                </div>
-              )}
+              {popup && <Post company={userInput} setCompany={setUserInput} />}
               <button onClick={addressInput}>주소 찾기</button>
 
               <input
@@ -142,12 +135,6 @@ function AddClass({ setTab }) {
                 required={true}
                 name="address"
                 value={userInput.address}
-              />
-              <input type="hidden" name="latitude" value={userInput.latitude} />
-              <input
-                type="hidden"
-                name="longitude"
-                value={userInput.longitude}
               />
             </div>
           </div>
