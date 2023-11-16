@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Detail.scss';
 import 'react-datepicker/dist/react-datepicker.module.css';
-import Chat from '../../components/Chat/Chat';
+// import Chat from '../../components/Chat/Chat';
 import Refund from '../../components/Refund/Refund';
 import CalendarApp from '../../components/CalendarApp/CalendarApp';
+import { useNavigate } from 'react-router-dom';
 
 const { kakao } = window;
 
@@ -12,24 +13,14 @@ const Detail = () => {
   const [reservations, setReservations] = useState([]);
   const [classDetail, setClassDetail] = useState({});
   const container = useRef();
-
-  const formatDate = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
+  const navigate = useNavigate();
 
   const reserveSubmit = (reservation) => {
     setReservations([...reservations, reservation]);
   };
 
   useEffect(() => {
-    initMap();
-  }, []);
-
-  useEffect(() => {
-    fetch(`http://10.58.52.181:8000/classes/194`, {
+    fetch(`http://10.58.52.154:8000/classes/2`, {
       headers: {
         // Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',
       },
@@ -37,7 +28,6 @@ const Detail = () => {
       .then((res) => res.json())
       .then((data) => {
         setClassDetail(data.message[0]);
-        console.log(data);
       });
   }, []);
 
@@ -62,6 +52,11 @@ const Detail = () => {
 
     marker.setMap(map);
   };
+
+  useEffect(() => {
+    initMap();
+  }, []);
+
   const addPeople = () => {
     setPeople(people + 1);
   };
@@ -79,6 +74,27 @@ const Detail = () => {
     } catch (error) {
       alert('클립보드 복사에 실패하였습니다.');
     }
+  };
+
+  const joinClass = () => {
+    fetch(`http://10.58.52.154:8000/classes/2`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',
+      },
+      body: JSON.stringify({
+        // classId : id;
+        // hostId :
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === '') {
+          alert('강의를 신청하였습니다.');
+          navigate('/');
+        }
+      });
   };
 
   return (
@@ -117,27 +133,19 @@ const Detail = () => {
               <button onClick={addPeople}>+</button>
             </div>
             <div className="buttons">
-              <button className="addClass">강의 신청</button>
+              <button className="addClass" onClick={joinClass}>
+                강의 신청
+              </button>
               <button className="addWish">찜</button>
             </div>
           </div>
 
           <div className="calendar">
             <div className="reserve">
-              <h1>예약 관리 시스템</h1>
-              <CalendarApp onReserve={reserveSubmit} />
-              <div>
-                <h2>예약 목록</h2>
-                <ul>
-                  {reservations.map((reservation, index) => (
-                    <li key={index}>
-                      {`날짜: ${formatDate(reservation.date)}, 시간: ${
-                        reservation.time
-                      }`}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <CalendarApp
+                onReserve={reserveSubmit}
+                scheduleInfo={classDetail.schedule_info}
+              />
             </div>
           </div>
         </div>
@@ -145,7 +153,7 @@ const Detail = () => {
 
         <Refund />
 
-        <Chat />
+        {/* <Chat /> */}
       </div>
     </div>
   );

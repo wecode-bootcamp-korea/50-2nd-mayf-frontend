@@ -1,86 +1,62 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import ScheduleList from '../ScheduleList/ScheduleList';
 
-const CalendarApp = ({ onReserve }) => {
-  const [date, setDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState(null);
+const CalendarApp = ({ scheduleInfo }) => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [scheduleData, setScheduleData] = useState([
+    {
+      class_day: '2023-11-19 00:00:00.000000',
+      class_hour: 3,
+      max_member: 25,
+      enrolled_member: 19,
+    },
+    {
+      class_day: '2023-11-18 04:00:00.000000',
+      class_hour: 2,
+      max_member: 16,
+      enrolled_member: 19,
+    },
+    {
+      class_day: '2023-12-24 19:00:00.000000',
+      class_hour: 2,
+      max_member: 15,
+      enrolled_member: 2,
+    },
+    {
+      class_day: '2023-12-12 00:00:00.000000',
+      class_hour: 2,
+      max_member: 20,
+      enrolled_member: 1,
+    },
+    {
+      class_day: '2023-12-13 00:00:00.000000',
+      class_hour: 2,
+      max_member: 20,
+      enrolled_member: 1,
+    },
+  ]);
 
-  const allowedTimesByDate = {
-    '2023-01-01': ['10:00', '14:00'],
-    '2023-01-05': ['15:00'],
-    '2023-01-10': ['9:00'],
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    console.log(selectedDate);
   };
 
-  const tileDisabled = ({ date, view }) => {
-    if (view === 'month') {
-      const formattedDate = date.toISOString().split('T')[0];
-      const isAllowedDate = formattedDate in allowedTimesByDate;
-      return !isAllowedDate;
-    }
-  };
-
-  const tileContent = ({ date, view }) => {
-    if (view === 'month') {
-      const formattedDate = date.toISOString().split('T')[0];
-      const isAllowedDate = formattedDate in allowedTimesByDate;
-      return isAllowedDate ? (
-        <div
-          style={{
-            background: 'green',
-            borderRadius: '50%',
-            width: '20px',
-            height: '20px',
-          }}
-        />
-      ) : null;
-    }
-  };
-
-  const handleTimeClick = (time) => {
-    setSelectedTime(time);
-  };
-
-  const getAvailableTimes = () => {
-    const formattedDate = date.toISOString().split('T')[0];
-    return allowedTimesByDate[formattedDate] || [];
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const availableTimes = getAvailableTimes();
-    if (availableTimes.length > 0 && availableTimes.includes(selectedTime)) {
-      onReserve({ date, time: selectedTime });
-      setSelectedTime(null);
-    }
+  // 예약이 불가능한 날짜를 비활성화
+  const tileDisabled = ({ date }) => {
+    const dateString = date.toISOString().split('T')[0];
+    return !scheduleData.some((item) => item.class_day.includes(dateString));
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        날짜:
-        <Calendar
-          onChange={setDate}
-          value={date}
-          tileDisabled={tileDisabled}
-          tileContent={tileContent}
-          view="month"
-        />
-      </label>
-      <div>
-        <p>예약 가능한 시간:</p>
-        {getAvailableTimes().map((time, index) => (
-          <button
-            key={index}
-            onClick={() => handleTimeClick(time)}
-            disabled={selectedTime === time}
-          >
-            {time}
-          </button>
-        ))}
-      </div>
-      <button type="submit">예약</button>
-    </form>
+    <div>
+      <Calendar
+        onChange={handleDateChange}
+        value={selectedDate}
+        tileDisabled={tileDisabled}
+      />
+    </div>
   );
 };
 
