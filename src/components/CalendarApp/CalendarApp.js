@@ -1,52 +1,80 @@
+// CalendarApp.js
+
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import ScheduleList from '../ScheduleList/ScheduleList';
 
-const CalendarApp = ({ scheduleInfo }) => {
+const CalendarApp = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [scheduleData, setScheduleData] = useState([
-    {
-      class_day: '2023-11-19 00:00:00.000000',
-      class_hour: 3,
-      max_member: 25,
-      enrolled_member: 19,
-    },
-    {
-      class_day: '2023-11-18 04:00:00.000000',
-      class_hour: 2,
-      max_member: 16,
-      enrolled_member: 19,
-    },
+    // 예약 가능한 스케줄 데이터
     {
       class_day: '2023-12-24 19:00:00.000000',
-      class_hour: 2,
+      class_duration: '2',
       max_member: 15,
       enrolled_member: 2,
     },
     {
-      class_day: '2023-12-12 00:00:00.000000',
-      class_hour: 2,
+      class_day: '2023-12-12 13:00:00.000000',
+      class_duration: '2',
       max_member: 20,
       enrolled_member: 1,
     },
     {
-      class_day: '2023-12-13 00:00:00.000000',
-      class_hour: 2,
+      class_day: '2023-12-13 15:00:00.000000',
+      class_duration: '2',
       max_member: 20,
       enrolled_member: 1,
+    },
+    {
+      class_day: '2023-11-30 11:00:00.000000',
+      class_duration: '2',
+      max_member: 20,
+      enrolled_member: 15,
+    },
+    {
+      class_day: '2023-11-30 13:00:00.000000',
+      class_duration: '2',
+      max_member: 25,
+      enrolled_member: 20,
+    },
+    {
+      class_day: '2023-11-30 15:00:00.000000',
+      class_duration: '2',
+      max_member: 15,
+      enrolled_member: 10,
     },
   ]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    console.log(selectedDate);
   };
 
-  // 예약이 불가능한 날짜를 비활성화
-  const tileDisabled = ({ date }) => {
-    const dateString = date.toISOString().split('T')[0];
-    return !scheduleData.some((item) => item.class_day.includes(dateString));
+  const getAvailableSlots = () => {
+    const formattedSelectedDate = selectedDate.toISOString().split('T')[0];
+    const selectedDateSchedules = scheduleData.filter(
+      (schedule) => schedule.class_day.split(' ')[0] === formattedSelectedDate,
+    );
+
+    const availableSlots = selectedDateSchedules.filter(
+      (schedule) => schedule.max_member > schedule.enrolled_member,
+    );
+
+    return availableSlots;
+  };
+
+  const isDateDisabled = ({ date }) => {
+    const formattedDate = date.toISOString().split('T')[0];
+    const availableDates = scheduleData
+      .filter((schedule) => schedule.max_member > schedule.enrolled_member)
+      .map((schedule) => schedule.class_day.split(' ')[0]);
+
+    return !availableDates.includes(formattedDate - 1);
+  };
+
+  const handleReservation = (slot) => {
+    // 예약 처리 로직
+    console.log('예약되었습니다.', slot);
   };
 
   return (
@@ -54,8 +82,21 @@ const CalendarApp = ({ scheduleInfo }) => {
       <Calendar
         onChange={handleDateChange}
         value={selectedDate}
-        tileDisabled={tileDisabled}
+        tileDisabled={isDateDisabled}
       />
+      <h2>Available Slots</h2>
+      {getAvailableSlots().length > 0 ? (
+        <ul>
+          {getAvailableSlots().map((slot) => (
+            <li key={slot.class_day}>
+              {slot.class_day} - {slot.class_duration}시간
+              <button onClick={() => handleReservation(slot)}>예약하기</button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>해당 날짜에는 예약 가능한 시간이 없습니다.</p>
+      )}
     </div>
   );
 };

@@ -27,7 +27,7 @@ const Detail = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setClassDetail(data.message[0]);
+        setClassDetail(data.message);
       });
   }, []);
 
@@ -37,7 +37,7 @@ const Detail = () => {
         classDetail.latitude,
         classDetail.longitude,
       ),
-      level: 1,
+      level: 2,
     };
     const map = new kakao.maps.Map(container.current, options);
 
@@ -106,9 +106,9 @@ const Detail = () => {
 
         <div className="content">
           <img
-            src={classDetail.sub_image_source}
             alt="클래스 사진"
             className="classImage"
+            src={classDetail.main_image_source}
           />
 
           <div className="simpleDetail">
@@ -145,6 +145,7 @@ const Detail = () => {
               <CalendarApp
                 onReserve={reserveSubmit}
                 scheduleInfo={classDetail.schedule_info}
+                people={people}
               />
             </div>
           </div>
