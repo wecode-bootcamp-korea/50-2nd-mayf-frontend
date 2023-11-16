@@ -12,6 +12,7 @@ import './Nav.scss';
 const Nav = () => {
   const navigate = useNavigate();
   //login여부 확인 state, 나중에는 토큰 불러올 예정
+  //const token = localStorage.getItem('token');
   const [login, setLogin] = useState(true);
   //유저 페이지 이동 사이드바 구현
   const [isOpen, setIsOpen] = useState(false);
