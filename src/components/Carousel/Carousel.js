@@ -6,6 +6,24 @@ import 'swiper/scss/navigation';
 import './Carousel.scss';
 
 const Carousel = () => {
+  const BANNER = [
+    {
+      id: 1,
+      img: 'https://mayfly-bucket.s3.ap-northeast-2.amazonaws.com/etc/cookingclass.jpg',
+    },
+    {
+      id: 2,
+      img: 'https://mayfly-bucket.s3.ap-northeast-2.amazonaws.com/etc/banner2.png',
+    },
+    {
+      id: 3,
+      img: 'https://mayfly-bucket.s3.ap-northeast-2.amazonaws.com/etc/joel-heard-4PAfwVC3zaE-unsplash+(1).jpg',
+    },
+    {
+      id: 4,
+      img: 'https://mayfly-bucket.s3.ap-northeast-2.amazonaws.com/etc/junior.png',
+    },
+  ];
   const sliderRef = useRef(null);
 
   const handleNextSlide = () => {
@@ -37,34 +55,18 @@ const Carousel = () => {
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000 }}
       >
-        <SwiperSlide>
-          <img
-            className="banner"
-            alt="banner"
-            src="https://mayfly-bucket.s3.ap-northeast-2.amazonaws.com/etc/cookingclass.jpg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="banner"
-            alt="banner"
-            src="https://mayfly-bucket.s3.ap-northeast-2.amazonaws.com/etc/banner2.png"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="banner"
-            alt="banner"
-            src="https://mayfly-bucket.s3.ap-northeast-2.amazonaws.com/etc/joel-heard-4PAfwVC3zaE-unsplash+(1).jpg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="banner"
-            alt="banner"
-            src="https://mayfly-bucket.s3.ap-northeast-2.amazonaws.com/etc/junior.png"
-          />
-        </SwiperSlide>
+        {BANNER.map((banner) => {
+          return (
+            <SwiperSlide>
+              <img
+                key={banner.id}
+                className="banner"
+                alt="banner"
+                src={banner.img}
+              />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
       <div className="swiper-button-next" onClick={handleNextSlide}></div>
       <div className="swiper-button-prev" onClick={handlePrevSlide}></div>
