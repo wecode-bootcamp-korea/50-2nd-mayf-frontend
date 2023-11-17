@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import './MyPageUser.scss';
-import TabContent from '../../components/TabContent/TabContent';
+import Profile from '../../components/Profile/Profile';
+import Reservation from '../../components/Reservation/Reservation';
+import WishList from '../../components/WishList/WishList';
+import Credit from '../../components/Credit/Credit';
 
 const MyPageUser = () => {
-  let [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(0);
+  const menuArr = [
+    { name: '정보 수정', content: <Profile /> },
+    { name: '예약 내역', content: <Reservation /> },
+    { name: '위시 리스트', content: <WishList /> },
+    { name: '크레딧', content: <Credit /> },
+  ];
+
+  const selectMenu = (index) => {
+    setTab(index);
+  };
 
   return (
     <div className="myPageUser">
@@ -14,17 +27,13 @@ const MyPageUser = () => {
 
         <div className="contents">
           <div className="contentCategory">
-            <button onClick={() => setTab(0)}>정보 수정</button>
-
-            <button onClick={() => setTab(1)}>예약 내역</button>
-
-            <button onClick={() => setTab(2)}>위시 리스트</button>
-
-            <button onClick={() => setTab(3)}>크레딧</button>
+            {menuArr.map((el, index) => (
+              <button key={index} onClick={() => selectMenu(index)}>
+                {el.name}
+              </button>
+            ))}
           </div>
-          <div className="content">
-            <TabContent tab={tab} />
-          </div>
+          <div className="content">{menuArr[tab].content}</div>
         </div>
       </div>
     </div>
