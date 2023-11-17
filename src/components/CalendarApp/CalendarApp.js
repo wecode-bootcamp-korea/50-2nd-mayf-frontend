@@ -1,56 +1,21 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import './CalendarApp.scss';
 
-const CalendarApp = () => {
+const CalendarApp = ({ scheduleInfo = [], setScheduleId }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
 
-  const scheduleData = [
-    {
-      class_day: '2023-12-24 19:00:00.000000',
-      class_duration: '2',
-      max_member: 15,
-      enrolled_member: 2,
-    },
-    {
-      class_day: '2023-12-12 13:00:00.000000',
-      class_duration: '2',
-      max_member: 20,
-      enrolled_member: 1,
-    },
-    {
-      class_day: '2023-12-13 15:00:00.000000',
-      class_duration: '2',
-      max_member: 20,
-      enrolled_member: 1,
-    },
-    {
-      class_day: '2023-11-30 11:00:00.000000',
-      class_duration: '2',
-      max_member: 20,
-      enrolled_member: 15,
-    },
-    {
-      class_day: '2023-11-30 13:00:00.000000',
-      class_duration: '2',
-      max_member: 25,
-      enrolled_member: 20,
-    },
-    {
-      class_day: '2023-11-30 15:00:00.000000',
-      class_duration: '2',
-      max_member: 15,
-      enrolled_member: 10,
-    },
-  ];
-
   const isDateAvailable = (date) => {
-    // 해당 날짜에 예약 가능한 스케줄이 있는지 확인
-    return scheduleData.some(
-      (schedule) =>
-        new Date(schedule.class_day).toLocaleDateString() ===
-        date.toLocaleDateString(),
+    // scheduleInfo가 정의되어 있고 배열인 경우에만 some 메서드 호출
+    return (
+      Array.isArray(scheduleInfo) &&
+      scheduleInfo.some(
+        (schedule) =>
+          new Date(schedule.class_day).toLocaleDateString() ===
+          date.toLocaleDateString(),
+      )
     );
   };
 
@@ -64,11 +29,7 @@ const CalendarApp = () => {
   };
 
   const handleReservation = () => {
-    if (selectedClass) {
-      console.log('예약 완료:', selectedClass);
-    } else {
-      console.log('강의를 선택해주세요.');
-    }
+    console.log(scheduleInfo.schedule_id);
   };
 
   return (
@@ -86,7 +47,7 @@ const CalendarApp = () => {
         <div>
           <h2>예약 가능한 강의</h2>
           <ul>
-            {scheduleData
+            {scheduleInfo
               .filter(
                 (schedule) =>
                   new Date(schedule.class_day).toLocaleDateString() ===
@@ -94,7 +55,13 @@ const CalendarApp = () => {
               )
               .map((classData, index) => (
                 <li key={index}>
-                  <span>{classData.class_day}</span>
+                  <button
+                    onClick={() => {
+                      setScheduleId(classData.schedule_id);
+                    }}
+                  >
+                    {classData.class_day}
+                  </button>
                   <button onClick={() => handleClassSelect(classData)}>
                     예약하기
                   </button>

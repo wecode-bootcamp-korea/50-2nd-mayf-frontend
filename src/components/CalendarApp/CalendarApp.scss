@@ -1,0 +1,18 @@
+/* CalendarApp.css 또는 관련된 스타일 파일에 추가 */
+
+.react-calendar__tile--hasActive {
+  position: relative;
+}
+
+.react-calendar__tile--hasActive::before {
+  content: '📅';
+  /* 아이콘 또는 이미지를 사용하려면 해당 내용을 조정하세요 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  /* 원하는 크기로 조정 */
+  color: #fff;
+  /* 아이콘 색상 조정 */
+}

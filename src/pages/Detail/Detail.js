@@ -12,6 +12,7 @@ const Detail = () => {
   const [people, setPeople] = useState(1);
   const [reservations, setReservations] = useState([]);
   const [classDetail, setClassDetail] = useState({});
+  const [scheduleId, setScheduleId] = useState('');
   const container = useRef();
   const navigate = useNavigate();
 
@@ -38,7 +39,7 @@ const Detail = () => {
         classDetail.latitude,
         classDetail.longitude,
       ),
-      level: 2,
+      level: 3,
     };
     const map = new kakao.maps.Map(container.current, options);
 
@@ -56,7 +57,7 @@ const Detail = () => {
 
   useEffect(() => {
     initMap();
-  }, []);
+  });
 
   const addPeople = () => {
     setPeople(people + 1);
@@ -78,24 +79,24 @@ const Detail = () => {
   };
 
   const joinClass = () => {
-    fetch(`http://10.58.52.154:8000/classes/2`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',
-      },
-      body: JSON.stringify({
-        // classId : id;
-        // hostId :
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === '') {
-          alert('강의를 신청하였습니다.');
-          navigate('/');
-        }
-      });
+    // fetch(`http://10.58.52.154:8000/classes/210`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     // Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',
+    //   },
+    //   body: JSON.stringify({
+    //     // classId : id;
+    //     // hostId :
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.message === '') {
+    //       alert('강의를 신청하였습니다.');
+    //       navigate('/');
+    //     }
+    //   });
   };
 
   return (
@@ -115,7 +116,9 @@ const Detail = () => {
           <div className="simpleDetail">
             <div className="classTitle">{classDetail.title}</div>
             <div className="classOpener">{classDetail.name}</div>
-            <div className="classCategory">{classDetail.top_category_name}</div>
+            <div className="classCategory">
+              {classDetail.top_category_name}({classDetail.sub_category_name})
+            </div>
             <div className="classLocation">
               <div className="locationWriting">
                 <div className="locationLabel">{classDetail.address}</div>
@@ -146,12 +149,17 @@ const Detail = () => {
               <CalendarApp
                 onReserve={reserveSubmit}
                 scheduleInfo={classDetail.schedule_info}
+                id={setScheduleId}
                 people={people}
               />
             </div>
           </div>
         </div>
-        <div className="classDetail">상세 정보</div>
+        <div className="classDetail">
+          <div className="summary">{classDetail.summary}</div>
+          <img src={classDetail.sub_image_source} alt="서브이미지" />
+          <div className="content">{classDetail.content}</div>
+        </div>
 
         <Refund />
 
