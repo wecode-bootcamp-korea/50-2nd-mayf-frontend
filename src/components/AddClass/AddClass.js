@@ -11,8 +11,8 @@ function AddClass({ setTab }) {
     summary: '',
     content: '',
     price: '',
-    mainImageSource: '',
-    subImageSource: '',
+    mainImageSource: null,
+    subImageSource: null,
     address: '',
   });
 
@@ -30,18 +30,54 @@ function AddClass({ setTab }) {
     setUserInput(newUserInput);
   };
 
-  const addressInput = (data) => {
+  const addressInput = () => {
     setPopup(!popup);
   };
 
+  const handleImageUpload = async (mainImage, subImage, imageType) => {
+    const formData = new FormData();
+    formData.append('mainImage', mainImage);
+    formData.append('subImage', subImage);
+
+    try {
+      const response = await fetch('http://10.58.52.68:8000/images/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNjk5OTU2NzYxLCJleHAiOjE3MDA2NzY3NjF9.zIOF-jyzWRPZrhN3Zi1vaenwp1T_Qyr2U2lW5Vih0ec',
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUserInput({
+          ...userInput,
+          [imageType]: data.imageUrl,
+        });
+      } else {
+        console.error('이미지 업로드 실패');
+      }
+    } catch (error) {
+      console.error('이미지 업로드 중 오류 발생', error);
+    }
+  };
+
+  const handleImageChange = (event, imageType) => {
+    const file = event.target.files[0];
+    if (file) {
+      handleImageUpload(file, imageType);
+    }
+  };
+
   const addClassButton = () => {
-    // console.log(userInput);
-    fetch(`http://10.58.52.154:8000/classes/createclass`, {
+    fetch('http://10.58.52.154:8000/classes/createclass', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsIm5hbWUiOiLsnoTsi5ztmIQiLCJlbWFpbCI6ImpzbTAwOTI5QG5hdmVyLmNvbSIsInBob25lX251bWJlciI6Iis4MiAxMC05MTU5LTA1MDYiLCJpYXQiOjE2OTk5MzUyODMsImV4cCI6MTcwMDY1NTI4M30.oXtoBY1SoujOKSClsVQf2JM9QoBuhajNV1EVC3b3R4o',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNjk5OTU2NzYxLCJleHAiOjE3MDA2NzY3NjF9.zIOF-jyzWRPZrhN3Zi1vaenwp1T_Qyr2U2lW5Vih0ec',
       },
       body: JSON.stringify({
         title: userInput.title,
@@ -59,9 +95,11 @@ function AddClass({ setTab }) {
       .then((data) => {
         if (data.result.message === 'CREATE_CLASS_SUCCESS') {
           alert('강의 생성 완료');
+          setTab(1);
         }
       });
   };
+
   return (
     <div className="addClass">
       <div className="container" onChange={setChangeUserInput}>
@@ -128,7 +166,11 @@ function AddClass({ setTab }) {
           <div className="info">
             <div className="label">강의 장소</div>
             <div className="addressInfo">
-              {popup && <Post company={userInput} setCompany={setUserInput} />}
+              {popup && (
+                <div>
+                  <Post company={userInput} setCompany={setUserInput} />
+                </div>
+              )}
               <button onClick={addressInput}>주소 찾기</button>
 
               <input
@@ -146,7 +188,7 @@ function AddClass({ setTab }) {
               <input
                 type="file"
                 name="mainImageSource"
-                value={userInput.mainImageSource}
+                onChange={(e) => handleImageChange(e, 'mainImageSource')}
               />
             </div>
           </div>
@@ -156,8 +198,8 @@ function AddClass({ setTab }) {
             <div className="infoInput">
               <input
                 type="file"
-                value={userInput.subImageSource}
                 name="subImageSource"
+                onChange={(e) => handleImageChange(e, 'subImageSource')}
               />
             </div>
           </div>
