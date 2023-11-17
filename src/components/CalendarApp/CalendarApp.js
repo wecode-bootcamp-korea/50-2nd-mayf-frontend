@@ -1,13 +1,12 @@
-// CalendarApp.js
-
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const CalendarApp = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [scheduleData, setScheduleData] = useState([
-    // 예약 가능한 스케줄 데이터
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedClass, setSelectedClass] = useState(null);
+
+  const scheduleData = [
     {
       class_day: '2023-12-24 19:00:00.000000',
       class_duration: '2',
@@ -44,58 +43,75 @@ const CalendarApp = () => {
       max_member: 15,
       enrolled_member: 10,
     },
-  ]);
+  ];
+
+  const isDateAvailable = (date) => {
+    // 해당 날짜에 예약 가능한 스케줄이 있는지 확인
+    return scheduleData.some(
+      (schedule) =>
+        new Date(schedule.class_day).toLocaleDateString() ===
+        date.toLocaleDateString(),
+    );
+  };
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    setSelectedClass(null);
   };
 
-  const getAvailableSlots = () => {
-    const formattedSelectedDate = selectedDate.toISOString().split('T')[0];
-    const selectedDateSchedules = scheduleData.filter(
-      (schedule) => schedule.class_day.split(' ')[0] === formattedSelectedDate,
-    );
-
-    const availableSlots = selectedDateSchedules.filter(
-      (schedule) => schedule.max_member > schedule.enrolled_member,
-    );
-
-    return availableSlots;
+  const handleClassSelect = (classData) => {
+    setSelectedClass(classData);
   };
 
-  const isDateDisabled = ({ date }) => {
-    const formattedDate = date.toISOString().split('T')[0];
-    const availableDates = scheduleData
-      .filter((schedule) => schedule.max_member > schedule.enrolled_member)
-      .map((schedule) => schedule.class_day.split(' ')[0]);
-
-    return !availableDates.includes(formattedDate - 1);
-  };
-
-  const handleReservation = (slot) => {
-    // 예약 처리 로직
-    console.log('예약되었습니다.', slot);
+  const handleReservation = () => {
+    if (selectedClass) {
+      console.log('예약 완료:', selectedClass);
+    } else {
+      console.log('강의를 선택해주세요.');
+    }
   };
 
   return (
-    <div>
-      <Calendar
-        onChange={handleDateChange}
-        value={selectedDate}
-        tileDisabled={isDateDisabled}
-      />
-      <h2>Available Slots</h2>
-      {getAvailableSlots().length > 0 ? (
-        <ul>
-          {getAvailableSlots().map((slot) => (
-            <li key={slot.class_day}>
-              {slot.class_day} - {slot.class_duration}시간
-              <button onClick={() => handleReservation(slot)}>예약하기</button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>해당 날짜에는 예약 가능한 시간이 없습니다.</p>
+    <div className="calendar-app">
+      <h1>강의 예약 시스템</h1>
+      <div className="calendar-container">
+        <h2>달력</h2>
+        <Calendar
+          onChange={handleDateChange}
+          value={selectedDate}
+          tileContent={({ date }) => (isDateAvailable(date) ? '📅' : null)}
+        />
+      </div>
+      {selectedDate && (
+        <div>
+          <h2>예약 가능한 강의</h2>
+          <ul>
+            {scheduleData
+              .filter(
+                (schedule) =>
+                  new Date(schedule.class_day).toLocaleDateString() ===
+                  selectedDate.toLocaleDateString(),
+              )
+              .map((classData, index) => (
+                <li key={index}>
+                  <span>{classData.class_day}</span>
+                  <button onClick={() => handleClassSelect(classData)}>
+                    예약하기
+                  </button>
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
+      {selectedClass && (
+        <div>
+          <h2>강의 정보</h2>
+          <p>날짜: {selectedClass.class_day}</p>
+          <p>소요 시간: {selectedClass.class_duration}시간</p>
+          <p>등록 인원: {selectedClass.enrolled_member}</p>
+          <p>최대 인원: {selectedClass.max_member}</p>
+          <button onClick={handleReservation}>예약하기</button>
+        </div>
       )}
     </div>
   );
