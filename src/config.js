@@ -1,7 +1,9 @@
-const BASE_URL = 'http://10.58.52.52:8000';
+const BASE_URL = 'http://10.58.52.154:8000';
 
 const API = {
-  SignUp: `${BASE_URL}/users/signup`,
+  signUp: `${BASE_URL}/users/signup`,
+  list: `${BASE_URL}/classes/classeslist`,
+  nav: `${BASE_URL}/classes/classeslist`,
 };
 
 export default API;
