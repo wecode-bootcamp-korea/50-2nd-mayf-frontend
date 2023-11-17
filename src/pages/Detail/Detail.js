@@ -79,35 +79,31 @@ const Detail = () => {
   };
 
   const joinClass = () => {
-    console.log('classid', classDetail.id);
-    console.log('hostId', classDetail.hostId);
-    console.log('scheduleId', scheduleId);
-    console.log('quantity', people);
-    console.log('price', classDetail.price * people);
-    console.log();
-    // fetch(`http://10.58.52.154:8000/classes/2`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization:
-    //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',
-    //   },
-    //   body: JSON.stringify({
-    //     classId: classDetail.id,
-    //     hostId: classDetail.hostId,
-    //     scheduleId: scheduleId,
-    //     quantity: people,
-    //     price: classDetail.price * people,
-    //     email: 'wecode@wecode.com',
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.message === '') {
-    //       alert('강의를 신청하였습니다.');
-    //       navigate('/');
-    //     }
-    //   });
+    fetch(`http://10.58.52.158:8000/orders/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
+      },
+      body: JSON.stringify({
+        classId: classDetail.id,
+        hostId: classDetail.hostId,
+        scheduleId: scheduleId,
+        quantity: people,
+        price: classDetail.price * people,
+        email: 'wecode@wecode.com',
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === 'ORDER_COMPLETED') {
+          alert('강의를 신청하였습니다.');
+          navigate('/');
+        } else if (data.message === 'NO_SEATS_LEFT') {
+          alert('마감인원을 초과하였습니다.');
+        }
+      });
   };
 
   return (
