@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CategoryList from './components/CategoryList';
 import UserSideBar from './components/UserSideBar';
-import API from '../../config';
 import Logo from '../Nav/navImg/logo.png';
 import Category from '../Nav/navImg/category.png';
 import UserIcon from '../Nav/navImg/user.png';

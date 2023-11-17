@@ -1,66 +1,82 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Carousel from '../../components/Carousel/Carousel';
+import API from '../../config';
+import Timer from './components/Timer';
 import './Main.scss';
 
 const Main = () => {
   const [classListData, setClassListData] = useState({});
 
   useEffect(() => {
-    fetch('/data/mainMockData.json', {
+    fetch(API.main, {
       method: 'GET',
     })
       .then((res) => res.json())
       .then((result) => {
-        setClassListData(result);
+        setClassListData(result.message);
       });
   }, []);
 
-  //1. const { bestClass = [], newClass = [], deadlineClass = [] } = classListData;
-  // bestClass?.map = ? optional chaining
-
-  const { bestClass, newClass, deadlineClass } = classListData;
+  const { newProductOrder, salesOrder, upcomingClasses } = classListData;
 
   return (
     <div className="main">
-      <img
-        className="banner"
-        src="https://cdn.class101.net/images/31eab75c-55e9-4484-9014-d6eb54b47959/1920xauto.webp"
-        alt="banner"
-      />
+      <Carousel />
       <div className="proudct">
-        <p className="classTitle">마감임박순</p>
+        <p className="classTitle">😯마감임박순😯</p>
         <div className="classContainer">
-          {deadlineClass?.map((pro) => (
+          {upcomingClasses?.map((pro) => (
             <div key={pro.id} className="class">
-              <div className="imgBox">
-                <img className="classImg" alt="class" src={pro.image} />
-              </div>
-              <p className="sectionTitle">{pro.class}</p>
+              <Link to={`/detail/${pro.id}`} className="detailLink">
+                <div className="imgBox">
+                  <img
+                    className="classImg"
+                    alt="class"
+                    src={pro.image_source}
+                  />
+                </div>
+                <p className="sectionTitle">{pro.title}</p>
+              </Link>
+              <Timer endDate={pro.class_day} />
             </div>
           ))}
         </div>
       </div>
       <div className="proudct">
-        <p className="classTitle">인기순</p>
+        <p className="classTitle">🥰인기순🥰</p>
         <div className="classContainer">
-          {bestClass?.map((pro) => (
+          {salesOrder?.map((pro) => (
             <div key={pro.id} className="class">
-              <div className="imgBox">
-                <img className="classImg" alt="class" src={pro.image} />
-              </div>
-              <p className="sectionTitle">{pro.class}</p>
+              <Link to={`/detail/${pro.id}`} className="detailLink">
+                <div className="imgBox">
+                  <img
+                    className="classImg"
+                    alt="class"
+                    src={pro.image_source}
+                  />
+                </div>
+                <p className="sectionTitle">{pro.title}</p>
+              </Link>
             </div>
           ))}
         </div>
       </div>
       <div className="proudct">
-        <p className="classTitle">최신순</p>
+        <p className="classTitle">🤩최신순🤩</p>
         <div className="classContainer">
-          {newClass?.map((pro) => (
+          {newProductOrder?.map((pro) => (
             <div key={pro.id} className="class">
-              <div className="imgBox">
-                <img className="classImg" alt="class" src={pro.image} />
-              </div>
-              <p className="sectionTitle">{pro.class}</p>
+              <Link to={`/detail/${pro.id}`} className="detailLink">
+                <div className="imgBox">
+                  <img
+                    className="classImg"
+                    alt="class"
+                    src={pro.image_source}
+                  />
+                </div>
+                <p className="sectionTitle">{pro.title}</p>
+              </Link>
             </div>
           ))}
         </div>
