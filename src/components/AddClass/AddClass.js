@@ -34,16 +34,14 @@ function AddClass({ setTab }) {
     setPopup(!popup);
   };
 
-  const handleImageUpload = async (mainImage, subImage, imageType) => {
+  const handleImageUpload = async (image, imageType) => {
     const formData = new FormData();
-    formData.append('mainImage', mainImage);
-    formData.append('subImage', subImage);
+    formData.append('images', image);
 
     try {
       const response = await fetch('http://10.58.52.68:8000/images/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNjk5OTU2NzYxLCJleHAiOjE3MDA2NzY3NjF9.zIOF-jyzWRPZrhN3Zi1vaenwp1T_Qyr2U2lW5Vih0ec',
         },
@@ -65,9 +63,11 @@ function AddClass({ setTab }) {
   };
 
   const handleImageChange = (event, imageType) => {
-    const file = event.target.files[0];
-    if (file) {
-      handleImageUpload(file, imageType);
+    const files = event.target.files;
+    if (files.length > 0) {
+      for (const file of files) {
+        handleImageUpload(file, imageType);
+      }
     }
   };
 
@@ -189,6 +189,7 @@ function AddClass({ setTab }) {
                 type="file"
                 name="mainImageSource"
                 onChange={(e) => handleImageChange(e, 'mainImageSource')}
+                multiple
               />
             </div>
           </div>
@@ -200,6 +201,7 @@ function AddClass({ setTab }) {
                 type="file"
                 name="subImageSource"
                 onChange={(e) => handleImageChange(e, 'subImageSource')}
+                multiple
               />
             </div>
           </div>
