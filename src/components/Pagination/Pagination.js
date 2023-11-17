@@ -8,13 +8,24 @@ const Pagination = ({
   currentPage,
   setCurrentPage,
 }) => {
-  const pageNumbers = [];
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  if (Math.ceil(totalItems / itemsPerPage) === 1) return null;
+  if (totalPages <= 1) return null;
 
-  for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const generatePageNumbers = () => {
+    const middleRange = 2;
+    let startPage = Math.max(currentPage - middleRange, 1);
+    let endPage = Math.min(startPage + 4, totalPages);
+
+    startPage = Math.max(endPage - 4, 1);
+
+    return Array.from(
+      { length: Math.min(5, totalPages) },
+      (_, index) => startPage + index,
+    );
+  };
+
+  const pageNumbers = generatePageNumbers();
 
   const goToNextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -26,19 +37,29 @@ const Pagination = ({
 
   return (
     <ul className="pagination">
+      <button onClick={() => paginate(1)} disabled={currentPage === 1}>
+        {'<<'}
+      </button>
       <button onClick={goToPrevPage} disabled={currentPage === 1}>
         {'<'}
       </button>
       {pageNumbers.map((num) => (
-        <button key={num} onClick={() => paginate(num)} className="pageItem">
+        <button
+          key={num}
+          onClick={() => paginate(num)}
+          className={`pageItem ${currentPage === num ? 'active' : ''}`}
+        >
           {num}
         </button>
       ))}
-      <button
-        onClick={goToNextPage}
-        disabled={currentPage === pageNumbers.length}
-      >
+      <button onClick={goToNextPage} disabled={currentPage === totalPages}>
         {'>'}
+      </button>
+      <button
+        onClick={() => paginate(totalPages)}
+        disabled={currentPage === totalPages}
+      >
+        {'>>'}
       </button>
     </ul>
   );

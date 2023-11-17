@@ -8,5 +8,9 @@
 
   .pageItem {
     margin: 0 5px;
+
+    &.active {
+      color: #ddd;
+    }
   }
 }

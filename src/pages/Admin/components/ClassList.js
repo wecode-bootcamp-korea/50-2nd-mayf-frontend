@@ -8,7 +8,7 @@ const ClassList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemData, setSelectedItemData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 30;
+  const itemsPerPage = 10;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -56,18 +56,21 @@ const ClassList = () => {
   };
 
   const handleDelete = (itemId) => {
-    fetch(`http://10.58.52.154:8000/classes/admin/delete/${itemId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: token,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert(data.message);
-        getClassList();
-      });
+    const ok = window.confirm('정말 삭제하시겠습니까?');
+    if (ok) {
+      fetch(`http://10.58.52.154:8000/classes/admin/delete/${itemId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          alert(data.message);
+          getClassList();
+        });
+    }
   };
 
   return (
@@ -84,8 +87,8 @@ const ClassList = () => {
               <p className="cell name">{item.name}</p>
               <p className="cell classCategory">{item.top_category_name}</p>
               <p className="cell classCategory">{item.sub_category_name}</p>
-              <p className="cell">
-                <button onClick={() => handleDelete(item.id)}>X</button>
+              <p className="cell" onClick={(e) => e.stopPropagation()}>
+                <button onClick={() => handleDelete(item.id)}>삭제</button>
               </p>
             </div>
           );

@@ -5,7 +5,7 @@ import './UserList.scss';
 const UserList = () => {
   const [userList, setUserList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -16,7 +16,11 @@ const UserList = () => {
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWRtaW5faWQiOiJhZG1pbjExMDgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTk5NTU1MDB9.MjN3UL4Ie0qnk2owFiqy0cONldqVNtbjFjZj9zJK6Ig';
 
   useEffect(() => {
-    fetch('http://10.58.52.195:8000/admins/users', {
+    getUserList();
+  }, []);
+
+  const getUserList = () => {
+    fetch('http://10.58.52.126:8000/admins/userlist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -25,9 +29,27 @@ const UserList = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setUserList(data.adminUserGetInfoList);
+        setUserList(data.message);
       });
-  }, []);
+  };
+
+  const handleDelete = (itemId) => {
+    const ok = window.confirm('정말 삭제하시겠습니까?');
+    if (ok) {
+      fetch(`http://10.58.52.126:8000/admins/${itemId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          alert(data.message);
+          getUserList();
+        });
+    }
+  };
 
   return (
     <div className="userList">
@@ -39,7 +61,7 @@ const UserList = () => {
             <p className="cell">{item.email}</p>
             <p className="cell">{item.phone_number}</p>
             <p className="cell">
-              <button>X</button>
+              <button onClick={handleDelete}>삭제</button>
             </p>
           </div>
         );
