@@ -36,7 +36,7 @@ const UserList = () => {
   const handleDelete = (itemId) => {
     const ok = window.confirm('정말 삭제하시겠습니까?');
     if (ok) {
-      fetch(`http://10.58.52.126:8000/admins/${itemId}`, {
+      fetch(`http://10.58.52.126:8000/admins/users/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -45,7 +45,7 @@ const UserList = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          alert(data.message);
+          alert(data.result.message);
           getUserList();
         });
     }
@@ -56,12 +56,15 @@ const UserList = () => {
       {currentItems.map((item) => {
         return (
           <div className="container" key={item.id}>
-            <p className="cell">{item.name}</p>
+            <p className="cell">
+              {item.name}
+              {item.deleted_at !== null && '(삭제됨)'}
+            </p>
             <p className="cell">{item.credit}</p>
             <p className="cell">{item.email}</p>
             <p className="cell">{item.phone_number}</p>
             <p className="cell">
-              <button onClick={handleDelete}>삭제</button>
+              <button onClick={() => handleDelete(item.id)}>삭제</button>
             </p>
           </div>
         );
