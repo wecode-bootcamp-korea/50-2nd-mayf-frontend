@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Modal from '../../../components/Modal/Modal';
+import Modal from './Modal';
 import Pagination from '../../../components/Pagination/Pagination';
 import './ClassList.scss';
 
 const ClassList = () => {
   const [classList, setClassList] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemData, setSelectedItemData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 30;
@@ -20,6 +19,10 @@ const ClassList = () => {
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWRtaW5faWQiOiJhZG1pbjExMDgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTk5NTU1MDB9.MjN3UL4Ie0qnk2owFiqy0cONldqVNtbjFjZj9zJK6Ig';
 
   useEffect(() => {
+    getClassList();
+  }, []);
+
+  const getClassList = () => {
     fetch('http://10.58.52.154:8000/classes/classeslist', {
       method: 'GET',
       headers: {
@@ -31,7 +34,7 @@ const ClassList = () => {
       .then((data) => {
         setClassList(data.result.classList);
       });
-  }, []);
+  };
 
   const openModal = (itemId) => {
     fetch(`http://10.58.52.154:8000/classes/${itemId}`, {
@@ -44,28 +47,51 @@ const ClassList = () => {
       .then((res) => res.json())
       .then((data) => {
         setSelectedItemData(data.message);
-        setSelectedItemId(itemId);
-        setModalIsOpen(true);
+        setIsModalOpen(true);
       });
   };
 
   const closeModal = () => {
-    setModalIsOpen(false);
+    setIsModalOpen(false);
+  };
+
+  const handleDelete = (itemId) => {
+    fetch(`http://10.58.52.154:8000/classes/admin/delete/${itemId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert(data.message);
+        getClassList();
+      });
   };
 
   return (
-    <div className="ClassList">
-      {currentItems.map((item) => {
-        return (
-          <div key={item.id} onClick={() => openModal(item.id)}>
-            <p className="title">{item.title}</p>
-            <p className="name">{item.name}</p>
-            <p className="top-category">{item.top_category_name}</p>
-            <p className="sub-category">{item.sub_category_name}</p>
-          </div>
-        );
-      })}
-      <div className="page-container">
+    <div className="classList">
+      <div>
+        {currentItems.map((item) => {
+          return (
+            <div
+              className="container"
+              key={item.id}
+              onClick={() => openModal(item.id)}
+            >
+              <p className="cell title">{item.title}</p>
+              <p className="cell name">{item.name}</p>
+              <p className="cell classCategory">{item.top_category_name}</p>
+              <p className="cell classCategory">{item.sub_category_name}</p>
+              <p className="cell">
+                <button onClick={() => handleDelete(item.id)}>X</button>
+              </p>
+            </div>
+          );
+        })}
+      </div>
+      <div className="pageContainer">
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={classList.length}
@@ -75,12 +101,9 @@ const ClassList = () => {
         />
       </div>
 
-      <Modal
-        isOpen={modalIsOpen}
-        closeModal={closeModal}
-        itemId={selectedItemId}
-        itemData={selectedItemData}
-      />
+      {isModalOpen && (
+        <Modal closeModal={closeModal} itemData={selectedItemData} />
+      )}
     </div>
   );
 };

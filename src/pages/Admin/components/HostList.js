@@ -30,19 +30,22 @@ const HostList = () => {
   }, []);
 
   return (
-    <div className="HostList">
+    <div className="hostList">
       {currentItems.map((item) => {
         return (
-          <div key={item.id}>
-            <p>{item.name}</p>
-            <p>{item.credit}</p>
-            <p>{item.email}</p>
-            <p>{item.phone_number}</p>
-            <p>{item.bank_account}</p>
+          <div className="container" key={item.id}>
+            <p className="cell">{item.name}</p>
+            <p className="cell">{item.credit}</p>
+            <p className="cell">{item.email}</p>
+            <p className="cell">{item.phone_number}</p>
+            <p className="cell">{item.bank_account}</p>
+            <p className="cell">
+              <button>X</button>
+            </p>
           </div>
         );
       })}
-      <div className="page-container">
+      <div className="pageContainer">
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={hostList.length}

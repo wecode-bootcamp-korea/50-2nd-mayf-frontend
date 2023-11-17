@@ -30,24 +30,29 @@ const UserList = () => {
   }, []);
 
   return (
-    <div className="UserList">
+    <div className="userList">
       {currentItems.map((item) => {
         return (
-          <div key={item.id}>
-            <p>{item.name}</p>
-            <p>{item.credit}</p>
-            <p>{item.email}</p>
-            <p>{item.phone_number}</p>
+          <div className="container" key={item.id}>
+            <p className="cell">{item.name}</p>
+            <p className="cell">{item.credit}</p>
+            <p className="cell">{item.email}</p>
+            <p className="cell">{item.phone_number}</p>
+            <p className="cell">
+              <button>X</button>
+            </p>
           </div>
         );
       })}
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={userList.length}
-        paginate={paginate}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      <div className="pageContainer">
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={userList.length}
+          paginate={paginate}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </div>
   );
 };

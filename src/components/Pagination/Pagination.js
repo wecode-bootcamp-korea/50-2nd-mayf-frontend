@@ -30,12 +30,7 @@ const Pagination = ({
         {'<'}
       </button>
       {pageNumbers.map((num) => (
-        // <li key={num} className="page-item">
-        //   <a onClick={() => paginate(num)} href="/admin" className="page-link">
-        //     {num}
-        //   </a>
-        // </li>
-        <button key={num} onClick={() => paginate(num)} className="page-item">
+        <button key={num} onClick={() => paginate(num)} className="pageItem">
           {num}
         </button>
       ))}

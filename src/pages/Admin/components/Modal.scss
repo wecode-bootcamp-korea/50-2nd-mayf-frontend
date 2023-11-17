@@ -1,4 +1,4 @@
-.modal-overlay {
+.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
 
-  .modal-content {
+  .modalContent {
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -23,29 +23,23 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 10px;
+      min-height: 25px;
+      border: 3px solid #ddd;
     }
 
-    .cell {
-      // border: 1px solid black;
-      min-height: 25px;
-      display: flex;
-      flex: 2;
+    .label {
+      padding: 5px;
       margin: 0;
+      width: 90px;
+      min-height: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
 
-      .label {
-        padding: 5px;
-        margin: 0;
-        width: 90px;
-        min-height: 20px;
-        text-align: center;
-        font-weight: bold;
-      }
-
-      .data {
-        margin: 0;
-        padding: 5px 5px 5px 10px;
-        width: 100%;
-      }
+    .data {
+      margin: 0;
+      padding: 5px 5px 5px 10px;
+      width: 100%;
     }
   }
 }
