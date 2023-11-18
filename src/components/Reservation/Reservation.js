@@ -87,6 +87,7 @@ const Reservation = () => {
                   <button onClick={() => handleDelete(item.order_id)}>
                     예약 취소
                   </button>
+                  <button>QR코드 보내기</button>
                 </div>
               </div>
             );
