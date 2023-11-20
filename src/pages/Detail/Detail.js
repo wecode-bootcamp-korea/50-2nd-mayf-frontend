@@ -21,7 +21,7 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    fetch(`http://10.58.52.154:8000/classes/2`, {
+    fetch(`http://10.58.52.127:8000/classes/2`, {
       headers: {
         Authorization:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',
@@ -106,6 +106,25 @@ const Detail = () => {
       });
   };
 
+  const addWishList = () => {
+    fetch('', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: '',
+      },
+      body: JSON.stringify({
+        classId: classDetail.id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === '') {
+          alert('위시리스트에 추가하였습니다.');
+        }
+      });
+  };
+
   return (
     <div className="detail">
       <div className="container">
@@ -156,7 +175,7 @@ const Detail = () => {
               <CalendarApp
                 onReserve={reserveSubmit}
                 scheduleInfo={classDetail.schedule_info}
-                id={setScheduleId}
+                scheduleId={setScheduleId}
                 people={people}
               />
             </div>

@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './CalendarApp.scss';
 
-const CalendarApp = ({ scheduleInfo = [], id }) => {
+const CalendarApp = ({ scheduleInfo = [], scheduleId }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
 
@@ -29,8 +29,7 @@ const CalendarApp = ({ scheduleInfo = [], id }) => {
   };
 
   const handleReservation = () => {
-    id(scheduleInfo.schedule_id);
-    console.log(scheduleInfo.schedule_id);
+    scheduleId(scheduleInfo.schedule_id);
   };
 
   return (
@@ -58,7 +57,7 @@ const CalendarApp = ({ scheduleInfo = [], id }) => {
                 <li key={index}>
                   <button
                     onClick={() => {
-                      id(classData.schedule_id);
+                      scheduleId(classData.schedule_id);
                     }}
                   >
                     {classData.class_day}
