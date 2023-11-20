@@ -20,7 +20,7 @@ const HostList = () => {
   }, []);
 
   const getHostList = () => {
-    fetch('http://10.58.52.126:8000/admins/hostlist', {
+    fetch('http://10.58.52.102:8000/admins/hostlist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -36,7 +36,7 @@ const HostList = () => {
   const handleDelete = (itemId) => {
     const ok = window.confirm('정말 삭제하시겠습니까?');
     if (ok) {
-      fetch(`http://10.58.52.126:8000/admins/hosts/${itemId}`, {
+      fetch(`http://10.58.52.102:8000/admins/hosts/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -51,21 +51,61 @@ const HostList = () => {
     }
   };
 
+  const handleRestore = (itemId) => {
+    const isDeleted = hostList.find(({ id }) => id === itemId).deleted_at;
+
+    if (!isDeleted) return;
+
+    fetch(`http://10.58.52.102:8000/admins/hosts/update/${itemId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert('호스트가 복구되었습니다');
+          getHostList();
+        } else {
+          throw new Error(`Error status : ${res.status}`);
+        }
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
+      });
+  };
+
   return (
     <div className="hostList">
       {currentItems.map((item) => {
+        const isDeleted = item.deleted_at !== null;
+
         return (
           <div className="container" key={item.id}>
             <p className="cell">
               {item.name}
-              {item.deleted_at !== null && '(삭제됨)'}
+              {isDeleted && '(삭제됨)'}
             </p>
             <p className="cell">{item.credit}</p>
             <p className="cell">{item.email}</p>
             <p className="cell">{item.phone_number}</p>
             <p className="cell">{item.bank_account}</p>
             <p className="cell">
-              <button onClick={() => handleDelete(item.id)}>삭제</button>
+              <button
+                disabled={isDeleted}
+                onClick={() => handleDelete(item.id)}
+              >
+                삭제
+              </button>
+            </p>
+            <p className="cell">
+              <button
+                disabled={!isDeleted}
+                onClick={() => handleRestore(item.id)}
+              >
+                복구
+              </button>
             </p>
           </div>
         );
