@@ -107,11 +107,12 @@ const Detail = () => {
   };
 
   const addWishList = () => {
-    fetch('', {
+    fetch('http://10.58.52.140:8000/likes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: '',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
       },
       body: JSON.stringify({
         classId: classDetail.id,
@@ -119,7 +120,7 @@ const Detail = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === '') {
+        if (data.message === 'REQUEST_ACCEPTED') {
           alert('위시리스트에 추가하였습니다.');
         }
       });
@@ -166,7 +167,9 @@ const Detail = () => {
               <button className="addClass" onClick={joinClass}>
                 강의 신청
               </button>
-              <button className="addWish">찜</button>
+              <button className="addWish" onClick={addWishList}>
+                찜
+              </button>
             </div>
           </div>
 
