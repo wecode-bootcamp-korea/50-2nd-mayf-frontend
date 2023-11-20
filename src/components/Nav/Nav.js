@@ -9,7 +9,7 @@ import './Nav.scss';
 
 const Nav = () => {
   const navigate = useNavigate();
-  const [credit, setCredit] = useState(0);
+  const [credit, setCredit] = useState();
   const token = localStorage.getItem('token');
   //유저 아이콘 클릭시 컴포넌트 실행 사이드바 구현
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +24,7 @@ const Nav = () => {
 
   //문영님, 보유 크레딧 정보 불러오기
   useEffect(() => {
-    fetch('http://10.58.52.195:8000/users', {
+    fetch('http://10.58.52.102:8000/users', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -36,7 +36,6 @@ const Nav = () => {
         setCredit(result.userGetInfoList[0].credit);
       });
   }, []);
-  //하드코딩으로 배열 맵 또는 백엔드에서 TOP만 주는 API 새로 생성..
 
   return (
     <div className="nav">

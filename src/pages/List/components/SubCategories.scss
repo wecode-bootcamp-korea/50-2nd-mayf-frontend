@@ -11,14 +11,18 @@
       font-weight: 500;
     }
 
-    .Class {
+    .class {
       padding: 16px 0 0px 13px;
+    }
 
-      .categories {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+    .categories {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+
+      .categoriesName {
+        margin: 10px;
       }
     }
   }
