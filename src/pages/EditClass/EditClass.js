@@ -12,7 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const EditClass = () => {
   const navigate = useNavigate();
-  const { productId } = useParams();
+  const { classId } = useParams();
   const [userInput, setUserInput] = useState({
     title: '',
     topCategoryName: '',
@@ -20,8 +20,8 @@ const EditClass = () => {
     summary: '',
     content: '',
     price: '',
-    mainImageSource: null,
-    subImageSource: null,
+    mainImageSource: '',
+    subImageSource: '',
     address: '',
   });
 
@@ -32,16 +32,18 @@ const EditClass = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://10.58.52.68:8000/${productId}`, {
+    fetch(`http://10.58.52.54:8000/classes/${classId}`, {
       headers: {
-        Authorization: localStorage.getItem('TOKEN'),
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        setClassData(data.products[0]);
+        setClassData(data.message);
       });
-  }, [productId]);
+  }, [classId]);
 
   useEffect(() => {
     setUserInput((prevUserInput) => ({
@@ -52,8 +54,8 @@ const EditClass = () => {
       summary: classData.summary || '',
       content: classData.content || '',
       price: classData.price || '',
-      mainImageSource: classData.main_image_source || null,
-      subImageSource: classData.subImageSource || null,
+      mainImageSource: classData.main_image_source || '',
+      subImageSource: classData.sub_image_source || '',
       address: classData.address || '',
     }));
   }, [classData]);
@@ -81,7 +83,7 @@ const EditClass = () => {
         method: 'POST',
         headers: {
           Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNjk5OTU2NzYxLCJleHAiOjE3MDA2NzY3NjF9.zIOF-jyzWRPZrhN3Zi1vaenwp1T_Qyr2U2lW5Vih0ec',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
         },
         body: formData,
       });
@@ -110,12 +112,12 @@ const EditClass = () => {
   };
 
   const editClassButton = () => {
-    fetch('http://10.58.52.154:8000/classes/createclass', {
+    fetch(`http://10.58.52.54:8000/classes/update/${classId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNjk5OTU2NzYxLCJleHAiOjE3MDA2NzY3NjF9.zIOF-jyzWRPZrhN3Zi1vaenwp1T_Qyr2U2lW5Vih0ec',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
       },
       body: JSON.stringify({
         title: userInput.title,
@@ -131,8 +133,8 @@ const EditClass = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.result.message === 'CREATE_CLASS_SUCCESS') {
-          alert('강의 생성 완료');
+        if (data.message.message === 'UPDATE_CLASS_SUCCESS') {
+          alert('강의 수정 완료');
           navigate('/my-page-event-classlist');
         }
       });
@@ -232,10 +234,11 @@ const EditClass = () => {
                 <div className="label">메인 사진</div>
                 <div className="infoInput">
                   <input
-                    type="file"
+                    type="text"
                     name="mainImageSource"
                     onChange={(e) => handleImageChange(e, 'mainImageSource')}
                     multiple
+                    value={userInput.mainImageSource}
                   />
                 </div>
               </div>
@@ -244,10 +247,11 @@ const EditClass = () => {
                 <div className="label">서브 사진</div>
                 <div className="infoInput">
                   <input
-                    type="file"
+                    type="text"
                     name="subImageSource"
                     onChange={(e) => handleImageChange(e, 'subImageSource')}
                     multiple
+                    value={userInput.subImageSource}
                   />
                 </div>
               </div>

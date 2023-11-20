@@ -39,8 +39,11 @@ const Router = () => {
         <Route path="/my-page-event-profile" element={<EventProfile />} />
         <Route path="/my-page-event-classlist" element={<ClassList />} />
         <Route path="/my-page-event-addclass" element={<AddClass />} />
-        <Route path="/my-page-event-editclass" element={<EditClass />} />
-        <Route path="/my-page-event-schedule" element={<Schedule />} />
+        <Route
+          path="/my-page-event-editclass/:classId"
+          element={<EditClass />}
+        />
+        <Route path="/my-page-event-schedule/:classId" element={<Schedule />} />
         <Route path="/my-page-event-chatlist" element={<ChatList />} />
         <Route path="/my-page-event-chatroom" element={<ChatRoom />} />
         <Route path="/my-page-event-calculate" element={<Calculate />} />

@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Schedule.scss';
+import { useParams } from 'react-router-dom';
 
 const Schedule = () => {
+  const { classId } = useParams();
   const [scheduleData, setScheduleData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -13,7 +15,7 @@ const Schedule = () => {
   const [plusSchedule, setPlusScehdule] = useState([]);
 
   const loadSchedule = () => {
-    fetch(`http://10.58.52.54:8000/schedules/209`, {
+    fetch(`http://10.58.52.54:8000/schedules/${classId}`, {
       headers: {
         Authorization:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
@@ -79,7 +81,7 @@ const Schedule = () => {
       selectedMaxMember !== null
     ) {
       const hasEnrolledStudents =
-        scheduleData[selectedIndex].enrolled_member > 0;
+        scheduleData[selectedIndex].enrolledMember > 0;
 
       if (hasEnrolledStudents) {
         alert('수강생이 등록된 강의는 수정할 수 없습니다.');
@@ -92,12 +94,36 @@ const Schedule = () => {
         }-${selectedDate.getDate()} ${selectedTime}:00:00.000000`,
         classHour: '2',
         maxMember: selectedMaxMember,
-        enrolled_member: 0,
+        enrolledMember: 0,
       };
 
       const updatedData = [...scheduleData];
       updatedData[selectedIndex] = updatedSchedule;
       setScheduleData(updatedData);
+
+      // 백엔드에 수정 요청 보내기
+      fetch(
+        `http://10.58.52.54:8000/schedules/update/${scheduleData[selectedIndex].id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization:
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
+          },
+          body: JSON.stringify(updatedSchedule),
+        },
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (Object.keys(data.result).includes('error')) {
+            alert('시간이 겹칩니다.');
+            loadSchedule();
+          } else if (data.result.message === 'UPDATE_SCHEDULE_SUCCESS') {
+            alert('수정 완료되었습니다.');
+            loadSchedule();
+          }
+        });
 
       setSelectedIndex(null);
       setSelectedDate(null);
@@ -107,19 +133,41 @@ const Schedule = () => {
   };
 
   const deleteSchedule = (index) => {
-    const hasEnrolledStudents = scheduleData[index].enrolled_member > 0;
+    const hasEnrolledStudents = scheduleData[index].enrolledMember > 0;
 
     if (hasEnrolledStudents) {
       alert('수강생이 등록된 강의는 삭제할 수 없습니다.');
     } else {
-      const updatedData = [...scheduleData];
-      updatedData.splice(index, 1);
-      setScheduleData(updatedData);
+      // 백엔드에 삭제 요청 보내기
+      fetch(`http://10.58.52.54:8000/schedules/${scheduleData[index].id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('삭제 실패');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.result.message === 'DELETE_SCHEDULE_SUCCESS') {
+            alert('삭제되었습니다.');
+            loadSchedule();
+          }
+        })
+        .catch((error) => {
+          console.error('Error deleting schedule:', error);
+          // 실패했을 때의 처리 (예: 사용자에게 알림 등)
+        });
     }
   };
 
   const handleUpdateClick = (index, schedule) => {
-    if (schedule.enrolled_member === 0) {
+    if (schedule.enrolledMember === 0) {
       setSelectedIndex(index);
       setSelectedDate(new Date(schedule.classDay));
       const hour = new Date(schedule.classDay).getHours();
@@ -148,13 +196,12 @@ const Schedule = () => {
   };
 
   const completEdit = () => {
-    console.log(scheduleData);
-    fetch('http://10.58.52.54:8000/schedules/209', {
+    fetch(`http://10.58.52.54:8000/schedules/${classId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNjk5OTU2NzYxLCJleHAiOjE3MDA2NzY3NjF9.zIOF-jyzWRPZrhN3Zi1vaenwp1T_Qyr2U2lW5Vih0ec',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
       },
       body: JSON.stringify({
         schedule_info: plusSchedule,
@@ -164,10 +211,12 @@ const Schedule = () => {
       .then((data) => {
         if (data.result.errors.length > 0) {
           alert('중복된 스케줄이 있습니다.\n지금 있는 스케줄을 확인해주세요.');
-          window.location.reload();
+          setPlusScehdule([]);
+          loadSchedule();
         } else {
           alert('스케줄이 추가되었습니다.');
-          window.location.reload();
+          setPlusScehdule([]);
+          loadSchedule();
         }
       });
   };
@@ -209,18 +258,20 @@ const Schedule = () => {
           />
         </label>
         <ul className="schedule-list">
-          {scheduleData.map((schedule, index) => (
-            <li key={index}>
-              {schedule.classDay} -{' '}
-              {calculateEndTime(schedule.classDay, schedule.classHour)} (최대
-              수강 인원: {schedule.maxMember}, 등록된 수강 인원:{' '}
-              {schedule.enrolledMember})
-              <button onClick={() => handleUpdateClick(index, schedule)}>
-                수정
-              </button>
-              <button onClick={() => deleteSchedule(index)}>삭제</button>
-            </li>
-          ))}
+          {scheduleData
+            .filter((schedule) => schedule.status === 1)
+            .map((schedule, index) => (
+              <li key={index}>
+                {schedule.classDay} -{' '}
+                {calculateEndTime(schedule.classDay, schedule.classHour)} (최대
+                수강 인원: {schedule.maxMember}, 등록된 수강 인원:{' '}
+                {schedule.enrolledMember})
+                <button onClick={() => handleUpdateClick(index, schedule)}>
+                  수정
+                </button>
+                <button onClick={() => deleteSchedule(index)}>삭제</button>
+              </li>
+            ))}
         </ul>
 
         <ul className="plusSchedule">
@@ -236,11 +287,25 @@ const Schedule = () => {
               <button onClick={() => deleteSchedule(index)}>삭제</button>
             </li>
           ))}
+          <button onClick={addSchedule}>일정 추가</button>
+        </ul>
+
+        <ul className="schedule-list">
+          지난 강의들
+          {scheduleData
+            .filter((schedule) => schedule.status === 0)
+            .map((schedule, index) => (
+              <li key={index}>
+                {schedule.classDay} -{' '}
+                {calculateEndTime(schedule.classDay, schedule.classHour)} (최대
+                수강 인원: {schedule.maxMember}, 등록된 수강 인원:{' '}
+                {schedule.enrolledMember})
+              </li>
+            ))}
         </ul>
         {selectedIndex !== null && (
           <button onClick={updateSchedule}>수정 내용 저장</button>
         )}
-        <button onClick={addSchedule}>일정 추가</button>
       </div>
       <button onClick={completEdit}>수정 완료</button>
     </div>
