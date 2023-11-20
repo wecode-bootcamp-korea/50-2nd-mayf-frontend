@@ -23,7 +23,7 @@ const ClassList = () => {
   }, []);
 
   const getClassList = () => {
-    fetch('http://10.58.52.154:8000/classes/classeslist', {
+    fetch('http://10.58.52.127:8000/classes/admin/classeslist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -32,12 +32,13 @@ const ClassList = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setClassList(data.result.classList);
+        console.log(data);
+        setClassList(data.message.result);
       });
   };
 
   const openModal = (itemId) => {
-    fetch(`http://10.58.52.154:8000/classes/${itemId}`, {
+    fetch(`http://10.58.52.127:8000/classes/${itemId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -58,7 +59,7 @@ const ClassList = () => {
   const handleDelete = (itemId) => {
     const ok = window.confirm('정말 삭제하시겠습니까?');
     if (ok) {
-      fetch(`http://10.58.52.154:8000/classes/admin/delete/${itemId}`, {
+      fetch(`http://10.58.52.127:8000/classes/admin/delete/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -66,11 +67,26 @@ const ClassList = () => {
         },
       })
         .then((res) => res.json())
-        .then((data) => {
-          alert(data.message);
+        .then(() => {
+          alert('강의가 삭제되었습니다');
           getClassList();
         });
     }
+  };
+
+  const handleRestore = (itemId) => {
+    fetch(`http://10.58.52.127:8000/classes/admin/reactivate/${itemId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+    })
+      .then((res) => res.json())
+      .then(() => {
+        alert('강의가 복구되었습니다');
+        getClassList();
+      });
   };
 
   return (
@@ -83,12 +99,18 @@ const ClassList = () => {
               key={item.id}
               onClick={() => openModal(item.id)}
             >
-              <p className="cell title">{item.title}</p>
-              <p className="cell name">{item.name}</p>
+              <p className="cell title">
+                {item.title}
+                {item.deleted_at !== null && '(삭제됨)'}
+              </p>
+              <p className="cell name">{item.host_name}</p>
               <p className="cell classCategory">{item.top_category_name}</p>
               <p className="cell classCategory">{item.sub_category_name}</p>
               <p className="cell" onClick={(e) => e.stopPropagation()}>
                 <button onClick={() => handleDelete(item.id)}>삭제</button>
+              </p>
+              <p className="cell" onClick={(e) => e.stopPropagation()}>
+                <button onClick={() => handleRestore(item.id)}>복구</button>
               </p>
             </div>
           );
