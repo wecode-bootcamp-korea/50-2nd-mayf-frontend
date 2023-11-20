@@ -23,19 +23,19 @@ const Nav = () => {
   };
 
   //문영님, 보유 크레딧 정보 불러오기
-  useEffect(() => {
-    fetch('http://10.58.52.102:8000/users', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: token,
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        setCredit(result.userGetInfoList[0].credit);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://10.58.52.102:8000/users', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //       authorization: token,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       setCredit(result.userGetInfoList[0].credit);
+  //     });
+  // }, []);
 
   return (
     <div className="nav">
