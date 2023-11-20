@@ -14,7 +14,7 @@ const Reservation = () => {
       enrolled_member: '',
     },
   ]);
-  // const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,11 +22,11 @@ const Reservation = () => {
   }, []);
 
   const getReservationList = () => {
-    fetch('http://10.58.52.154:8000/classes/myclass', {
+    fetch('http://10.58.52.127:8000/classes/myclass', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        // Authorization: token,
+        Authorization: token,
       },
     })
       .then((res) => res.json())
@@ -38,26 +38,26 @@ const Reservation = () => {
   };
 
   const handleDelete = (itemId) => {
-    fetch(`http://10.58.52.158:8000/orders/${itemId}`, {
+    fetch(`http://10.58.52.127:8000/orders/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        // Authorization: token,
+        Authorization: token,
       },
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         alert('예약이 성공적으로 취소되었습니다');
         getReservationList();
       });
   };
 
   const handleCode = (itemId) => {
-    fetch(``, {
+    fetch(`http://10.58.52.140:8000/orders/sendme/${itemId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        // Authorization: token,
+        Authorization: token,
       },
     })
       .then((res) => res.json())
@@ -99,7 +99,7 @@ const Reservation = () => {
                   <button onClick={() => handleDelete(item.order_id)}>
                     예약 취소
                   </button>
-                  <button onClick={() => handleCode(item.id)}>
+                  <button onClick={() => handleCode(item.order_id)}>
                     QR코드 보내기
                   </button>
                 </div>

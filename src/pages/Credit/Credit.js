@@ -17,7 +17,7 @@ const Credit = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('http://10.58.52.144:8000/users/credit', {
+    fetch('http://10.58.52.102:8000/users/credit', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

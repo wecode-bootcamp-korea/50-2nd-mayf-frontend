@@ -9,15 +9,15 @@ const Profile = () => {
     credit: 0,
   });
   const [userData, setUserData] = useState({});
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI';
-
+  // const token =
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI';
+  const token = localStorage.getItem('token');
   useEffect(() => {
     getUser();
   }, []);
 
   const getUser = () => {
-    fetch('http://10.58.52.126:8000/users', {
+    fetch('http://10.58.52.102:8000/users', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -37,7 +37,7 @@ const Profile = () => {
     if (!userInfo.phone_number) {
       userInfo.phone_number = userData.phone_number;
     }
-    fetch('http://10.58.52.126:8000/users/update', {
+    fetch('http://10.58.52.102:8000/users/update', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
