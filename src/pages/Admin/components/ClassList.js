@@ -75,6 +75,10 @@ const ClassList = () => {
   };
 
   const handleRestore = (itemId) => {
+    const isDeleted = classList.find(({ id }) => id === itemId).deleted_at;
+
+    if (!isDeleted) return;
+
     fetch(`http://10.58.52.127:8000/classes/admin/reactivate/${itemId}`, {
       method: 'PUT',
       headers: {
@@ -82,10 +86,16 @@ const ClassList = () => {
         Authorization: token,
       },
     })
-      .then((res) => res.json())
-      .then(() => {
-        alert('강의가 복구되었습니다');
-        getClassList();
+      .then((res) => {
+        if (res.ok) {
+          alert('강의가 복구되었습니다');
+          getClassList();
+        } else {
+          throw new Error(`Error status : ${res.status}`);
+        }
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
       });
   };
 
@@ -93,6 +103,8 @@ const ClassList = () => {
     <div className="classList">
       <div>
         {currentItems.map((item) => {
+          const isDeleted = item.deleted_at !== null;
+
           return (
             <div
               className="container"
@@ -101,16 +113,26 @@ const ClassList = () => {
             >
               <p className="cell title">
                 {item.title}
-                {item.deleted_at !== null && '(삭제됨)'}
+                {isDeleted && '(삭제됨)'}
               </p>
               <p className="cell name">{item.host_name}</p>
               <p className="cell classCategory">{item.top_category_name}</p>
               <p className="cell classCategory">{item.sub_category_name}</p>
               <p className="cell" onClick={(e) => e.stopPropagation()}>
-                <button onClick={() => handleDelete(item.id)}>삭제</button>
+                <button
+                  disabled={isDeleted}
+                  onClick={() => handleDelete(item.id)}
+                >
+                  삭제
+                </button>
               </p>
               <p className="cell" onClick={(e) => e.stopPropagation()}>
-                <button onClick={() => handleRestore(item.id)}>복구</button>
+                <button
+                  disabled={!isDeleted}
+                  onClick={() => handleRestore(item.id)}
+                >
+                  복구
+                </button>
               </p>
             </div>
           );
