@@ -52,6 +52,18 @@ const Reservation = () => {
       });
   };
 
+  const handleCode = (itemId) => {
+    fetch(``, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        // Authorization: token,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <div className="reservation">
       <div className="container">
@@ -87,7 +99,9 @@ const Reservation = () => {
                   <button onClick={() => handleDelete(item.order_id)}>
                     예약 취소
                   </button>
-                  <button>QR코드 보내기</button>
+                  <button onClick={() => handleCode(item.id)}>
+                    QR코드 보내기
+                  </button>
                 </div>
               </div>
             );
