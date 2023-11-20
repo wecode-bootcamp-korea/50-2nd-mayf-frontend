@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import './SubCategories.scss';
 
 const SubCategories = ({ subCategories }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,7 +21,7 @@ const SubCategories = ({ subCategories }) => {
         <div className="labelTitle class">클라스 카테고리</div>
         <div className="categories">
           {subCategories.map(({ name }) => (
-            <div className="test" key={name}>
+            <div className="categoriesBox" key={name}>
               <input
                 onChange={() => handleSubFilter(name)}
                 checked={selectedSubCategory === name}

@@ -49,19 +49,19 @@ const List = () => {
   // fetch(`/data/listMockData.json${queryString}`,
   // `${API.list}${queryString}`
   // 백엔드 통신 데이터
-  useEffect(() => {
-    const fetchData = () => {
-      fetch(`${API.list}${queryString}`, {
-        method: 'GET',
-      })
-        .then((res) => res.json())
-        .then((result) => {
-          setClassList(result.result.classList);
-          setSubCategories(result.result.subCategoriesName);
-        });
-    };
-    fetchData();
-  }, [queryString]);
+  // useEffect(() => {
+  //   const fetchData = () => {
+  //     fetch(`${API.list}${queryString}`, {
+  //       method: 'GET',
+  //     })
+  //       .then((res) => res.json())
+  //       .then((result) => {
+  //         setClassList(result.result.classList);
+  //         setSubCategories(result.result.subCategoriesName);
+  //       });
+  //   };
+  //   fetchData();
+  // }, [queryString]);
 
   return (
     <div className="list">
