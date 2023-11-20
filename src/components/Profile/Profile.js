@@ -58,7 +58,7 @@ const Profile = () => {
         getUser();
       });
   };
-  console.log(userData);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
