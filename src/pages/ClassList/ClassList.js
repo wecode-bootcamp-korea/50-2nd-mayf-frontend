@@ -9,10 +9,10 @@ const ClassList = ({ setTab, setSelectedClassId }) => {
   const navigate = useNavigate();
 
   const getClassList = () => {
-    fetch(`http://10.58.52.54:8000/classes/hostclass`, {
+    fetch(`http://10.58.52.127:8000/classes/hostclass`, {
       headers: {
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTU1NS0xMjM0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNDU3Mzg3LCJleHAiOjE3MDExNzczODd9.5oy_-lmBlMC8SC3MXHc82-s64bsLJZfBm82JcjWrSXQ',
       },
     })
       .then((res) => res.json())
@@ -26,12 +26,12 @@ const ClassList = ({ setTab, setSelectedClassId }) => {
   }, []);
 
   const deleteClass = (id) => {
-    fetch(`http://10.58.52.54:8000/classes/delete/${id}`, {
+    fetch(`http://10.58.52.127:8000/classes/delete/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTU1NS0xMjM0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNDU3Mzg3LCJleHAiOjE3MDExNzczODd9.5oy_-lmBlMC8SC3MXHc82-s64bsLJZfBm82JcjWrSXQ',
       },
     }).then((res) => {
       if (res.ok) {
