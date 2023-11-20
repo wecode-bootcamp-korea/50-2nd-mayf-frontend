@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './Detail.scss';
-import 'react-datepicker/dist/react-datepicker.module.css';
-// import Chat from '../../components/Chat/Chat';
+import { useNavigate } from 'react-router-dom';
 import Refund from '../../components/Refund/Refund';
 import CalendarApp from '../../components/CalendarApp/CalendarApp';
-import { useNavigate } from 'react-router-dom';
+import Chat from './Chat';
+import 'react-datepicker/dist/react-datepicker.module.css';
+import './Detail.scss';
 
 const { kakao } = window;
 
@@ -192,7 +192,7 @@ const Detail = () => {
 
         <Refund />
 
-        {/* <Chat /> */}
+        <Chat />
       </div>
     </div>
   );
