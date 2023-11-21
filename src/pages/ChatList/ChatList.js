@@ -1,31 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // React Router를 사용하여 채팅방 간 이동을 처리합니다.
-import io from 'socket.io-client';
-
-const socket = io('http://10.58.52.232:8000'); // 적절한 서버 주소로 변경하세요.
+import { useNavigate } from 'react-router-dom';
 
 const ChatList = () => {
   const [chatRooms, setChatRooms] = useState([]);
+  const [token, setToken] = useState(''); // 여기에 사용자 토큰을 저장
+  const navigate = useNavigate();
+
+  const getChatRooms = () => {
+    fetch('http://10.58.52.232:8000/chat', {
+      headers: {
+        Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setChatRooms(data.room);
+      })
+      .catch((error) => {
+        console.error('Error fetching chat rooms:', error);
+      });
+  };
 
   useEffect(() => {
-    // 서버로부터 채팅방 목록을 받아와 업데이트합니다.
-    socket.on('chatRoomList', (rooms) => {
-      setChatRooms(rooms);
-    });
+    getChatRooms();
 
-    // 컴포넌트가 언마운트될 때 소켓 연결을 끊습니다.
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+    // 5초마다 채팅방 목록을 다시 가져오기
+    const intervalId = setInterval(getChatRooms, 5000);
+
+    // 컴포넌트가 언마운트될 때 clearInterval을 사용하여 interval 정리
+    return () => clearInterval(intervalId);
+  }, [token]); // 토큰이 변경될 때마다 실행
 
   return (
     <div>
-      <h2>채팅방 목록</h2>
+      <h2>Chat Rooms</h2>
       <ul>
-        {chatRooms.map((room) => (
-          <li key={room.id}>
-            <Link to="/my-page-event-chatroom/14">{room.name}</Link>
+        {chatRooms.map((room, index) => (
+          <li key={index}>
+            <button
+              onClick={() => navigate(`/my-page-event-chatroom/${room.id}`)}
+            >
+              {room.user_name}
+            </button>
           </li>
         ))}
       </ul>
