@@ -1,0 +1,16 @@
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 10px 0 0 0;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+
+  .pageItem {
+    margin: 0 5px;
+
+    &.active {
+      color: #ddd;
+    }
+  }
+}
