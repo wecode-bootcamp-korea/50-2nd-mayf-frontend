@@ -6,7 +6,6 @@ import Adjustment from './components/Adjustment';
 import './Admin.scss';
 
 const Admin = () => {
-  // const token = localStorage.getItem('token');
   const ADMIN_TAB_LIST = [
     { id: 1, btnText: '하루살이 목록 조회', component: <UserList /> },
     {

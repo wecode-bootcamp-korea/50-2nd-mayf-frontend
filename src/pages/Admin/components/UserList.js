@@ -20,33 +20,49 @@ const UserList = () => {
   }, []);
 
   const getUserList = () => {
-    fetch('http://10.58.52.102:8000/admins/userlist', {
+    fetch('http://10.58.52.238:8000/admins/userlist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: token,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
         setUserList(data.message);
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
       });
   };
 
   const handleDelete = (itemId) => {
     const ok = window.confirm('정말 삭제하시겠습니까?');
     if (ok) {
-      fetch(`http://10.58.52.102:8000/admins/users/${itemId}`, {
+      fetch(`http://10.58.52.238:8000/admins/users/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           Authorization: token,
         },
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+          }
+          return res.json();
+        })
         .then((data) => {
           alert(data.result.message);
           getUserList();
+        })
+        .catch((error) => {
+          console.error('Fetch error:', error.message);
         });
     }
   };
@@ -56,7 +72,7 @@ const UserList = () => {
 
     if (!isDeleted) return;
 
-    fetch(`http://10.58.52.102:8000/admins/users/update/${itemId}`, {
+    fetch(`http://10.58.52.238:8000/admins/users/update/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

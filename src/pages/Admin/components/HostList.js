@@ -20,33 +20,49 @@ const HostList = () => {
   }, []);
 
   const getHostList = () => {
-    fetch('http://10.58.52.102:8000/admins/hostlist', {
+    fetch('http://10.58.52.238:8000/admins/hostlist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: token,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
         setHostList(data.message);
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
       });
   };
 
   const handleDelete = (itemId) => {
     const ok = window.confirm('정말 삭제하시겠습니까?');
     if (ok) {
-      fetch(`http://10.58.52.102:8000/admins/hosts/${itemId}`, {
+      fetch(`http://10.58.52.238:8000/admins/hosts/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           Authorization: token,
         },
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+          }
+          return res.json();
+        })
         .then((data) => {
           alert(data.result.message);
           getHostList();
+        })
+        .catch((error) => {
+          console.error('Fetch error:', error.message);
         });
     }
   };
@@ -56,7 +72,7 @@ const HostList = () => {
 
     if (!isDeleted) return;
 
-    fetch(`http://10.58.52.102:8000/admins/hosts/update/${itemId}`, {
+    fetch(`http://10.58.52.238:8000/admins/hosts/update/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
