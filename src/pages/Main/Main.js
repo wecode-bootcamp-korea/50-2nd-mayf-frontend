@@ -8,8 +8,9 @@ import './Main.scss';
 const Main = () => {
   const [classListData, setClassListData] = useState({});
   // fetch(API.main, {
+  //'/data/mainMockData.json'
   useEffect(() => {
-    fetch('/data/mainMockData.json', {
+    fetch(API.main, {
       method: 'GET',
     })
       .then((res) => res.json())

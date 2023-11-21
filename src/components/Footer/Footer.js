@@ -8,19 +8,20 @@ const Footer = () => {
   const role = localStorage.getItem('role');
   const watched = localStorage.getItem('watched');
   const logout = () => {
-    localStorage.removeItem('token', 'role', 'watched');
+    localStorage.clear('token', 'role', 'watched');
+
     alert('로그아웃 되었습니다.');
     navigate('/');
   };
 
   return (
     <div className="footer">
-      {(token && role) || watched ? (
+      {token && role ? (
         <p className="logout" onClick={logout}>
           로그아웃
         </p>
       ) : (
-        <p />
+        <p className="logout">Mayfly</p>
       )}
     </div>
   );

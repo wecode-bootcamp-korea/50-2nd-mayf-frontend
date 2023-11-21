@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Link, json } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Sort from './components/Sort';
 import Search from './components/Search';
 import SubCategories from './components/SubCategories';
@@ -49,19 +49,19 @@ const List = () => {
   // fetch(`/data/listMockData.json${queryString}`,
   // `${API.list}${queryString}`
   // 백엔드 통신 데이터
-  // useEffect(() => {
-  //   const fetchData = () => {
-  //     fetch(`${API.list}${queryString}`, {
-  //       method: 'GET',
-  //     })
-  //       .then((res) => res.json())
-  //       .then((result) => {
-  //         setClassList(result.result.classList);
-  //         setSubCategories(result.result.subCategoriesName);
-  //       });
-  //   };
-  //   fetchData();
-  // }, [queryString]);
+  useEffect(() => {
+    const fetchData = () => {
+      fetch(`${API.list}${queryString}`, {
+        method: 'GET',
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          setClassList(result.result.classList);
+          setSubCategories(result.result.subCategoriesName);
+        });
+    };
+    fetchData();
+  }, [queryString]);
 
   return (
     <div className="list">
