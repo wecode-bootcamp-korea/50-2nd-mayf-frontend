@@ -20,7 +20,7 @@ const HostList = () => {
   }, []);
 
   const getHostList = () => {
-    fetch('http://10.58.52.238:8000/admins/hostlist', {
+    fetch('http://10.58.52.84:8000/admins/hostlist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -44,7 +44,7 @@ const HostList = () => {
   const handleDelete = (itemId) => {
     const ok = window.confirm('정말 삭제하시겠습니까?');
     if (ok) {
-      fetch(`http://10.58.52.238:8000/admins/hosts/${itemId}`, {
+      fetch(`http://10.58.52.84:8000/admins/hosts/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -72,7 +72,7 @@ const HostList = () => {
 
     if (!isDeleted) return;
 
-    fetch(`http://10.58.52.238:8000/admins/hosts/update/${itemId}`, {
+    fetch(`http://10.58.52.84:8000/admins/hosts/update/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
