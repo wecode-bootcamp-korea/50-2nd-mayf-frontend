@@ -1,104 +1,152 @@
-// // Chat.js
-// import React, { useState, useEffect } from 'react';
-// import io from 'socket.io-client';
+// ChatRoom.js
 
-// const socket = io('http://localhost:3001');
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import io from 'socket.io-client';
+// 적절한 서버 주소로 변경하세요.
 
-// const Chat = () => {
-//   const [message, setMessage] = useState('');
-//   const [messages, setMessages] = useState([]);
-//   const [userId, setUserId] = useState('');
-//   const [hostId, setHostId] = useState('');
-//   const [userToken, setUserToken] = useState('');
+const ChatRoom = () => {
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
+  const [roomCreated, setRoomCreated] = useState(false);
+  const [chatId, setChatId] = useState(null);
+  const [socket, setSocket] = useState(null);
 
-//   useEffect(() => {
-//     // 서버로부터 메시지 수신
-//     socket.on('chat message', (msg) => {
-//       setMessages([...messages, msg]);
-//     });
+  useEffect(() => {
+    // 소켓 연결
+    const newSocket = io('http://10.58.52.232:8000', {
+      transports: ['websocket'],
+    });
 
-//     return () => {
-//       socket.disconnect();
-//     };
-//   }, [messages]);
+    newSocket.on('connect', () => {
+      console.log('Socket connected');
+    });
 
-//   useEffect(() => {
-//     fetch(`http://10.58.52.238:8000/users`, {
-//       headers: {
-//         Authorization:
-//           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
-//       },
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setUserId(data.message);
-//       });
-//   });
+    newSocket.on('connect_error', (error) => {
+      console.error('Socket connection error:', error);
+    });
 
-//   const sendMessage = () => {
-//     // 서버로 메시지 전송
-//     socket.emit('chat message', message);
-//     setMessage('');
-//   };
+    setSocket(newSocket);
 
-//   const startChat = () => {
-//     // fetch를 사용한 POST 요청 보내기
-//     fetch('http://10.58.52.238:8000/chat', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${userToken}`,
-//       },
-//       body: JSON.stringify({
-//         userId,
-//         hostId,
-//       }),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         console.log('Chat started:', data);
-//       })
-//       .catch((error) => {
-//         console.error('Error starting chat:', error);
-//       });
-//   };
+    // 연결 해제 시 정리
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
 
-//   return (
-//     <div>
-//       <ul>
-//         {messages.map((msg, index) => (
-//           <li key={index}>{msg}</li>
-//         ))}
-//       </ul>
-//       <input
-//         type="text"
-//         value={message}
-//         onChange={(e) => setMessage(e.target.value)}
-//       />
-//       <button onClick={sendMessage}>Send</button>
+  // 클라이언트 측 코드 수정
+  useEffect(() => {
+    // 채팅방이 생성되면 서버에 참가
+    if (socket && roomCreated) {
+      socket.emit('join room');
 
-//       {/* 추가: 채팅 시작 버튼 */}
-//       <input
-//         type="text"
-//         placeholder="User ID"
-//         value={userId}
-//         onChange={(e) => setUserId(e.target.value)}
-//       />
-//       <input
-//         type="text"
-//         placeholder="Host ID"
-//         value={hostId}
-//         onChange={(e) => setHostId(e.target.value)}
-//       />
-//       <input
-//         type="text"
-//         placeholder="User Token"
-//         value={userToken}
-//         onChange={(e) => setUserToken(e.target.value)}
-//       />
-//       <button onClick={startChat}>Start Chat</button>
-//     </div>
-//   );
-// };
+      // 서버로부터 메시지 수신
+      socket.on('message', (msg) => {
+        console.log('Received message:', msg);
+        setMessages((prevMessages) => [...prevMessages, msg]);
+        console.log(messages);
+      });
 
-// export default Chat;
+      // 서버로부터 저장된 메시지 수신
+      socket.on('load messages', (loadedMessages) => {
+        setMessages(loadedMessages);
+      });
+    }
+  }, [socket, roomCreated]);
+
+  // 메시지 전송
+  const handleSendMessage = () => {
+    if (socket) {
+      // socket이 null이 아닌 경우에만 실행
+      socket.emit('message', {
+        content: newMessage,
+      });
+
+      // 기존의 fetch를 사용하여 메시지 저장
+      fetch(`http://10.58.52.232:8000/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
+        },
+        body: JSON.stringify({ content: newMessage, chatId: 14 }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setMessages((prevMessages) => {
+            if (data.message && data.message.content) {
+              const trimmedContent = data.message.content.trim();
+              if (trimmedContent !== '') {
+                return [...prevMessages, { content: trimmedContent }];
+              }
+            }
+            return prevMessages;
+          });
+          setNewMessage('');
+        })
+        .catch((error) => {
+          console.error('Error sending message:', error);
+        });
+    }
+  };
+
+  // 방 생성 API 호출
+  const createRoom = () => {
+    fetch('http://10.58.52.232:8000/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
+      },
+      body: JSON.stringify({
+        userId: 10,
+        hostId: 29,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setChatId(data.chatId); // 생성된 채팅방의 chatId를 설정
+        setRoomCreated(true);
+      })
+      .catch((error) => {
+        console.error('Error creating room:', error);
+      });
+  };
+
+  return (
+    <div className="chat">
+      <div className="chat-header">
+        <div>실시간 채팅</div>
+        {!roomCreated && <button onClick={createRoom}>방 생성하기</button>}
+      </div>
+      <div className="chat-messages">
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`message ${message.isCurrentUser ? 'sent' : 'received'}`}
+          >
+            <span className="username">
+              {message.isCurrentUser ? '나' : '김문영'}
+            </span>
+            {message.content}
+          </div>
+        ))}
+      </div>
+
+      {roomCreated && (
+        <div className="chat-input">
+          <input
+            type="text"
+            placeholder="메시지를 입력하세요"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+          />
+          <button onClick={handleSendMessage}>전송</button>
+        </div>
+      )}
+    </div>
+  );
+};
+export default ChatRoom;
