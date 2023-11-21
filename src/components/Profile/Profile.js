@@ -24,15 +24,23 @@ const Profile = () => {
         Authorization: token,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
         setUserData(data.userGetInfoList[0]);
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
       });
   };
 
   const handleUpdate = () => {
     if (!userInfo.name) {
-      userInfo.email = userData.name;
+      userInfo.name = userData.name;
     }
     if (!userInfo.phone_number) {
       userInfo.phone_number = userData.phone_number;
@@ -45,8 +53,10 @@ const Profile = () => {
       },
       body: JSON.stringify(userInfo),
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
         alert('정보가 수정되었습니다');
         setUserInfo({
           id: '',
@@ -56,6 +66,9 @@ const Profile = () => {
           credit: 0,
         });
         getUser();
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
       });
   };
 
@@ -69,7 +82,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="container">
+    <div className="profile">
       <div className="info">개인 정보</div>
       <div>
         <p>{userData.email}</p>

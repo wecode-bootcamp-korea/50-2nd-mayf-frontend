@@ -29,8 +29,16 @@ const Reservation = () => {
         Authorization: token,
       },
     })
-      .then((res) => res.json())
-      .then((data) => setReservationList(data.message));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => setReservationList(data.message))
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
+      });
   };
 
   const handleDetail = (itemId) => {
@@ -45,10 +53,15 @@ const Reservation = () => {
         Authorization: token,
       },
     })
-      .then((res) => res.json())
-      .then(() => {
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
         alert('예약이 성공적으로 취소되었습니다');
         getReservationList();
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
       });
   };
 
@@ -60,8 +73,14 @@ const Reservation = () => {
         Authorization: token,
       },
     })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
+      });
   };
 
   return (
@@ -73,7 +92,7 @@ const Reservation = () => {
           {reservationList.map((item) => {
             return (
               <div className="content" key={item.id}>
-                <img src={item.image_source} alt="이미지" />
+                <img src={item.image_source} alt="classImg" />
 
                 <div className="classInfo">
                   <div className="classTitle">강의명 : {item.title}</div>
