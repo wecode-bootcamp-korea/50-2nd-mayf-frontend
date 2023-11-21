@@ -11,6 +11,7 @@ const DEFAULT_USER_INFO = {
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useState(DEFAULT_USER_INFO);
+  const [userData, setUserData] = useState({});
   const [isUpdate, setIsUpdate] = useState(false);
   // const token =
   //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI';
@@ -34,7 +35,7 @@ const Profile = () => {
         return res.json();
       })
       .then((data) => {
-        setUserInfo(data.userGetInfoList[0]);
+        setUserData(data.userGetInfoList[0]);
       })
       .catch((error) => {
         console.error('Fetch error:', error.message);
@@ -78,10 +79,10 @@ const Profile = () => {
     <div className="profile">
       <div className="info">개인 정보</div>
       <div className="email">
-        <p>{userInfo.email}</p>
+        <p>{userData.email}</p>
       </div>
       <div className="name">
-        <p>{userInfo.name}</p>
+        <p>{userData.name}</p>
         <input
           disabled={!isUpdate}
           name="name"
@@ -90,7 +91,7 @@ const Profile = () => {
         />
       </div>
       <div className="phone">
-        <p>{userInfo.phone_number}</p>
+        <p>{userData.phone_number}</p>
         <input
           disabled={!isUpdate}
           name="phone_number"
@@ -101,7 +102,14 @@ const Profile = () => {
       {isUpdate ? (
         <>
           <button onClick={handleUpdate}>완료</button>
-          <button onClick={() => setIsUpdate(false)}>취소</button>
+          <button
+            onClick={() => {
+              setIsUpdate(false);
+              setUserInfo(DEFAULT_USER_INFO);
+            }}
+          >
+            취소
+          </button>
         </>
       ) : (
         <button onClick={() => setIsUpdate(true)}>수정</button>
