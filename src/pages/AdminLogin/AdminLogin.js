@@ -12,7 +12,7 @@ const AdminLogin = () => {
     e.preventDefault();
 
     if (adminUserInfo.admin_id && adminUserInfo.password) {
-      fetch('http://10.58.52.144:8000/admins/login', {
+      fetch('http://10.58.52.84:8000/admins/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -23,7 +23,7 @@ const AdminLogin = () => {
         .then((data) => {
           if (data.message === 'login_success') {
             localStorage.setItem('token', data.accessToken);
-            navigate('/');
+            navigate('/admin');
           } else {
             if (data.message === 'key_error')
               alert('아이디와 비밀번호를 입력하세요');

@@ -44,6 +44,9 @@ const UserSideBar = ({ credit }) => {
           >
             MY PAGE
           </li>
+          <li className="menu" onClick={() => navigate('/wishlist')}>
+            WISH LIST
+          </li>
         </ul>
       </div>
     ),
