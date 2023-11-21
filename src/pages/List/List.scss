@@ -10,14 +10,15 @@
     width: 100%;
 
     .header {
-      background-color: beige;
+      background-color: #ffdab9;
       display: flex;
       justify-content: center;
       align-self: stretch;
 
       .headerTitle {
+        color: white;
         font-size: 55px;
-        font-weight: 500;
+        font-weight: 600;
         line-height: 95px;
         margin: 125px 0;
       }
@@ -26,17 +27,25 @@
     .content {
       margin-top: 120px;
       display: flex;
+      height: 100%;
+      min-height: 100vh;
 
       .tab {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 20px;
         width: 300px;
+        height: 100%;
+        border: 1px solid #ffdab9;
+        border-radius: 6px;
+        padding-top: 8px;
 
         .labelTitle {
-          font-size: 16px;
-          font-weight: 500;
+          padding-top: 10px;
+          color: burlywood;
+          font-size: 20px;
+          font-weight: 600;
         }
 
         .class {
@@ -48,6 +57,8 @@
         }
 
         .categories {
+          font-weight: 600;
+          font-size: large;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -61,16 +72,19 @@
         align-items: center;
         width: 100%;
         max-width: 1000px;
-        border: 1px solid #fbf3fa;
+        min-width: 1000px;
+        border: 1px solid #ffdab9;
+        border-radius: 6px;
 
         .labels {
           display: flex;
           align-items: center;
           justify-content: space-between;
           align-self: stretch;
-          padding: 16px 13px 16px 13px;
+          padding: 16px 40px 16px 40px;
 
           .labelTitle {
+            color: burlywood;
             font-size: 20px;
             font-weight: 600;
             display: flex;
@@ -97,6 +111,7 @@
               img {
                 width: 270px;
                 height: 270px;
+                cursor: pointer;
               }
             }
 
@@ -105,6 +120,7 @@
               font-weight: 600;
               margin-top: 10px;
               font-size: 19px;
+              color: burlywood;
             }
 
             .classLocation {
@@ -113,8 +129,10 @@
             }
 
             .classCredit {
+              color: #deb887;
               margin-top: 8px;
               font-size: 16px;
+              font-weight: 600;
             }
           }
         }

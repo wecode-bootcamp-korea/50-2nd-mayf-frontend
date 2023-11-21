@@ -1,52 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CategoryList from './components/CategoryList';
-import Sidebar from './components/Sidebar';
+import UserSideBar from './components/UserSideBar';
 import Logo from '../Nav/navImg/logo.png';
 import Category from '../Nav/navImg/category.png';
 import UserIcon from '../Nav/navImg/user.png';
 import './Nav.scss';
-import { GET_TOP_CATEGORY_LIST_API } from '../../config';
 
 const Nav = () => {
   const navigate = useNavigate();
-  //login여부 확인 state, 나중에는 토큰 불러올 예정
-  const [login, setLogin] = useState(true);
-  //마이페이지 사이드바 구현
+  const [credit, setCredit] = useState(0);
+  const token = localStorage.getItem('token');
+  //유저 아이콘 클릭시 컴포넌트 실행 사이드바 구현
   const [isOpen, setIsOpen] = useState(false);
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-
   //햄버거 버튼 카테고리 구현
-  const [categories, setCategories] = useState([]);
-  const [showCategories, setShowCategories] = useState(false);
+  const [showCategories, setShowCategories] = useState(true);
   const handleLogoClick = () => {
     setShowCategories(!showCategories);
   };
-  // 백엔드 통신 데이터(MOCK DATA)
+
+  //문영님, 보유 크레딧 정보 불러오기
   useEffect(() => {
-    fetch('/data/dummy.json', {
+    fetch('http://10.58.52.195:8000/users', {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: token,
+      },
     })
       .then((res) => res.json())
       .then((result) => {
-        // const uniqueCategories = Array.from(
-        //   new Set(result.message.top_category_name),
-        // );
-        setCategories(result.message);
+        setCredit(result.userGetInfoList[0].credit);
       });
   }, []);
-  // 백엔드 통신 데이터
-  // useEffect(() => {
-  //   fetch(`${GET_TOP_CATEGORY_LIST_API}`, {
-  //     method: 'GET',
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       setCategories(result.message);
-  //     });
-  // }, []);
+  //하드코딩으로 배열 맵 또는 백엔드에서 TOP만 주는 API 새로 생성..
 
   return (
     <div className="nav">
@@ -57,7 +47,7 @@ const Nav = () => {
           alt="categoryIcon"
           onClick={handleLogoClick}
         />
-        {showCategories && <CategoryList categories={categories} />}
+        {showCategories && <CategoryList />}
         <img
           className="logo"
           onClick={() => {
@@ -68,16 +58,24 @@ const Nav = () => {
         />
       </div>
       <div className="loginLogo">
-        {login ? (
+        {token ? (
           <img
-            onClick={() => toggleSidebar()}
+            onClick={toggleSidebar}
             className="user"
             src={UserIcon}
+            alt="userIcon"
           />
         ) : (
-          <p className="login"> 로그인 </p>
+          <p
+            className="login"
+            onClick={() => {
+              navigate('/login');
+            }}
+          >
+            로그인
+          </p>
         )}
-        {isOpen && <Sidebar />}
+        {isOpen && <UserSideBar credit={credit} />}
       </div>
     </div>
   );
