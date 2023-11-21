@@ -11,11 +11,11 @@ const Calculate = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.102:8000/hosts', {
+    fetch('http://10.58.52.84:8000/hosts', {
       headers: {
         'Content-Type': 'application/json',
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTU1NS0xMjM0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNDU3Mzg3LCJleHAiOjE3MDExNzczODd9.5oy_-lmBlMC8SC3MXHc82-s64bsLJZfBm82JcjWrSXQ',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
       },
     })
       .then((res) => res.json())
@@ -25,12 +25,12 @@ const Calculate = () => {
   }, []);
 
   const completeCal = () => {
-    fetch('http://10.58.52.140:8000/orders/adjust', {
+    fetch('http://10.58.52.84:8000/orders/adjust', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTU1NS0xMjM0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNDU3Mzg3LCJleHAiOjE3MDExNzczODd9.5oy_-lmBlMC8SC3MXHc82-s64bsLJZfBm82JcjWrSXQ',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
       },
       body: JSON.stringify({
         amount: credit,

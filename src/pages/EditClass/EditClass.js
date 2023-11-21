@@ -32,11 +32,11 @@ const EditClass = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://10.58.52.127:8000/classes/${classId}`, {
+    fetch(`http://10.58.52.84:8000/classes/${classId}`, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTU1NS0xMjM0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNDU3Mzg3LCJleHAiOjE3MDExNzczODd9.5oy_-lmBlMC8SC3MXHc82-s64bsLJZfBm82JcjWrSXQ',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
       },
     })
       .then((res) => res.json())
@@ -79,11 +79,11 @@ const EditClass = () => {
     formData.append('images', image);
 
     try {
-      const response = await fetch('http://10.58.52.68:8000/images/', {
+      const response = await fetch('http://10.58.52.84:8000/images/', {
         method: 'POST',
         headers: {
           Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwMTk2MjQ4LCJleHAiOjE3MDA5MTYyNDh9.djPth_b9BC8H8dNNpr3R0LnuUbC9pQ3oeYlihvzUwyA',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
         },
         body: formData,
       });
@@ -112,12 +112,12 @@ const EditClass = () => {
   };
 
   const editClassButton = () => {
-    fetch(`http://10.58.52.127:8000/classes/update/${classId}`, {
+    fetch(`http://10.58.52.84:8000/classes/update/${classId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTU1NS0xMjM0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNDU3Mzg3LCJleHAiOjE3MDExNzczODd9.5oy_-lmBlMC8SC3MXHc82-s64bsLJZfBm82JcjWrSXQ',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
       },
       body: JSON.stringify({
         title: userInput.title,

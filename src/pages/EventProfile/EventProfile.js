@@ -16,7 +16,7 @@ const EventProfile = () => {
   const [hostData, setHostData] = useState([]);
 
   useEffect(() => {
-    fetch(`http://10.58.52.102:8000/hosts`, {
+    fetch(`http://10.58.52.84:8000/hosts`, {
       headers: {
         Authorization:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTU1NS0xMjM0Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNDU3Mzg3LCJleHAiOjE3MDExNzczODd9.5oy_-lmBlMC8SC3MXHc82-s64bsLJZfBm82JcjWrSXQ',
@@ -39,7 +39,7 @@ const EventProfile = () => {
   }, [hostData]);
 
   const withdrawal = () => {
-    fetch('http://10.58.52.102:8000/hosts/delete', {
+    fetch('http://10.58.52.84:8000/hosts/delete', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const EventProfile = () => {
   };
 
   const editProfile = () => {
-    fetch('http://10.58.52.102:8000/hosts/update', {
+    fetch('http://10.58.52.84:8000/hosts/update', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
