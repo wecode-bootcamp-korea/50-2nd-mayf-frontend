@@ -21,7 +21,7 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    fetch(`http://10.58.52.127:8000/classes/209`, {
+    fetch(`http://10.58.52.84:8000/classes/209`, {
       headers: {
         Authorization:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',

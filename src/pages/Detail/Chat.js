@@ -11,7 +11,7 @@ const Chat = () => {
 
   useEffect(() => {
     // 소켓 연결
-    const newSocket = io('http://10.58.52.238:8000', {
+    const newSocket = io('http://10.58.52.232:8000', {
       transports: ['websocket'],
     });
 
@@ -60,7 +60,7 @@ const Chat = () => {
       });
 
       // 기존의 fetch를 사용하여 메시지 저장
-      fetch(`http://10.58.52.238:8000/message`, {
+      fetch(`http://10.58.52.232:8000/message/14`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ const Chat = () => {
 
   // 방 생성 API 호출
   const createRoom = () => {
-    fetch('http://10.58.52.238:8000/chat', {
+    fetch('http://10.58.52.232:8000/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
