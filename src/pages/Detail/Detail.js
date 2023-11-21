@@ -79,7 +79,7 @@ const Detail = () => {
   };
 
   const joinClass = () => {
-    fetch(`http://10.58.52.140:8000/orders/`, {
+    fetch(`http://10.58.52.84:8000/orders/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ const Detail = () => {
   };
 
   const addWishList = () => {
-    fetch('http://10.58.52.140:8000/likes', {
+    fetch('http://10.58.52.84:8000/likes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
