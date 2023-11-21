@@ -30,10 +30,17 @@ const ClassList = () => {
         Authorization: token,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
-        console.log(data);
         setClassList(data.message.result);
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
       });
   };
 
@@ -54,6 +61,9 @@ const ClassList = () => {
       .then((data) => {
         setSelectedItemData(data.message);
         setIsModalOpen(true);
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
       });
   };
 
@@ -70,13 +80,17 @@ const ClassList = () => {
           'Content-Type': 'application/json;charset=utf-8',
           Authorization: token,
         },
-      }).then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        alert('강의가 삭제되었습니다');
-        getClassList();
-      });
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+          }
+          alert('강의가 삭제되었습니다');
+          getClassList();
+        })
+        .catch((error) => {
+          console.error('Fetch error:', error.message);
+        });
     }
   };
 
