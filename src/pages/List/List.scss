@@ -10,7 +10,8 @@
     width: 100%;
 
     .header {
-      background-color: #9fbbe3;
+      //background-color: rgb(140, 177, 230, 0.6);
+      background-color: #bfcefb;
       display: flex;
       justify-content: center;
       align-self: stretch;
@@ -40,13 +41,14 @@
           flex-direction: column;
           align-items: center;
           gap: 20px;
-          width: 300px;
+          width: 200px;
           height: 100%;
           border: 3px solid #8ca9d3;
           border-radius: 6px;
           padding-top: 8px;
 
           .labelTitle {
+            text-align: center;
             padding-top: 10px;
             font-size: 20px;
             font-weight: 600;
@@ -153,7 +155,7 @@
         margin-bottom: 10px;
 
         .recentlyViewedImages {
-          color: rgb(0, 0, 102);
+          color: white;
           position: sticky;
           top: 100px;
           padding-top: 20px;
@@ -165,8 +167,8 @@
           font-size: 18px;
           text-align: center;
           align-items: center;
-          background-color: rgb(208, 224, 247, 0.5);
-
+          //background-color: rgb(134, 164, 207, 0.4);
+          background-color: rgb(140, 177, 230, 0.6);
           .recentlyClass {
             aspect-ratio: 2/3;
             object-fit: cover;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CategoryList from './components/CategoryList';
 import UserSideBar from './components/UserSideBar';
@@ -10,7 +10,9 @@ import './Nav.scss';
 const Nav = () => {
   const navigate = useNavigate();
   const [credit, setCredit] = useState();
+  const [hostCrdeit, setHostCredit] = useState();
   const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
   //유저 아이콘 클릭시 컴포넌트 실행 사이드바 구현
   const [isOpen, setIsOpen] = useState(false);
   const toggleSidebar = () => {
@@ -22,20 +24,49 @@ const Nav = () => {
     setShowCategories(!showCategories);
   };
 
-  //문영님, 보유 크레딧 정보 불러오기
+  const userToken = () => {
+    fetch('http://10.58.52.84:8000/users', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: token,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setCredit(result.userGetInfoList[0].credit);
+      });
+  };
+
   // useEffect(() => {
-  //   fetch('http://10.58.52.238:8000/users', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //       authorization: token,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       setCredit(result.userGetInfoList[0].credit);
-  //     });
+  //   userToken();
   // }, []);
+
+  const hostToken = () => {
+    fetch('http://10.58.52.84:8000/hosts', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: token,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setHostCredit(result.hostInfoList[0].credit);
+      });
+  };
+
+  // useEffect(() => {
+  //   hostToken();
+  // }, []);
+
+  useEffect(() => {
+    if (role === 'users') {
+      userToken();
+    } else if (role === 'hosts') {
+      hostToken();
+    }
+  }, []);
 
   return (
     <div className="nav">
@@ -74,7 +105,7 @@ const Nav = () => {
             로그인
           </p>
         )}
-        {isOpen && <UserSideBar credit={credit} />}
+        {isOpen && <UserSideBar credit={credit} hostCrdeit={hostCrdeit} />}
       </div>
     </div>
   );
