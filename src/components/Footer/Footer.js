@@ -16,6 +16,33 @@ const Footer = () => {
 
   return (
     <div className="footer">
+      <div className="developer">
+        <a
+          href="https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend"
+          className="gitHubUrl"
+        >
+          FrontEnd
+        </a>
+        <ul className="member">
+          <li>최민지</li>
+          <li>신희현</li>
+          <li>임시현</li>
+        </ul>
+      </div>
+      <div className="developer">
+        <a
+          href="https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-backend"
+          className="gitHubUrl"
+        >
+          BackEnd
+        </a>
+        <ul className="member">
+          <li>유진서</li>
+          <li>김문영</li>
+          <li>노범석</li>
+          <li>이주현</li>
+        </ul>
+      </div>
       {token && role ? (
         <p className="logout" onClick={logout}>
           로그아웃
