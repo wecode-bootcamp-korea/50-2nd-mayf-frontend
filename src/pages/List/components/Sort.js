@@ -11,7 +11,6 @@ const Sort = () => {
   ];
 
   const handleFilter = (value) => {
-    //const newSearchParams = new URLSearchParams(searchParams);
     searchParams.set('sortBy', value);
     setSearchParams(searchParams);
   };

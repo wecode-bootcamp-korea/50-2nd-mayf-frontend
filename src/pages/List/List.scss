@@ -10,7 +10,7 @@
     width: 100%;
 
     .header {
-      background-color: #ffdab9;
+      background-color: #9fbbe3;
       display: flex;
       justify-content: center;
       align-self: stretch;
@@ -27,113 +27,167 @@
     .content {
       margin-top: 120px;
       display: flex;
+      gap: 50px;
       height: 100%;
       min-height: 100vh;
 
-      .tab {
+      .classBox {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        width: 300px;
-        height: 100%;
-        border: 1px solid #ffdab9;
-        border-radius: 6px;
-        padding-top: 8px;
 
-        .labelTitle {
-          padding-top: 10px;
-          color: burlywood;
-          font-size: 20px;
-          font-weight: 600;
-        }
-
-        .class {
-          padding: 16px 0 0px 13px;
-        }
-
-        .location {
-          padding: 16px 0 0px 13px;
-        }
-
-        .categories {
-          font-weight: 600;
-          font-size: large;
+        .tab {
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
-          gap: 15px;
-        }
-      }
-
-      .classTab {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 1000px;
-        min-width: 1000px;
-        border: 1px solid #ffdab9;
-        border-radius: 6px;
-
-        .labels {
-          display: flex;
           align-items: center;
-          justify-content: space-between;
-          align-self: stretch;
-          padding: 16px 40px 16px 40px;
+          gap: 20px;
+          width: 300px;
+          height: 100%;
+          border: 3px solid #8ca9d3;
+          border-radius: 6px;
+          padding-top: 8px;
 
           .labelTitle {
-            color: burlywood;
+            padding-top: 10px;
             font-size: 20px;
             font-weight: 600;
+          }
+
+          .class {
+            padding: 16px 0 0px 13px;
+          }
+
+          .location {
+            padding: 16px 0 0px 13px;
+          }
+
+          .categories {
+            font-weight: 600;
+            font-size: large;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
           }
         }
 
-        .classList {
-          padding-left: 40px;
-          width: 100%;
+        .classTab {
+          margin-left: 50px;
           display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          max-width: 1000px;
+          min-width: 1000px;
+          border: 3px solid #8ca9d3;
+          border-radius: 6px;
 
-          .class {
-            text-align: center;
-            width: 305px;
-            height: 400px;
-            padding: 16px 13px 35px 13px;
-            border: 1px solid #fbf3fa;
+          .labels {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            align-self: stretch;
+            padding: 16px 40px 16px 40px;
 
-            .picture {
-              img {
-                width: 270px;
-                height: 270px;
-                cursor: pointer;
+            .labelTitle {
+              font-size: 20px;
+              font-weight: 600;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+
+          .classList {
+            padding-left: 40px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            .class {
+              text-align: center;
+              width: 305px;
+              height: 400px;
+              padding: 16px 13px 35px 13px;
+              border: 1px solid #fbf3fa;
+
+              .picture {
+                img {
+                  width: 270px;
+                  height: 270px;
+                  cursor: pointer;
+                  border-radius: 4px;
+
+                  &:hover {
+                    background-color: #000;
+                    opacity: 80%;
+                    transition: all 0.5s;
+                    transform: scale(1.05);
+                  }
+                }
+              }
+
+              .classTitle {
+                line-height: 25px;
+                font-weight: 600;
+                margin-top: 10px;
+                font-size: 19px;
+              }
+
+              .classLocation {
+                margin-top: 8px;
+                font-size: 18px;
+              }
+
+              .classCredit {
+                margin-top: 8px;
+                font-size: 16px;
+                font-weight: 600;
               }
             }
+          }
+        }
+      }
+      .recentlyBox {
+        border: 1px solid rgb(208, 224, 247, 0.5);
+        border-radius: 6px;
+        margin-bottom: 10px;
 
-            .classTitle {
-              line-height: 25px;
-              font-weight: 600;
-              margin-top: 10px;
-              font-size: 19px;
-              color: burlywood;
-            }
+        .recentlyViewedImages {
+          color: rgb(0, 0, 102);
+          position: sticky;
+          top: 100px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          width: 200px;
+          height: auto;
+          border-radius: 6px;
+          font-weight: 700;
+          font-size: 18px;
+          text-align: center;
+          align-items: center;
+          background-color: rgb(208, 224, 247, 0.5);
 
-            .classLocation {
-              margin-top: 8px;
-              font-size: 18px;
-            }
+          .recentlyClass {
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            border-radius: 4px;
+            width: 150px;
+            height: 150px;
+            margin-top: 14px;
 
-            .classCredit {
-              color: #deb887;
-              margin-top: 8px;
-              font-size: 16px;
-              font-weight: 600;
+            &:hover {
+              background-color: #000;
+              opacity: 90%;
+              transition: all 0.3s;
+              transform: scale(1.1);
             }
+          }
+
+          .recentlyTitle {
+            align-items: flex-start;
+            font-size: 16px;
+            margin-top: 5px;
+            padding-bottom: 10px;
           }
         }
       }
