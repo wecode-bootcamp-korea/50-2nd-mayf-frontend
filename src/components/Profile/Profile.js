@@ -43,13 +43,19 @@ const Profile = () => {
   };
 
   const handleUpdate = () => {
-    fetch('http://10.58.52.238:8000/users/update', {
+    fetch('http://10.58.52.84:8000/users/update', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: token,
       },
-      body: JSON.stringify(userInfo),
+      body: JSON.stringify({
+        id: userData.id,
+        email: userData.email,
+        credit: userData.credit,
+        name: userInfo.name || userData.name,
+        phone_number: userInfo.phone_number || userData.phone_number,
+      }),
     })
       .then((res) => {
         if (!res.ok) {
@@ -67,22 +73,20 @@ const Profile = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (value !== null) {
-      setUserInfo((prevUserInfo) => ({
-        ...prevUserInfo,
-        [name]: value,
-      }));
-    }
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      [name]: value,
+    }));
   };
 
   return (
     <div className="profile">
       <div className="info">개인 정보</div>
       <div className="email">
-        <p>{userData.email}</p>
+        <p>이메일 : {userData.email}</p>
       </div>
       <div className="name">
-        <p>{userData.name}</p>
+        <p>이름 : {userData.name}</p>
         <input
           disabled={!isUpdate}
           name="name"
@@ -91,7 +95,7 @@ const Profile = () => {
         />
       </div>
       <div className="phone">
-        <p>{userData.phone_number}</p>
+        <p>전화번호 : {userData.phone_number}</p>
         <input
           disabled={!isUpdate}
           name="phone_number"
@@ -99,21 +103,23 @@ const Profile = () => {
           onChange={handleChange}
         />
       </div>
-      {isUpdate ? (
-        <>
-          <button onClick={handleUpdate}>완료</button>
-          <button
-            onClick={() => {
-              setIsUpdate(false);
-              setUserInfo(DEFAULT_USER_INFO);
-            }}
-          >
-            취소
-          </button>
-        </>
-      ) : (
-        <button onClick={() => setIsUpdate(true)}>수정</button>
-      )}
+      <div className="button">
+        {isUpdate ? (
+          <>
+            <button onClick={handleUpdate}>완료</button>
+            <button
+              onClick={() => {
+                setIsUpdate(false);
+                setUserInfo(DEFAULT_USER_INFO);
+              }}
+            >
+              취소
+            </button>
+          </>
+        ) : (
+          <button onClick={() => setIsUpdate(true)}>수정</button>
+        )}
+      </div>
     </div>
   );
 };
