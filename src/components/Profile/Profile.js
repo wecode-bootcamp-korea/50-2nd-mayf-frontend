@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 const Profile = () => {
-  const [userInfo, setUserInfo] = useState({
+  const user = {
     id: '',
     name: '',
     email: '',
     phone_number: '',
     credit: 0,
-  });
+  };
+  const [userInfo, setUserInfo] = useState(user);
   const [userData, setUserData] = useState({});
   // const token =
   //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI';
@@ -58,13 +59,7 @@ const Profile = () => {
           throw new Error(`HTTP error! Status: ${res.status}`);
         }
         alert('정보가 수정되었습니다');
-        setUserInfo({
-          id: '',
-          name: '',
-          email: '',
-          phone_number: '',
-          credit: 0,
-        });
+        setUserInfo(user);
         getUser();
       })
       .catch((error) => {

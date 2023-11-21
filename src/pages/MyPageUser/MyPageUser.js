@@ -31,11 +31,11 @@ const MyPageUser = () => {
           <div className="contentCategory">
             {menuArr.map((item) =>
               item.name === '크레딧' ? (
-                <button key={index} onClick={() => navigate('/credit')}>
+                <button key={item} onClick={() => navigate('/credit')}>
                   {item.name}
                 </button>
               ) : (
-                <button key={index} onClick={() => selectMenu(index)}>
+                <button key={item} onClick={() => selectMenu(item)}>
                   {item.name}
                 </button>
               ),
