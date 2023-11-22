@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+//font-family: 'Dongle', sans-serif;
+
 .Admin {
   display: flex;
+  font-family: 'Dongle', sans-serif;
+  font-size: 25px;
 
   .category {
     display: flex;
@@ -10,6 +15,14 @@
     button {
       margin-bottom: 10px; // 버튼 간 간격 조절
       width: 150px;
+      height: 40px;
+      font-size: 25px;
+      border-radius: 4px;
+      font-family: 'Dongle', sans-serif;
+      background-color: rgb(140, 177, 230, 0.6);
+      color: white;
+      border: 1px solid black;
+      cursor: pointer;
     }
   }
 }

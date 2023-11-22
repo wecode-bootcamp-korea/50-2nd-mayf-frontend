@@ -15,6 +15,19 @@
 
       &.classCategory {
         text-align: center;
+        min-width: 100px;
+      }
+
+      &.name {
+        text-align: center;
+        min-width: 80px;
+      }
+
+      .btn {
+        font-family: 'Dongle', sans-serif;
+        font-size: 20px;
+        background-color: white;
+        border-radius: 3px;
       }
     }
   }

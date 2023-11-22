@@ -1,14 +1,14 @@
 .pagination {
   display: flex;
   list-style: none;
-  padding: 10px 0 0 0;
+  padding: 10px 0 10px 0;
   font-size: 20px;
   justify-content: center;
   align-items: center;
 
   .pageItem {
     margin: 0 5px;
-
+    width: 30px;
     &.active {
       color: #ddd;
     }

@@ -23,7 +23,7 @@ const ClassList = () => {
   }, []);
 
   const getClassList = () => {
-    fetch('http://10.58.52.84:8000/classes/admin/classeslist', {
+    fetch('http://34.64.172.211:8000/classes/admin/classeslist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -45,7 +45,7 @@ const ClassList = () => {
   };
 
   const openModal = (itemId) => {
-    fetch(`http://10.58.52.84:8000/classes/${itemId}`, {
+    fetch(`http://34.64.172.211:8000/classes/${itemId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -74,7 +74,7 @@ const ClassList = () => {
   const handleDelete = (itemId) => {
     const ok = window.confirm('정말 삭제하시겠습니까?');
     if (ok) {
-      fetch(`http://10.58.52.84:8000/classes/admin/delete/${itemId}`, {
+      fetch(`http://34.64.172.211:8000/classes/admin/delete/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -99,7 +99,7 @@ const ClassList = () => {
 
     if (!isDeleted) return;
 
-    fetch(`http://10.58.52.84:8000/classes/admin/reactivate/${itemId}`, {
+    fetch(`http://34.64.172.211:8000/classes/admin/reactivate/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -142,6 +142,7 @@ const ClassList = () => {
                 <button
                   disabled={isDeleted}
                   onClick={() => handleDelete(item.id)}
+                  className="delete btn"
                 >
                   삭제
                 </button>
@@ -150,6 +151,7 @@ const ClassList = () => {
                 <button
                   disabled={!isDeleted}
                   onClick={() => handleRestore(item.id)}
+                  className="restore btn"
                 >
                   복구
                 </button>
