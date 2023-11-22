@@ -32,7 +32,7 @@ const Main = () => {
           <div className="classTitle">
             <img className="mainIcon" src={TimeIcon} alt="mainIcon" />
             <div className="titleWrapper">
-              <p className="subTitle">Closing Soon </p>
+              <p className="subTitle">Comming Soon </p>
               <p className="summary">곧 마감되는 클래스에요! 서둘르세요!</p>
             </div>
           </div>
