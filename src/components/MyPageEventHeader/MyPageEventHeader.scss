@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background-color: beige;
+  align-self: stretch;
+
+  .headerTitle {
+    font-size: 50px;
+  }
+}

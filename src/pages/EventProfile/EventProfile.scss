@@ -1,4 +1,4 @@
-.myPageEvent {
+.eventProfile {
   display: flex;
   width: 100%;
   align-items: center;
@@ -20,6 +20,12 @@
       padding: 15px 20px;
       align-self: stretch;
       margin: 0 30px;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
     }
   }
 }
