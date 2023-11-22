@@ -8,7 +8,7 @@ const KAKAOuser = () => {
   const code = searchParams.get('code');
 
   useEffect(() => {
-    fetch('http://10.58.52.84:8000/users/signup', {
+    fetch('http://34.64.172.211:8000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

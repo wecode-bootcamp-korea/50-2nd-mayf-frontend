@@ -18,7 +18,7 @@ const UserSideBar = ({ credit }) => {
           >
             MY PAGE
           </li>
-          <li className="menu">
+          <li className="myCredit">
             보유 크레딧 : {credit.toLocaleString('ko-KR')}
           </li>
           <li
@@ -44,8 +44,16 @@ const UserSideBar = ({ credit }) => {
           >
             MY PAGE
           </li>
-          <li className="menu" onClick={() => navigate('/wishlist')}>
-            WISH LIST
+          <li className="myCredit">
+            보유 크레딧 : {credit.toLocaleString('ko-KR')}
+          </li>
+          <li
+            className="menu"
+            onClick={() => {
+              navigate('/my-page-event-calculate');
+            }}
+          >
+            정산하기
           </li>
         </ul>
       </div>

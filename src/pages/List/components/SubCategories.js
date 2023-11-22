@@ -18,7 +18,7 @@ const SubCategories = ({ subCategories }) => {
   return (
     <div className="subcategories">
       <div className="tab">
-        <div className="labelTitle class">클라스 카테고리</div>
+        <div className="labelTitle">클라스 카테고리</div>
         <div className="categories">
           {subCategories.map(({ name }) => (
             <div className="categoriesBox" key={name}>

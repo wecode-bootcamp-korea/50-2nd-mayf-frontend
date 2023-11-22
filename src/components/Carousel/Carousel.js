@@ -43,8 +43,10 @@ const Carousel = () => {
       <Swiper
         ref={sliderRef}
         modules={[Autoplay]}
-        spaceBetween={40}
-        slidesPerView={2}
+        spaceBetween={100}
+        slidesPerView={1.5}
+        centeredSlides={true}
+        loop={true}
         onSwiper={(swiper) => {
           sliderRef.current = swiper;
         }}
