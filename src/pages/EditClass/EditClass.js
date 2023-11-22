@@ -126,13 +126,10 @@ const EditClass = () => {
   const [selectedSubCategory, setSelectedSubCategory] = useState('');
 
   useEffect(() => {
-    // 서버에서 받아온 classData의 sub_category_name을 선택된 상위 카테고리의 서브 카테고리 목록 중에서 찾습니다.
     const subCategories = categories.find(
       (category) => category.name === selectedTopCategory,
     )?.subcategories;
 
-    // 찾은 subCategories 중에 classData의 sub_category_name이 있다면 해당 값을 사용하고,
-    // 없다면 subCategories의 첫 번째 값을 사용합니다.
     setSelectedSubCategory(
       subCategories?.includes(classData.sub_category_name)
         ? classData.sub_category_name
@@ -142,14 +139,13 @@ const EditClass = () => {
 
   const setTopCategory = (event) => {
     const { value } = event.target;
-    console.log('selected Top Category:', value);
     setSelectedTopCategory(value);
 
     const subCategories =
       categories.find((category) => category.name === value)?.subcategories ||
       [];
 
-    setSelectedSubCategory(classData.sub_category_name || ''); // 수정된 부분
+    setSelectedSubCategory(classData.sub_category_name || '');
     setUserInput((prevUserInput) => {
       const subCategories =
         categories.find((category) => category.name === value)?.subcategories ||
@@ -160,7 +156,7 @@ const EditClass = () => {
         topCategoryName: value,
         subCategoryName: subCategories.includes(classData.sub_category_name)
           ? classData.sub_category_name
-          : subCategories[0] || '', // 수정된 부분
+          : subCategories[0] || '',
       };
     });
   };
@@ -172,11 +168,6 @@ const EditClass = () => {
       ...prevUserInput,
       subCategoryName: value,
     }));
-
-    // 비동기적 업데이트로 인한 지연을 고려하여 setTimeout 사용
-    setTimeout(() => {
-      console.log('Selected Sub Category After Set:', selectedSubCategory);
-    }, 0);
   };
 
   useEffect(() => {

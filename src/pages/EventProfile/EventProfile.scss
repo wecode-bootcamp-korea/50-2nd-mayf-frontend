@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+
 .eventProfile {
+  font-family: 'Dongle', sans-serif;
   display: flex;
   width: 100%;
   align-items: center;
@@ -22,9 +25,85 @@
       margin: 0 30px;
 
       .content {
+        width: 100%;
+      }
+
+      .mainLabel {
+        text-align: center;
+        font-size: 35px;
+        border-bottom: 1px solid #999;
+        padding-bottom: 15px;
+      }
+
+      .profileInfo {
+        margin: 0 auto;
+        display: flex;
+        width: 700px;
+        min-width: 500px;
+        flex-direction: column;
+        align-items: center;
+        align-self: stretch;
+        gap: 30px;
+
+        .info {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          align-self: stretch;
+          gap: 20px;
+
+          .label {
+            font-size: 25px;
+          }
+
+          .name {
+            margin-top: 30px;
+          }
+
+          .infoInput {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-self: stretch;
+
+            input {
+              font-family: 'Dongle', sans-serif;
+              display: flex;
+              align-self: stretch;
+              font-size: 30px;
+              border: none;
+              border-bottom: 1px solid #999;
+            }
+          }
+        }
+      }
+
+      .buttons {
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        width: 700px;
+        min-width: 500px;
+        align-items: center;
+        align-self: stretch;
+        gap: 10px;
+
+        button {
+          width: 100%;
+          max-width: 700px;
+          background-color: rgb(140, 177, 230, 0.6);
+          border: none;
+          border-radius: 10px;
+          margin-top: 10px;
+          padding: 10px 15px;
+          font-size: 30px;
+          font-family: 'Dongle', sans-serif;
+          color: white;
+        }
+
+        .withdrawalBtn {
+          background-color: #f6b489;
+        }
       }
     }
   }

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Calculate.scss';
+import MyPageEventHeader from '../../components/MyPageEventHeader/MyPageEventHeader';
+import MyPageEventTab from '../../components/MyPageEventTab/MyPageEventTab';
 
 const Calculate = () => {
   const [credit, setCredit] = useState();
@@ -52,16 +54,28 @@ const Calculate = () => {
   return (
     <div className="calculate">
       <div className="container">
-        <div className="credit">
-          <input type="text" value={useCredit} onChange={setChangeUseCredit} />
-          <div>보유 크레딧 : {credit}P</div>
-          <div>수수료 20% 적용</div>
-          <div>
-            예상 정산가 : {useCredit === undefined ? 0 : useCredit * 0.8}원
+        <MyPageEventHeader />
+
+        <div className="contents">
+          <MyPageEventTab />
+          <div className="content">
+            <div className="mainLabel">정산</div>
+            <div className="credit">
+              <input
+                type="text"
+                value={useCredit}
+                onChange={setChangeUseCredit}
+              />
+              <div>보유 크레딧 : {credit}P</div>
+              <div>수수료 20% 적용</div>
+              <div>
+                예상 정산가 : {useCredit === undefined ? 0 : useCredit * 0.8}원
+              </div>
+              <button className="completeBtn" onClick={completeCal}>
+                정산하기
+              </button>
+            </div>
           </div>
-          <button className="completeBtn" onClick={completeCal}>
-            정산하기
-          </button>
         </div>
       </div>
     </div>

@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+
+.calculate {
+  font-family: 'Dongle', sans-serif;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-direction: column;
+
+  .container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    flex-direction: column;
+
+    .contents {
+      display: flex;
+      gap: 30px;
+      padding: 15px 20px;
+      align-self: stretch;
+      margin: 0 30px;
+
+      .content {
+        width: 100%;
+        font-size: 30px;
+
+        .mainLabel {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          font-size: 35px;
+          border-bottom: 1px solid #999;
+          padding-bottom: 15px;
+          margin-bottom: 30px
+        }
+
+        .credit {
+          display: flex;
+          flex-direction: column;
+          width: 350px;
+          gap: 10px;
+
+          input {
+            font-family: 'Dongle', sans-serif;
+            font-size: 35px;
+          }
+
+          button {
+            width: 200px;
+            font-family: 'Dongle', sans-serif;
+            color: white;
+            background-color: rgb(140, 177, 230, 0.6);
+            border: none;
+            border-radius: 10px;
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
+}

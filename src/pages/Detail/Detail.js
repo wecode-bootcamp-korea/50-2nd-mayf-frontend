@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Refund from '../../components/Refund/Refund';
 import CalendarApp from '../../components/CalendarApp/CalendarApp';
 import Chat from './Chat';
@@ -8,6 +8,7 @@ import './Detail.scss';
 const { kakao } = window;
 
 const Detail = () => {
+  const { id } = useParams();
   const [people, setPeople] = useState(1);
   const [reservations, setReservations] = useState([]);
   const [classDetail, setClassDetail] = useState({});
@@ -21,7 +22,7 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    fetch(`http://34.64.172.211:8000/classes/209`, {
+    fetch(`http://34.64.172.211:8000/classes/${id}`, {
       headers: {
         Authorization:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',

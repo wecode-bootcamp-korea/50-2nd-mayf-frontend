@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+
+.chatList {
+  font-family: 'Dongle', sans-serif;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-direction: column;
+
+  .container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    flex-direction: column;
+
+    .contents {
+      display: flex;
+      gap: 30px;
+      padding: 15px 20px;
+      align-self: stretch;
+      margin: 0 30px;
+
+      .content {
+        width: 100%;
+
+        .mainLabel {
+          text-align: center;
+          font-size: 35px;
+          border-bottom: 1px solid #999;
+          padding-bottom: 15px;
+          margin-bottom: 30px;
+        }
+
+        .chats {
+          display: flex;
+          flex-direction: column;
+          gap: 35px;
+          height: 100vh;
+          flex-wrap: wrap;
+
+          .chatRooms {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 350px;
+            font-size: 30px;
+            border-bottom: 1px solid #999;
+            padding-bottom: 5px;
+
+            .enterRoom {
+              font-family: 'Dongle', sans-serif;
+              background-color: rgb(140, 177, 230, 0.6);
+              display: flex;
+              align-items: center;
+              padding: 5px 10px;
+              font-size: 25px;
+              border: none;
+              border-radius: 10px;
+              color: white;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}
