@@ -38,8 +38,7 @@ const CalendarApp = ({ scheduleInfo = [], scheduleId }) => {
         />
       </div>
       {selectedDate && (
-        <div>
-          <h2>예약 가능한 강의</h2>
+        <div className="scheduleList">
           <ul>
             {scheduleInfo
               .filter(
@@ -53,15 +52,10 @@ const CalendarApp = ({ scheduleInfo = [], scheduleId }) => {
                     className="dateList"
                     onClick={() => {
                       scheduleId(classData.schedule_id);
+                      handleClassSelect(classData);
                     }}
                   >
-                    {classData.class_day}
-                  </button>
-                  <button
-                    className="dateList"
-                    onClick={() => handleClassSelect(classData)}
-                  >
-                    예약하기
+                    {classData.class_day.slice(0, 16)}
                   </button>
                 </li>
               ))}
@@ -69,10 +63,10 @@ const CalendarApp = ({ scheduleInfo = [], scheduleId }) => {
         </div>
       )}
       {selectedClass && (
-        <div>
+        <div className="scheduleData">
           <h2>강의 정보</h2>
-          <p>날짜 : {selectedClass.class_day}</p>
-          <p>소요 시간 : {selectedClass.class_duration}시간</p>
+          <p>날짜 : {selectedClass.class_day.slice(0, 11)}</p>
+          <p>시간 : {selectedClass.class_day.slice(11, 16)}</p>
           <p>등록 인원 : {selectedClass.enrolled_member}</p>
           <p>최대 인원 : {selectedClass.max_member}</p>
         </div>

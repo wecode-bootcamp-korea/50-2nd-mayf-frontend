@@ -11,6 +11,7 @@ const Detail = () => {
   const [people, setPeople] = useState(1);
   const [reservations, setReservations] = useState([]);
   const [classDetail, setClassDetail] = useState({});
+  const [userData, setUserData] = useState([]);
   const [scheduleId, setScheduleId] = useState('');
   const container = useRef();
   const navigate = useNavigate();
@@ -29,6 +30,29 @@ const Detail = () => {
       .then((res) => res.json())
       .then((data) => {
         setClassDetail(data.message);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('http://34.64.172.211:8000/users', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setUserData(data.userGetInfoList[0]);
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message);
       });
   }, []);
 
@@ -132,39 +156,41 @@ const Detail = () => {
     <div className="detail">
       <div className="container">
         <div className="header">
-          <div className="headerTitle">Class Page</div>
+          <div className="headerTitle">{classDetail.title}</div>
         </div>
 
         <div className="content">
-          <img
-            alt="클래스 사진"
-            className="classImage"
-            src={classDetail.main_image_source}
-          />
-
           <div className="simpleDetail">
-            <div className="classTitle">{classDetail.title}</div>
-            <div className="classOpener">{classDetail.name}</div>
-            <div className="classCategory">
-              {classDetail.top_category_name}({classDetail.sub_category_name})
-            </div>
-            <div className="classLocation">
-              <div className="locationWriting">
+            <div className="basicInfo">
+              <img
+                alt="클래스 사진"
+                className="mainImage"
+                src={classDetail.main_image_source}
+              />
+
+              <div className="basicDetail">
+                <div className="classTitle">{classDetail.title}</div>
+                <div className="classOpener">{classDetail.name}</div>
+                <div className="classCategory">
+                  {classDetail.top_category_name}(
+                  {classDetail.sub_category_name})
+                </div>
                 <div className="locationLabel">{classDetail.address}</div>
-                <button
+                <div
                   className="copyAddress"
                   onClick={() => copyClipBoard(classDetail.address)}
                 >
                   주소 복사
-                </button>
+                </div>
               </div>
-              <div className="map" id="map" ref={container} />
             </div>
+
             <div className="selectPeople">
               <button onClick={subPeople}>-</button>
               <div>{people}명</div>
               <button onClick={addPeople}>+</button>
             </div>
+
             <div className="buttons">
               <button className="addClass" onClick={joinClass}>
                 강의 신청
@@ -186,15 +212,46 @@ const Detail = () => {
             </div>
           </div>
         </div>
-        <div className="classDetail">
+
+        <div className="summaryInfo">
+          <div className="label">요약</div>
           <div className="summary">{classDetail.summary}</div>
-          <img src={classDetail.sub_image_source} alt="서브이미지" />
-          <div className="content">{classDetail.content}</div>
         </div>
 
-        <Refund />
+        <div className="imagesInfo">
+          <div className="label">사진</div>
+          <div className="images">
+            <img
+              alt="클래스 사진"
+              className="mainImage"
+              src={classDetail.main_image_source}
+            />
+            <img
+              src={classDetail.sub_image_source}
+              className="subImage"
+              alt="서브이미지"
+            />
+          </div>
+        </div>
 
-        <Chat />
+        <div className="contentInfo">
+          <div className="label">상세 내용</div>
+          <div className="contentDetail">{classDetail.content}</div>
+        </div>
+
+        <div className="mapInfo">
+          <div className="label">위치</div>
+          <div className="map" id="map" ref={container} />
+        </div>
+
+        <Chat
+          host={classDetail.name}
+          hostId={classDetail.hostId}
+          userId={userData.id}
+          userName={userData.name}
+        />
+
+        <Refund />
       </div>
     </div>
   );

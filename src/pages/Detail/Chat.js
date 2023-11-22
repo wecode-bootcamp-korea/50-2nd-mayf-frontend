@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import './Chat.scss';
 
-const Chat = () => {
+const Chat = ({ host, hostId, userId }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [roomCreated, setRoomCreated] = useState(false);
@@ -60,14 +60,14 @@ const Chat = () => {
       });
 
       // 기존의 fetch를 사용하여 메시지 저장
-      fetch(`http://34.64.172.211:8000/message/14`, {
+      fetch(`http://34.64.172.211:8000/message/${chatId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
         },
-        body: JSON.stringify({ content: newMessage, chatId: 14 }),
+        body: JSON.stringify({ content: newMessage, chatId }),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -98,8 +98,8 @@ const Chat = () => {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
       },
       body: JSON.stringify({
-        userId: 10,
-        hostId: 29,
+        userId,
+        hostId,
       }),
     })
       .then((response) => response.json())
@@ -113,19 +113,23 @@ const Chat = () => {
   };
 
   return (
-    <div className="chat">
-      <div className="chat-header">
-        <div>실시간 채팅</div>
-        {!roomCreated && <button onClick={createRoom}>방 생성하기</button>}
+    <div className="detailPageChat">
+      <div className="chatHeader">
+        <div className="label">문의하기</div>
+        {!roomCreated && (
+          <button className="chatRoomBtn" onClick={createRoom}>
+            문의 시작
+          </button>
+        )}
       </div>
-      <div className="chat-messages">
+      <div className="chatMessages">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`message ${message.isCurrentUser ? 'sent' : 'received'}`}
+            className={`message ${message.isCurrentUser ? 'received' : 'sent'}`}
           >
             <span className="username">
-              {message.isCurrentUser ? '나' : '김문영'}
+              {message.isCurrentUser ? host : '나'}
             </span>
             {message.content}
           </div>
@@ -133,7 +137,7 @@ const Chat = () => {
       </div>
 
       {roomCreated && (
-        <div className="chat-input">
+        <div className="chatInput">
           <input
             type="text"
             placeholder="메시지를 입력하세요"
