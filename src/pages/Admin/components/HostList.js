@@ -112,6 +112,7 @@ const HostList = () => {
                 <button
                   disabled={isDeleted}
                   onClick={() => handleDelete(item.id)}
+                  className="btn"
                 >
                   삭제
                 </button>
@@ -120,6 +121,7 @@ const HostList = () => {
                 <button
                   disabled={!isDeleted}
                   onClick={() => handleRestore(item.id)}
+                  className="btn"
                 >
                   복구
                 </button>

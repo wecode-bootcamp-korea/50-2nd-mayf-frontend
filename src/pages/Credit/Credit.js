@@ -100,7 +100,7 @@ const Credit = () => {
                 name="radio"
                 value={list.amount}
               />
-              {list.amount}
+              {list.amount} C
             </label>
           </div>
         ))}
@@ -112,7 +112,11 @@ const Credit = () => {
 
       <div className="chargeBtnBox">
         <button type="button" className="btn" onClick={handlePay}>
-          <img src="/images/payment_icon_yellow_large.png" alt="pay_btn" />
+          <img
+            className="kakaopay"
+            src="/images/payment_icon_yellow_large.png"
+            alt="pay_btn"
+          />
         </button>
       </div>
     </div>

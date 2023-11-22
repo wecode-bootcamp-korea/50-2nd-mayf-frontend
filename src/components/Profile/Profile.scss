@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+
 .profile {
   .info {
-    font-size: 25px;
+    font-size: 45px;
   }
   .email {
     display: flex;
@@ -8,6 +10,7 @@
     min-width: 300px;
     align-items: center;
     margin: 10px 10px 10px 10px;
+    font-size: 30px;
   }
 
   .name {
@@ -17,6 +20,11 @@
     min-width: 300px;
     margin: 10px 10px 10px 10px;
     padding: 10px 0 10px 0;
+    font-size: 30px;
+
+    & p {
+      margin-bottom: 15px;
+    }
   }
 
   .phone {
@@ -26,6 +34,11 @@
     min-width: 300px;
     margin: 10px 10px 10px 10px;
     padding: 10px 0 10px 0;
+    font-size: 30px;
+
+    & p {
+      margin-bottom: 15px;
+    }
   }
 
   .button {
@@ -34,6 +47,10 @@
       height: 30px;
       margin: 10px 10px 10px 10px;
       border-radius: 4px;
+      background-color: rgb(140, 177, 230, 0.6);
+      font-family: 'Dongle', sans-serif;
+      font-size: 20px;
+      border: none;
     }
   }
 }

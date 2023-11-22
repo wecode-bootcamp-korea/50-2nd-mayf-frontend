@@ -108,7 +108,6 @@ const Reservation = () => {
                   <div className="classpeople">
                     인원 : {item.enrolled_member}
                   </div>
-                  <div>{item.order_id}</div>
                 </div>
 
                 <div className="buttons">

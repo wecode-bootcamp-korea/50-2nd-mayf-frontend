@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+//font-family: 'Dongle', sans-serif;
+
 .wishList {
   display: flex;
 
@@ -19,7 +22,7 @@
       align-items: center;
       align-self: stretch;
       flex-wrap: wrap;
-      gap: 50px;
+      gap: 30px;
 
       .content {
         display: flex;
@@ -30,10 +33,11 @@
         border: 1px solid #999;
         border-radius: 8px;
         padding: 25px 20px;
+        width: 360px;
 
         img {
-          width: 400px;
-          height: 300px;
+          width: 320px;
+          height: 240px;
         }
 
         .classInfo {
@@ -41,6 +45,7 @@
           flex-direction: column;
           align-items: flex-start;
           gap: 10px;
+          font-size: 25px;
         }
 
         .buttons {
@@ -57,8 +62,10 @@
             font-size: 15px;
             border: none;
             border-radius: 8px;
-            background-color: beige;
+            background-color: rgb(140, 177, 230, 0.6);
             cursor: pointer;
+            font-family: 'Dongle', sans-serif;
+            font-size: 25px;
 
             &:active {
               opacity: 0.7;
