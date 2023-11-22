@@ -1,0 +1,22 @@
+.userList {
+  display: table;
+
+  .container {
+    display: table-row;
+    border: 1px solid #ddd;
+    margin: 5px;
+
+    .cell {
+      display: table-cell;
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+  }
+
+  .pageContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -12,6 +12,11 @@ import MyPageUser from './pages/MyPageUser/MyPageUser';
 import MyPageEvent from './pages/MyPageEvent/MyPageEvent';
 import Manage from './pages/Manage/Manage';
 import Credit from './pages/Credit/Credit';
+import KAKAOcredit from './pages/Credit/KAKAOcredit';
+import KAKAOuser from './pages/Login/KAKAOuser';
+import KAKAOevent from './pages/Login/KAKAOevent';
+import AdminLogin from './pages/AdminLogin/AdminLogin';
+import Admin from './pages/Admin/Admin';
 
 const Router = () => {
   return (
@@ -28,6 +33,11 @@ const Router = () => {
         <Route path="/my-page-event" element={<MyPageEvent />} />
         <Route path="/manage" element={<Manage />} />
         <Route path="/credit" element={<Credit />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/credit/KAKAOcredit" element={<KAKAOcredit />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/users/signup" element={<KAKAOuser />} />
+        <Route path="/hosts/signup" element={<KAKAOevent />} />
       </Routes>
       <Footer />
     </BrowserRouter>

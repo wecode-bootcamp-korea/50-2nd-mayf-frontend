@@ -1,0 +1,55 @@
+.box {
+  .sideBar {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    display: block;
+    width: 250px;
+    overflow: hidden;
+    background-color: white;
+    opacity: 0.8;
+
+    .userMenu {
+      font-size: 18px;
+      list-style: none;
+      text-align: center;
+      padding-top: 10px;
+
+      .menu {
+        margin-bottom: 10px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: burlywood;
+        }
+      }
+    }
+  }
+
+  .evenUser {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    display: block;
+    width: 250px;
+    overflow: hidden;
+    background-color: white;
+    opacity: 0.8;
+
+    .eventUserMenu {
+      font-size: 18px;
+      list-style: none;
+      text-align: center;
+      padding-top: 10px;
+
+      .menu {
+        margin-bottom: 10px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: burlywood;
+        }
+      }
+    }
+  }
+}
