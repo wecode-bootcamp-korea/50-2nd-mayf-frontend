@@ -21,7 +21,7 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    fetch(`http://10.58.52.84:8000/classes/209`, {
+    fetch(`http://34.64.172.211:8000/classes/209`, {
       headers: {
         Authorization:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',
@@ -79,7 +79,8 @@ const Detail = () => {
   };
 
   const joinClass = () => {
-    fetch(`http://10.58.52.84:8000/orders/`, {
+    console.log(scheduleId);
+    fetch(`http://34.64.172.211:8000/orders/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -102,12 +103,14 @@ const Detail = () => {
           navigate('/');
         } else if (data.message === 'NO_SEATS_LEFT') {
           alert('마감인원을 초과하였습니다.');
+        } else if (data.message === 'NOT_ENOUGH_CREDITS') {
+          alert('크레딧이 부족합니다.');
         }
       });
   };
 
   const addWishList = () => {
-    fetch('http://10.58.52.84:8000/likes', {
+    fetch('http://34.64.172.211:8000/likes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

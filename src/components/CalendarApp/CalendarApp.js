@@ -28,10 +28,6 @@ const CalendarApp = ({ scheduleInfo = [], scheduleId }) => {
     setSelectedClass(classData);
   };
 
-  const handleReservation = () => {
-    scheduleId(scheduleInfo.schedule_id);
-  };
-
   return (
     <div className="calendar-app">
       <h1>강의 예약 시스템</h1>
@@ -77,7 +73,6 @@ const CalendarApp = ({ scheduleInfo = [], scheduleId }) => {
           <p>소요 시간: {selectedClass.class_duration}시간</p>
           <p>등록 인원: {selectedClass.enrolled_member}</p>
           <p>최대 인원: {selectedClass.max_member}</p>
-          <button onClick={handleReservation}>예약하기</button>
         </div>
       )}
     </div>
