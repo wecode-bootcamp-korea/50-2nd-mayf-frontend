@@ -12,7 +12,7 @@ const WishList = () => {
   }, []);
 
   const getWishList = () => {
-    fetch('http://10.58.52.84:8000/likes/users', {
+    fetch('http://34.64.172.211:8000/likes/users', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -38,7 +38,7 @@ const WishList = () => {
   };
 
   const handleCancel = (itemId) => {
-    fetch('http://10.58.52.84:8000/likes', {
+    fetch('http://34.64.172.211:8000/likes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

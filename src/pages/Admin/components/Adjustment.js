@@ -10,7 +10,7 @@ const Adjustment = () => {
   // const token = localStorage.getItem('token')
 
   useEffect(() => {
-    fetch('http://10.58.52.84:8000/admins/hostlist', {
+    fetch('http://34.64.172.211:8000/admins/hostlist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

@@ -20,7 +20,7 @@ const UserList = () => {
   }, []);
 
   const getUserList = () => {
-    fetch('http://10.58.52.84:8000/admins/userlist', {
+    fetch('http://34.64.172.211:8000/admins/userlist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -44,7 +44,7 @@ const UserList = () => {
   const handleDelete = (itemId) => {
     const ok = window.confirm('정말 삭제하시겠습니까?');
     if (ok) {
-      fetch(`http://10.58.52.84:8000/admins/users/${itemId}`, {
+      fetch(`http://34.64.172.211:8000/admins/users/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -72,7 +72,7 @@ const UserList = () => {
 
     if (!isDeleted) return;
 
-    fetch(`http://10.58.52.84:8000/admins/users/update/${itemId}`, {
+    fetch(`http://34.64.172.211:8000/admins/users/update/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

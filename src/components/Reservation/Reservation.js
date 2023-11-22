@@ -22,7 +22,7 @@ const Reservation = () => {
   }, []);
 
   const getReservationList = () => {
-    fetch('http://10.58.52.84:8000/classes/myclass', {
+    fetch('http://34.64.172.211:8000/classes/myclass', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -46,7 +46,7 @@ const Reservation = () => {
   };
 
   const handleDelete = (itemId) => {
-    fetch(`http://10.58.52.84:8000/orders/${itemId}`, {
+    fetch(`http://34.64.172.211:8000/orders/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -66,7 +66,7 @@ const Reservation = () => {
   };
 
   const handleCode = (itemId) => {
-    fetch(`http://10.58.52.84:8000/orders/sendme/${itemId}`, {
+    fetch(`http://34.64.172.211:8000/orders/sendme/${itemId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

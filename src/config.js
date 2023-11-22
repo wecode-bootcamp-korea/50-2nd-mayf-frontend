@@ -1,4 +1,4 @@
-const BASE_URL = 'http://10.58.52.84:8000';
+const BASE_URL = 'http://34.64.172.211:8000';
 
 const API = {
   signUp: `${BASE_URL}/users/signup`,
