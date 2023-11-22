@@ -81,7 +81,7 @@ const List = () => {
               </div>
               <div className="classList">
                 {filterSearch.map((list) => {
-                  const { id, title, summery, name, image_source } = list;
+                  const { id, title, name, image_source } = list;
 
                   return (
                     <div key={id} className="class">
