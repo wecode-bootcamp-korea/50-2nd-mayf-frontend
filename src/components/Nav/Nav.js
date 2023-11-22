@@ -96,4 +96,3 @@ const Nav = () => {
 };
 
 export default Nav;
-// credit={credit || 0} hostCredit={hostCredit || 0}
