@@ -21,7 +21,7 @@ const Profile = () => {
   }, []);
 
   const getUser = () => {
-    fetch('http://10.58.52.84:8000/users', {
+    fetch('http://34.64.172.211:8000/users', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

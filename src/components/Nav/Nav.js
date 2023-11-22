@@ -24,8 +24,8 @@ const Nav = () => {
     setShowCategories(!showCategories);
   };
 
-  const userToken = () => {
-    fetch('http://34.64.172.211:8000/users', {
+  const fetchData = (endpoint) => {
+    fetch(`http://34.64.172.211:8000/${endpoint}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -34,29 +34,19 @@ const Nav = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        setCredit(result.userGetInfoList[0].credit);
-      });
-  };
-
-  const hostToken = () => {
-    fetch('http://34.64.172.211:8000/hosts', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: token,
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        setHostCredit(result.hostInfoList[0].credit);
+        if (endpoint === 'users') {
+          setCredit(result.userGetInfoList[0].credit);
+        } else if (endpoint === 'hosts') {
+          setHostCredit(result.hostInfoList[0].credit);
+        }
       });
   };
 
   useEffect(() => {
     if (role === 'users') {
-      userToken();
+      fetchData('users');
     } else if (role === 'hosts') {
-      hostToken();
+      fetchData('hosts');
     }
   }, []);
 
