@@ -23,7 +23,7 @@ const AdminLogin = () => {
         .then((data) => {
           if (data.message === 'login_success') {
             localStorage.setItem('token', data.accessToken);
-            navigate('/');
+            navigate('/admin');
           } else {
             if (data.message === 'key_error')
               alert('아이디와 비밀번호를 입력하세요');
