@@ -89,20 +89,58 @@ const EventProfile = () => {
         <div className="contents">
           <MyPageEventTab />
           <div className="content">
-            이름
-            <input type="text" value={userInput.name} name="name" />
-            이메일
-            <input type="text" value={hostData.email} readOnly />
-            휴대폰 번호
-            <input type="text" value={userInput.mobile} name="mobile" />
-            보유 크레딧
-            <input type="text" value={hostData.credit} readOnly />
-            은행
-            <input type="text" value={userInput.bank} name="bank" />
-            계좌번호
-            <input type="text" value={userInput.account} name="account" />
-            <button onClick={editProfile}>수정하기</button>
-            <button onClick={withdrawal}>회원 탈퇴</button>
+            <div className="mainLabel">개인 정보 수정</div>
+            <div className="profileInfo">
+              <div className="info">
+                <div className="label name">이름</div>
+                <div className="infoInput">
+                  <input type="text" value={userInput.name} name="name" />
+                </div>
+              </div>
+
+              <div className="info">
+                <div className="label">이메일</div>
+                <div className="infoInput">
+                  <input type="text" value={hostData.email} readOnly />
+                </div>
+              </div>
+
+              <div className="info">
+                <div className="label">휴대폰 번호</div>
+                <div className="infoInput">
+                  <input type="text" value={userInput.mobile} name="mobile" />
+                </div>
+              </div>
+
+              <div className="info">
+                <div className="label">보유 크레딧</div>
+                <div className="infoInput">
+                  <input type="text" value={hostData.credit} readOnly />
+                </div>
+              </div>
+
+              <div className="info">
+                <div className="label">은행</div>
+                <div className="infoInput">
+                  <input type="text" value={userInput.bank} name="bank" />
+                </div>
+              </div>
+
+              <div className="info">
+                <div className="label">계좌번호</div>
+                <div className="infoInput">
+                  <input type="text" value={userInput.account} name="account" />
+                </div>
+              </div>
+            </div>
+            <div className="buttons">
+              <button className="editBtn" onClick={editProfile}>
+                수정하기
+              </button>
+              <button className="withdrawalBtn" onClick={withdrawal}>
+                회원 탈퇴
+              </button>
+            </div>
           </div>
         </div>
       </div>

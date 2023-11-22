@@ -222,7 +222,7 @@ const Schedule = () => {
   };
 
   return (
-    <div className="calendar-container">
+    <div className="calendarContainer">
       <Calendar
         onChange={handleDateChange}
         value={selectedDate}
@@ -232,7 +232,7 @@ const Schedule = () => {
         <h2>강의 일정</h2>
         <div>
           <label>시간 선택: </label>
-          {[11, 13, 15, 17, 19].map((time) => (
+          {[9, 11, 13, 15, 17, 19].map((time) => (
             <button key={time} onClick={() => handleTimeSelect(time)}>
               {time}:00
             </button>

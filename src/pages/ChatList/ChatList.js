@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './ChatList.scss';
 
 const ChatList = () => {
   const [chatRooms, setChatRooms] = useState([]);
@@ -43,6 +44,7 @@ const ChatList = () => {
         {chatRooms.map((room, index) => (
           <li key={index}>
             <button
+              className="chatRoom"
               onClick={() => navigate(`/my-page-event-chatroom/${room.id}`)}
             >
               {room.user_name}

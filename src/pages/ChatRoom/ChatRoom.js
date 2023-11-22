@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import './ChatRoom.scss';
 
 const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
@@ -8,6 +9,7 @@ const ChatRoom = () => {
   const [roomCreated, setRoomCreated] = useState(false);
   const [socket, setSocket] = useState(null);
   const { chatId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // 소켓 연결
@@ -34,13 +36,17 @@ const ChatRoom = () => {
   // 클라이언트 측 코드 수정
   useEffect(() => {
     // 채팅방이 생성되면 서버에 참가
-    if (socket && roomCreated) {
+    if (socket) {
       socket.emit('join room');
 
       // 서버로부터 메시지 수신
+      // 채팅 메시지 전송 시
       socket.on('message', (msg) => {
         console.log('Received message:', msg);
-        setMessages((prevMessages) => [...prevMessages, msg]);
+
+        // 메시지 객체에 isCurrentUser 추가
+        const messageWithUser = { ...msg, isCurrentUser: false };
+        setMessages((prevMessages) => [...prevMessages, messageWithUser]);
         console.log(messages);
       });
 
@@ -51,12 +57,28 @@ const ChatRoom = () => {
     }
   }, [socket, roomCreated]);
 
+  // useEffect(() => {
+  //   fetch(`http://34.64.172.211:8000/chat/${chatId}`, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization:
+  //         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwNTYzNjY5LCJleHAiOjE3MDEyODM2Njl9.Ibm3Hpn3HvqZZJMnWl3FX04vaKwf0zfS1JCModJr51E',
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setData(data);
+  //     });
+  // }, []);
+
   // 메시지 전송
+  // 메시지 전송 시
   const handleSendMessage = () => {
     if (socket) {
       // socket이 null이 아닌 경우에만 실행
       socket.emit('message', {
         content: newMessage,
+        isCurrentUser: true, // 보낸 메시지를 표시하기 위한 플래그
       });
 
       // 기존의 fetch를 사용하여 메시지 저장
@@ -65,7 +87,7 @@ const ChatRoom = () => {
         headers: {
           'Content-Type': 'application/json',
           Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwNTYzNjY5LCJleHAiOjE3MDEyODM2Njl9.Ibm3Hpn3HvqZZJMnWl3FX04vaKwf0zfS1JCModJr51E',
         },
         body: JSON.stringify({ content: newMessage, chatId: 14 }),
       })
@@ -75,7 +97,11 @@ const ChatRoom = () => {
             if (data.message && data.message.content) {
               const trimmedContent = data.message.content.trim();
               if (trimmedContent !== '') {
-                return [...prevMessages, { content: trimmedContent }];
+                // 보낸 메시지를 표시하기 위한 플래그 추가
+                return [
+                  ...prevMessages,
+                  { content: trimmedContent, isCurrentUser: true },
+                ];
               }
             }
             return prevMessages;
@@ -94,7 +120,7 @@ const ChatRoom = () => {
       headers: {
         'Content-Type': 'application/json',
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwNTYzNjY5LCJleHAiOjE3MDEyODM2Njl9.Ibm3Hpn3HvqZZJMnWl3FX04vaKwf0zfS1JCModJr51E',
       },
       body: JSON.stringify({
         userId: 10,
@@ -111,20 +137,20 @@ const ChatRoom = () => {
   });
 
   return (
-    <div className="chat">
-      <div className="chat-header">
-        <div>실시간 채팅</div>
+    <div className="myPageChat">
+      <div className="chatHeader">
+        <button onClick={() => navigate('/my-page-event-chatlist')}>
+          뒤로 가기
+        </button>
       </div>
-      <div className="chat-messages">
+      <div className="chatMessages">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`message ${
-              !message.isCurrentUser ? 'sent' : 'received'
-            }`}
+            className={`message ${message.isCurrentUser ? 'sent' : 'received'}`}
           >
             <span className="username">
-              {message.isCurrentUser ? '나' : '김문영'}
+              {message.isCurrentUser ? '나' : '상대방'}
             </span>
             {message.content}
           </div>
@@ -132,7 +158,7 @@ const ChatRoom = () => {
       </div>
 
       {roomCreated && (
-        <div className="chat-input">
+        <div className="chatInput">
           <input
             type="text"
             placeholder="메시지를 입력하세요"

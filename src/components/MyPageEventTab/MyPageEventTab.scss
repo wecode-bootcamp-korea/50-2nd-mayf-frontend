@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+
 .contentCategory {
   display: flex;
   width: 150px;
@@ -8,16 +10,17 @@
   padding-right: 15px 80px 0 25px;
 
   button {
+    font-family: 'Dongle', sans-serif;
     display: flex;
     align-items: flex-start;
-    font-size: 20px;
+    font-size: 30px;
     border: none;
     background-color: white;
     align-self: stretch;
     width: 135px;
 
     &:hover {
-      font-size: 22px;
+      font-size: 35px;
       text-decoration: underline;
       cursor: pointer;
     }

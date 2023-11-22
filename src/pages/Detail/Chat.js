@@ -39,9 +39,7 @@ const Chat = ({ host, hostId, userId }) => {
 
       // 서버로부터 메시지 수신
       socket.on('message', (msg) => {
-        console.log('Received message:', msg);
         setMessages((prevMessages) => [...prevMessages, msg]);
-        console.log(messages);
       });
 
       // 서버로부터 저장된 메시지 수신
@@ -60,26 +58,33 @@ const Chat = ({ host, hostId, userId }) => {
       });
 
       // 기존의 fetch를 사용하여 메시지 저장
-      fetch(`http://34.64.172.211:8000/message/${chatId}`, {
+      fetch(`http://34.64.172.211:8000/message/14`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
         },
-        body: JSON.stringify({ content: newMessage, chatId }),
+        body: JSON.stringify({ content: newMessage, chatId: 14 }),
       })
         .then((response) => response.json())
         .then((data) => {
+          // 서버 응답 확인
+
           setMessages((prevMessages) => {
             if (data.message && data.message.content) {
               const trimmedContent = data.message.content.trim();
               if (trimmedContent !== '') {
-                return [...prevMessages, { content: trimmedContent }];
+                // 보낸 메시지를 표시하기 위한 플래그 추가
+                return [
+                  ...prevMessages,
+                  { content: trimmedContent, isCurrentUser: true },
+                ];
               }
             }
             return prevMessages;
           });
+
           setNewMessage('');
         })
         .catch((error) => {
