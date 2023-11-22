@@ -102,8 +102,8 @@ const List = () => {
                         </div>
                       </Link>
                       <div className="classTitle">{title}</div>
-                      <div className="classLocation">{summery}</div>
-                      <div className="classCredit">등대 : {name} </div>
+
+                      <div className="hostName">등대 : {name} </div>
                     </div>
                   );
                 })}
@@ -114,13 +114,13 @@ const List = () => {
             <div className="recentlyViewedImages">
               <p className="recentlyWatched">최근 본 상품</p>
               {recentlyViewedImages.map((product) => (
-                <div recentlyBox>
+                <div className="recentlyBox" key={product.id}>
                   <Link to={`/detail/${product.id}`}>
                     <img
                       key={product.id}
                       src={product.image_source}
                       className="recentlyClass"
-                      alt={`recentlyClass`}
+                      alt="recentlyClass"
                     />
                   </Link>
                   <p className="recentlyTitle">등대 : {product.name}</p>
