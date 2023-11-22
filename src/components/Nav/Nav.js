@@ -88,7 +88,7 @@ const Nav = () => {
           </p>
         )}
         {isOpen && (
-          <UserSideBar credit={credit || 0} hostCredit={hostCredit || 0} />
+          <UserSideBar credit={role === 'users' ? credit : hostCredit} />
         )}
       </div>
     </div>
@@ -96,3 +96,4 @@ const Nav = () => {
 };
 
 export default Nav;
+// credit={credit || 0} hostCredit={hostCredit || 0}

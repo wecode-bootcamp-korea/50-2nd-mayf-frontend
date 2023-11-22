@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './UserSideBar.scss';
 
-const UserSideBar = ({ hostCredit, credit }) => {
+const UserSideBar = ({ credit }) => {
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
 
@@ -45,7 +45,7 @@ const UserSideBar = ({ hostCredit, credit }) => {
             MY PAGE
           </li>
           <li className="myCredit">
-            보유 크레딧 : {hostCredit.toLocaleString('ko-KR')}
+            보유 크레딧 : {credit.toLocaleString('ko-KR')}
           </li>
           <li
             className="menu"
