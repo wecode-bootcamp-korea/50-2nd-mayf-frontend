@@ -1,26 +1,133 @@
-import React, { useEffect, useState, useRef } from 'react';
-import DatePicker from 'react-datepicker';
-import { ko } from 'date-fns/locale';
-import './Detail.scss';
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Refund from '../../components/Refund/Refund';
+import CalendarApp from '../../components/CalendarApp/CalendarApp';
+import Chat from './Chat';
 import 'react-datepicker/dist/react-datepicker.module.css';
+import './Detail.scss';
 
 const { kakao } = window;
 
 const Detail = () => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [people, setPeople] = useState(1);
+  const [reservations, setReservations] = useState([]);
+  const [classDetail, setClassDetail] = useState({});
+  const [scheduleId, setScheduleId] = useState('');
   const container = useRef();
+  const navigate = useNavigate();
+
+  const reserveSubmit = (reservation) => {
+    setReservations([...reservations, reservation]);
+  };
+
+  useEffect(() => {
+    fetch(`http://34.64.172.211:8000/classes/209`, {
+      headers: {
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIrODIgMTAtNzU2Ni0xMDA1IiwiaWF0IjoxNjk5ODgwNzQ3LCJleHAiOjE3MDA2MDA3NDd9.LdYhYyzRlxH-Q0PwKSbWwLJPeQ7pyKI_Vckkto6iHIE',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setClassDetail(data.message);
+      });
+  }, []);
 
   const initMap = () => {
     const options = {
-      center: new kakao.maps.LatLng(37.50637032453994, 127.05365992775118),
-      level: 1,
+      center: new kakao.maps.LatLng(
+        classDetail.latitude,
+        classDetail.longitude,
+      ),
+      level: 3,
     };
     const map = new kakao.maps.Map(container.current, options);
+
+    const markerPosition = new kakao.maps.LatLng(
+      classDetail.latitude,
+      classDetail.longitude,
+    );
+
+    const marker = new kakao.maps.Marker({
+      position: markerPosition,
+    });
+
+    marker.setMap(map);
   };
 
   useEffect(() => {
     initMap();
-  }, []);
+  });
+
+  const addPeople = () => {
+    setPeople(people + 1);
+  };
+
+  const subPeople = () => {
+    if (people > 1) {
+      setPeople(people - 1);
+    }
+  };
+
+  const copyClipBoard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('클립보드에 링크가 복사되었습니다.');
+    } catch (error) {
+      alert('클립보드 복사에 실패하였습니다.');
+    }
+  };
+
+  const joinClass = () => {
+    console.log(scheduleId);
+    fetch(`http://34.64.172.211:8000/orders/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
+      },
+      body: JSON.stringify({
+        classId: classDetail.id,
+        hostId: classDetail.hostId,
+        scheduleId: scheduleId,
+        quantity: people,
+        price: classDetail.price * people,
+        email: 'wecode@wecode.com',
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === 'ORDER_COMPLETED') {
+          alert('강의를 신청하였습니다.');
+          navigate('/');
+        } else if (data.message === 'NO_SEATS_LEFT') {
+          alert('마감인원을 초과하였습니다.');
+        } else if (data.message === 'NOT_ENOUGH_CREDITS') {
+          alert('크레딧이 부족합니다.');
+        }
+      });
+  };
+
+  const addWishList = () => {
+    fetch('http://34.64.172.211:8000/likes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
+      },
+      body: JSON.stringify({
+        classId: classDetail.id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === 'REQUEST_ACCEPTED') {
+          alert('위시리스트에 추가하였습니다.');
+        }
+      });
+  };
 
   return (
     <div className="detail">
@@ -30,48 +137,65 @@ const Detail = () => {
         </div>
 
         <div className="content">
-          <div className="classImage">
-            <img
-              src="https://img.freepik.com/free-photo/top-view-arrangement-of-natural-material-stationery_23-2148898233.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
-              alt="클래스 사진"
-            />
-          </div>
+          <img
+            alt="클래스 사진"
+            className="classImage"
+            src={classDetail.main_image_source}
+          />
 
           <div className="simpleDetail">
-            <div className="classTitle">강의 1</div>
+            <div className="classTitle">{classDetail.title}</div>
+            <div className="classOpener">{classDetail.name}</div>
+            <div className="classCategory">
+              {classDetail.top_category_name}({classDetail.sub_category_name})
+            </div>
             <div className="classLocation">
               <div className="locationWriting">
-                <div className="locationLabel">강의 위치</div>
-                <button className="copyAddress">주소 복사</button>
+                <div className="locationLabel">{classDetail.address}</div>
+                <button
+                  className="copyAddress"
+                  onClick={() => copyClipBoard(classDetail.address)}
+                >
+                  주소 복사
+                </button>
               </div>
               <div className="map" id="map" ref={container} />
             </div>
-            <div className="classCategory">강의 카테고리</div>
             <div className="selectPeople">
-              <button>-</button>
-              <div>1명</div>
-              <button>+</button>
+              <button onClick={subPeople}>-</button>
+              <div>{people}명</div>
+              <button onClick={addPeople}>+</button>
             </div>
             <div className="buttons">
-              <button className="addClass">강의 신청</button>
-              <button className="addWish">찜</button>
+              <button className="addClass" onClick={joinClass}>
+                강의 신청
+              </button>
+              <button className="addWish" onClick={addWishList}>
+                찜
+              </button>
+            </div>
+          </div>
+
+          <div className="calendar">
+            <div className="reserve">
+              <CalendarApp
+                onReserve={reserveSubmit}
+                scheduleInfo={classDetail.schedule_info}
+                scheduleId={setScheduleId}
+                people={people}
+              />
             </div>
           </div>
         </div>
-
-        <div className="date">
-          <DatePicker
-            locale={ko}
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            dateFormat="yyyy-MM-dd"
-            className="datePicker"
-          />
+        <div className="classDetail">
+          <div className="summary">{classDetail.summary}</div>
+          <img src={classDetail.sub_image_source} alt="서브이미지" />
+          <div className="content">{classDetail.content}</div>
         </div>
 
-        <div className="classDetail">상세 정보</div>
+        <Refund />
 
-        <div className="classRefund">환불 규정</div>
+        <Chat />
       </div>
     </div>
   );
