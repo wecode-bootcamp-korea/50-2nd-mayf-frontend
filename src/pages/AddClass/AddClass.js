@@ -225,7 +225,7 @@ const AddClass = () => {
             <div className="mainLabel">강의 정보 입력</div>
             <div className="classInfo">
               <div className="info">
-                <div className="label">강의명</div>
+                <div className="label makeName">강의명</div>
                 <div className="infoInput">
                   <input
                     type="text"
@@ -349,10 +349,11 @@ const AddClass = () => {
                   />
                 </div>
               </div>
-
-              <button className="btnRegister" onClick={addClassButton}>
-                등록
-              </button>
+              <div className="addClassBtnBox">
+                <button className="btnRegister" onClick={addClassButton}>
+                  강의 등록
+                </button>
+              </div>
             </div>
           </div>
         </div>

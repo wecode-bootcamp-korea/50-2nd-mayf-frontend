@@ -299,7 +299,7 @@ const EditClass = () => {
             <div className="mainLabel">강의 정보 입력</div>
             <div className="classInfo">
               <div className="info">
-                <div className="label">강의명</div>
+                <div className="label makeName">강의명</div>
                 <div className="infoInput">
                   <input
                     type="text"
@@ -426,8 +426,11 @@ const EditClass = () => {
                 </div>
               </div>
             </div>
-
-            <button onClick={editClassButton}>강의 추가</button>
+            <div className="editClassBtnBox">
+              <button className="editClassBtn" onClick={editClassButton}>
+                강의 수정
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ const UserSideBar = ({ credit }) => {
             MY PAGE
           </li>
           <li className="myCredit">
-            보유 크레딧 : {credit.toLocaleString('ko-KR')}
+            보유 크레딧 : {credit.toLocaleString('ko-KR') + ' C'}
           </li>
           <li
             className="menu"
@@ -45,7 +45,7 @@ const UserSideBar = ({ credit }) => {
             MY PAGE
           </li>
           <li className="myCredit">
-            보유 크레딧 : {credit.toLocaleString('ko-KR')}
+            보유 크레딧 : {credit.toLocaleString('ko-KR') + ' C'}
           </li>
           <li
             className="menu"

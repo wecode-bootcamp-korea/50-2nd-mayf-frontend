@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+
 .editClass {
+  font-family: 'Dongle', sans-serif;
   display: flex;
   width: 100%;
   align-items: center;
@@ -21,13 +24,23 @@
       align-self: stretch;
       margin: 0 30px;
 
+      .content {
+        width: 100%;
+      }
+
       .btnBack {
+        padding: 0;
+        background-color: white;
+        font-family: 'Dongle', sans-serif;
+        font-size: 25px;
         border: none;
       }
 
       .mainLabel {
-        font-size: 30px;
-        font-weight: 700;
+        text-align: center;
+        font-size: 35px;
+        border-bottom: 1px solid #999;
+        padding-bottom: 15px;
       }
 
       .classInfo {
@@ -48,7 +61,11 @@
           gap: 20px;
 
           .label {
-            font-size: 20px;
+            font-size: 25px;
+          }
+
+          .makeName {
+            margin-top: 30px;
           }
 
           .infoInput {
@@ -58,10 +75,10 @@
             align-self: stretch;
 
             input {
+              font-family: 'Dongle', sans-serif;
               display: flex;
-              padding: 15px;
               align-self: stretch;
-              font-size: 20px;
+              font-size: 30px;
               border: none;
               border-bottom: 1px solid #999;
             }
@@ -74,11 +91,11 @@
             justify-content: space-between;
 
             select {
+              font-family: 'Dongle', sans-serif;
               width: 330px;
-              font-size: 20px;
+              font-size: 30px;
               border: none;
               border-bottom: 1px solid #999;
-              padding: 15px;
             }
           }
 
@@ -92,12 +109,13 @@
               display: flex;
               align-items: center;
               justify-content: center;
-              padding: 20px;
+              padding: 30px;
               height: 54px;
-              font-size: 20px;
-              background-color: beige;
+              font-family: 'Dongle', sans-serif;
+              font-size: 27px;
+              background-color: rgb(140, 177, 230, 0.6);
               border: none;
-              border-radius: 12px;
+              border-radius: 10px;
               cursor: pointer;
             }
 
@@ -106,14 +124,32 @@
               flex-direction: column;
               justify-content: center;
               align-items: flex-start;
-              padding: 15px;
-              font-size: 20px;
+              padding: 10px;
+              font-family: 'Dongle', sans-serif;
+              font-size: 25px;
               border: none;
               border-bottom: 1px solid #999;
               flex: 1 0 0;
-
             }
           }
+        }
+      }
+
+      .editClassBtnBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .editClassBtn {
+          width: 100%;
+          max-width: 700px;
+          background-color: rgb(140, 177, 230, 0.6);
+          border: none;
+          border-radius: 10px;
+          margin-top: 10px;
+          padding: 10px 15px;
+          font-size: 30px;
+          font-family: 'Dongle', sans-serif;
         }
       }
     }
