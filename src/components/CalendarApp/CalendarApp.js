@@ -30,9 +30,7 @@ const CalendarApp = ({ scheduleInfo = [], scheduleId }) => {
 
   return (
     <div className="calendar-app">
-      <h1>강의 예약 시스템</h1>
       <div className="calendar-container">
-        <h2>달력</h2>
         <Calendar
           onChange={handleDateChange}
           value={selectedDate}
@@ -50,15 +48,19 @@ const CalendarApp = ({ scheduleInfo = [], scheduleId }) => {
                   selectedDate.toLocaleDateString(),
               )
               .map((classData, index) => (
-                <li key={index}>
+                <li className="dateContainer" key={index}>
                   <button
+                    className="dateList"
                     onClick={() => {
                       scheduleId(classData.schedule_id);
                     }}
                   >
                     {classData.class_day}
                   </button>
-                  <button onClick={() => handleClassSelect(classData)}>
+                  <button
+                    className="dateList"
+                    onClick={() => handleClassSelect(classData)}
+                  >
                     예약하기
                   </button>
                 </li>
@@ -69,10 +71,10 @@ const CalendarApp = ({ scheduleInfo = [], scheduleId }) => {
       {selectedClass && (
         <div>
           <h2>강의 정보</h2>
-          <p>날짜: {selectedClass.class_day}</p>
-          <p>소요 시간: {selectedClass.class_duration}시간</p>
-          <p>등록 인원: {selectedClass.enrolled_member}</p>
-          <p>최대 인원: {selectedClass.max_member}</p>
+          <p>날짜 : {selectedClass.class_day}</p>
+          <p>소요 시간 : {selectedClass.class_duration}시간</p>
+          <p>등록 인원 : {selectedClass.enrolled_member}</p>
+          <p>최대 인원 : {selectedClass.max_member}</p>
         </div>
       )}
     </div>
