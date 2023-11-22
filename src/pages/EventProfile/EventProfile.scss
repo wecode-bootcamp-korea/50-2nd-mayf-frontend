@@ -1,0 +1,31 @@
+.eventProfile {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-direction: column;
+
+  .container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    flex-direction: column;
+
+    .contents {
+      display: flex;
+      gap: 30px;
+      padding: 15px 20px;
+      align-self: stretch;
+      margin: 0 30px;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  }
+}

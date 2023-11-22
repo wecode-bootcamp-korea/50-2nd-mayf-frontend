@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CategoryList from './components/CategoryList';
 import UserSideBar from './components/UserSideBar';
 import Logo from '../Nav/navImg/logo.png';
 import Category from '../Nav/navImg/category.png';
-import UserIcon from '../Nav/navImg/user.png';
+import UserIcon from '../Nav/navImg/userIcon.png';
 import './Nav.scss';
 
 const Nav = () => {
   const navigate = useNavigate();
-  const [credit, setCredit] = useState(0);
+  const [credit, setCredit] = useState();
   const token = localStorage.getItem('token');
   //유저 아이콘 클릭시 컴포넌트 실행 사이드바 구현
   const [isOpen, setIsOpen] = useState(false);
@@ -23,20 +23,19 @@ const Nav = () => {
   };
 
   //문영님, 보유 크레딧 정보 불러오기
-  useEffect(() => {
-    fetch('http://10.58.52.195:8000/users', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: token,
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        setCredit(result.userGetInfoList[0].credit);
-      });
-  }, []);
-  //하드코딩으로 배열 맵 또는 백엔드에서 TOP만 주는 API 새로 생성..
+  // useEffect(() => {
+  //   fetch('http://10.58.52.238:8000/users', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //       authorization: token,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       setCredit(result.userGetInfoList[0].credit);
+  //     });
+  // }, []);
 
   return (
     <div className="nav">

@@ -1,5 +1,6 @@
 .nav {
-  position: relative;
+  top: 0px;
+  position: sticky;
   z-index: 2;
   display: flex;
   padding: 8px 12px;
@@ -7,6 +8,7 @@
   align-items: center;
   width: 100%;
   height: 80px;
+  background-color: white;
 
   .categoryLogo {
     position: relative;
@@ -42,8 +44,8 @@
     .user {
       display: block;
       margin: auto;
-      height: 40px;
-      width: 40px;
+      height: 43px;
+      width: 43px;
       z-index: 2;
       cursor: pointer;
     }
