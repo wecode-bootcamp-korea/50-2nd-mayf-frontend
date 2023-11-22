@@ -10,7 +10,7 @@ const Adjustment = () => {
   // const token = localStorage.getItem('token')
 
   useEffect(() => {
-    fetch('http://10.58.52.195:8000/admins/hosts', {
+    fetch('http://10.58.52.84:8000/admins/hostlist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -19,7 +19,7 @@ const Adjustment = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setHostCreditList(data.adminHostInfoList.map((i) => i.credit));
+        setHostCreditList(data.message.map((i) => i.credit));
       });
   }, []);
 
