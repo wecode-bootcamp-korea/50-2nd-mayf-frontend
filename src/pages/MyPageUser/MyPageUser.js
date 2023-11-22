@@ -4,9 +4,11 @@ import Profile from '../../components/Profile/Profile';
 import Reservation from '../../components/Reservation/Reservation';
 import WishList from '../../components/WishList/WishList';
 import Credit from '../../components/Credit/Credit';
+import { useNavigate } from 'react-router-dom';
 
 const MyPageUser = () => {
   const [tab, setTab] = useState(0);
+  const navigate = useNavigate();
   const menuArr = [
     { name: '정보 수정', content: <Profile /> },
     { name: '예약 내역', content: <Reservation /> },
@@ -27,11 +29,17 @@ const MyPageUser = () => {
 
         <div className="contents">
           <div className="contentCategory">
-            {menuArr.map((el, index) => (
-              <button key={index} onClick={() => selectMenu(index)}>
-                {el.name}
-              </button>
-            ))}
+            {menuArr.map((item, idx) =>
+              item.name === '크레딧' ? (
+                <button key={item} onClick={() => navigate('/credit')}>
+                  {item.name}
+                </button>
+              ) : (
+                <button key={item} onClick={() => selectMenu(idx)}>
+                  {item.name}
+                </button>
+              ),
+            )}
           </div>
           <div className="content">{menuArr[tab].content}</div>
         </div>

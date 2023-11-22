@@ -6,7 +6,7 @@ const Login = () => {
 
   const handleClickUser = () => {
     const REDIRECT_URI = 'http://localhost:3000/users/signup';
-    const KAKAO_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,name,phone_number`;
+    const KAKAO_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,name,phone_number,talk_message`;
     window.location.href = KAKAO_URL;
   };
 
