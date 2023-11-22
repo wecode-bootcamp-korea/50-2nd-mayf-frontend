@@ -16,3 +16,26 @@
   color: #fff;
   /* 아이콘 색상 조정 */
 }
+
+.calendar-app {
+  h2 {
+    margin-top: 10px;
+    font-size: 25px;
+  }
+
+  .dateContainer {
+    display: flex;
+    justify-content: space-between;
+
+    .dateList {
+      font-size: 20px;
+      font-family: 'Dongle', sans-serif;
+      background-color: white;
+      width: 200px;
+    }
+  }
+
+  p {
+    font-size: 20px;
+  }
+}
