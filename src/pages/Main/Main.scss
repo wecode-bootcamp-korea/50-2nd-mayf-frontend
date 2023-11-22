@@ -1,6 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+//font-family: 'Noto Sans KR', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+//font-family: 'Nanum Pen Script', cursive;
+
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+//font-family: 'Dongle', sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Jua&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+//font-family: 'Jua', sans-serif;
 .main {
   width: 100%;
   height: 100%;
+  font-family: 'Dongle', sans-serif;
 
   .container {
     background-color: rgb(208, 224, 247, 0.7);
@@ -13,7 +24,7 @@
       align-items: center;
       width: 100%;
       max-width: 1500px;
-      margin: 15px auto;
+      margin: 10px auto;
       border-radius: 20px;
       background-color: white;
 
@@ -31,17 +42,14 @@
 
         .subTitle {
           text-align: center;
-          padding-top: 10px;
-          color: navy;
-          font-size: 23px;
-          font-weight: 700;
-          margin-bottom: 10px;
+          padding-top: 5px;
+          color: lightseagreen;
+          font-size: 60px;
         }
 
         .summary {
-          font-size: 16px;
-          font-weight: 600;
-          margin-bottom: 10px;
+          font-size: 30px;
+          margin-bottom: 5px;
         }
       }
     }
@@ -89,16 +97,15 @@
         }
 
         .sectionTitle {
-          font-size: 18px;
-          font-weight: 600;
+          font-size: 30px;
           margin: 5px;
           text-align: center;
           line-height: 30px;
         }
 
         .hostName {
-          font-size: 15px;
-          font-weight: 600;
+          padding-top: 10px;
+          font-size: 26px;
           text-align: center;
         }
       }

@@ -1,4 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+//font-family: 'Dongle', sans-serif;
+
 .box {
+  font-family: 'Dongle', sans-serif;
+
   .sideBar {
     position: absolute;
     top: 45px;
@@ -8,9 +13,10 @@
     overflow: hidden;
     background-color: white;
     opacity: 0.8;
+    border-radius: 10px;
 
     .userMenu {
-      font-size: 18px;
+      font-size: 32px;
       list-style: none;
       text-align: center;
       padding-top: 10px;
@@ -39,9 +45,10 @@
     overflow: hidden;
     background-color: white;
     opacity: 0.8;
+    border-radius: 10px;
 
     .eventUserMenu {
-      font-size: 18px;
+      font-size: 32px;
       list-style: none;
       text-align: center;
       padding-top: 10px;
