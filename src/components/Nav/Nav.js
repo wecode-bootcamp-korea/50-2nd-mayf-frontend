@@ -10,7 +10,7 @@ import './Nav.scss';
 const Nav = () => {
   const navigate = useNavigate();
   const [credit, setCredit] = useState('');
-  const [hostCrdeit, setHostCredit] = useState(null);
+  const [hostCredit, setHostCredit] = useState('');
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
   //유저 아이콘 클릭시 컴포넌트 실행 사이드바 구현
@@ -38,10 +38,6 @@ const Nav = () => {
       });
   };
 
-  // useEffect(() => {
-  //   userToken();
-  // }, []);
-
   const hostToken = () => {
     fetch('http://34.64.172.211:8000/hosts', {
       method: 'GET',
@@ -55,10 +51,6 @@ const Nav = () => {
         setHostCredit(result.hostInfoList[0].credit);
       });
   };
-
-  // useEffect(() => {
-  //   hostToken();
-  // }, []);
 
   useEffect(() => {
     if (role === 'users') {
@@ -105,7 +97,9 @@ const Nav = () => {
             로그인
           </p>
         )}
-        {isOpen && <UserSideBar credit={credit} hostCrdeit={hostCrdeit} />}
+        {isOpen && (
+          <UserSideBar credit={credit || 0} hostCredit={hostCredit || 0} />
+        )}
       </div>
     </div>
   );
