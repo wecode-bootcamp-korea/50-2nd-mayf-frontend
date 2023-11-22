@@ -6,19 +6,15 @@
     background-color: rgb(208, 224, 247, 0.7);
     padding: 20px 0px;
 
-    // .classTitle {
-    //   color: rgb(0, 0, 102);
-    //   text-align: center;
-    //   font-size: 20px;
-    //   font-weight: bold;
-    //   padding: 15px;}
-
     .classTitle {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       align-items: center;
       width: 100%;
-      margin: 15px 0px;
+      max-width: 1500px;
+      margin: 15px auto;
+      border-radius: 20px;
       background-color: white;
 
       .mainIcon {
@@ -51,8 +47,8 @@
     }
 
     .classContainer {
-      border-radius: 8px;
-      background-color: rgb(196, 218, 255);
+      border-radius: 20px;
+      background-color: white;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -76,7 +72,7 @@
         .imgBox {
           text-align: center;
           .classImg {
-            border-radius: 4px;
+            border-radius: 20px;
             object-fit: cover;
             aspect-ratio: 3/3;
             max-height: 100%;
@@ -98,6 +94,12 @@
           margin: 5px;
           text-align: center;
           line-height: 30px;
+        }
+
+        .hostName {
+          font-size: 15px;
+          font-weight: 600;
+          text-align: center;
         }
       }
     }

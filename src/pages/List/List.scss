@@ -10,8 +10,8 @@
     width: 100%;
 
     .header {
-      //background-color: rgb(140, 177, 230, 0.6);
-      background-color: #bfcefb;
+      background-color: rgb(140, 177, 230, 0.6);
+      //background-color: #bfcefb;
       display: flex;
       justify-content: center;
       align-self: stretch;
@@ -167,8 +167,8 @@
           font-size: 18px;
           text-align: center;
           align-items: center;
-          //background-color: rgb(134, 164, 207, 0.4);
           background-color: rgb(140, 177, 230, 0.6);
+
           .recentlyClass {
             aspect-ratio: 2/3;
             object-fit: cover;
@@ -188,7 +188,7 @@
           .recentlyTitle {
             align-items: flex-start;
             font-size: 16px;
-            margin-top: 5px;
+            margin-top: 10px;
             padding-bottom: 10px;
           }
         }

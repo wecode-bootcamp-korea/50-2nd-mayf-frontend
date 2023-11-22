@@ -9,8 +9,8 @@ import './Nav.scss';
 
 const Nav = () => {
   const navigate = useNavigate();
-  const [credit, setCredit] = useState();
-  const [hostCrdeit, setHostCredit] = useState();
+  const [credit, setCredit] = useState('');
+  const [hostCrdeit, setHostCredit] = useState(null);
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
   //유저 아이콘 클릭시 컴포넌트 실행 사이드바 구현
@@ -25,7 +25,7 @@ const Nav = () => {
   };
 
   const userToken = () => {
-    fetch('http://10.58.52.84:8000/users', {
+    fetch('http://34.64.172.211:8000/users', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -43,7 +43,7 @@ const Nav = () => {
   // }, []);
 
   const hostToken = () => {
-    fetch('http://10.58.52.84:8000/hosts', {
+    fetch('http://34.64.172.211:8000/hosts', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

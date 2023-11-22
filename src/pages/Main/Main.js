@@ -13,7 +13,7 @@ const Main = () => {
   // fetch(API.main, {
   //'/data/mainMockData.json'
   useEffect(() => {
-    fetch('/data/mainMockData.json', {
+    fetch(API.main, {
       method: 'GET',
     })
       .then((res) => res.json())
@@ -77,6 +77,7 @@ const Main = () => {
                     />
                   </div>
                   <p className="sectionTitle">{pro.title}</p>
+                  <p className="hostName"> 🗽 등대 : {pro.name}</p>
                 </Link>
               </div>
             ))}
@@ -87,7 +88,9 @@ const Main = () => {
             <img className="mainIcon" src={NewClassIcon} alt="mainIcon" />
             <div className="titleWrapper">
               <p className="subTitle">New Class</p>
-              <p className="summary">새로운 클래스들을 만나보세요!</p>
+              <p className="summary">
+                앗 이건 해야해! 새로운 클래스들을 만나보세요!
+              </p>
             </div>
           </div>
           <div className="classContainer">
@@ -102,6 +105,7 @@ const Main = () => {
                     />
                   </div>
                   <p className="sectionTitle">{pro.title}</p>
+                  <p className="hostName"> 🗽등대 : {pro.name}</p>
                 </Link>
               </div>
             ))}

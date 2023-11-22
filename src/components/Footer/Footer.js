@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../Nav/navImg/logo.png';
 import './Footer.scss';
 
 const Footer = () => {
@@ -28,8 +29,6 @@ const Footer = () => {
           <li>신희현</li>
           <li>임시현</li>
         </ul>
-      </div>
-      <div className="developer">
         <a
           href="https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-backend"
           className="gitHubUrl"
@@ -43,12 +42,22 @@ const Footer = () => {
           <li>이주현</li>
         </ul>
       </div>
+      <div className="logoContainer">
+        <img className="logo" src={Logo} alt="logo" />
+      </div>
       {token && role ? (
         <p className="logout" onClick={logout}>
           로그아웃
         </p>
       ) : (
-        <p className="logout">Mayfly</p>
+        <p
+          className="logout"
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          Mayfly
+        </p>
       )}
     </div>
   );
