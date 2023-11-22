@@ -12,6 +12,7 @@ import MyPageUser from './pages/MyPageUser/MyPageUser';
 import MyPageEvent from './pages/MyPageEvent/MyPageEvent';
 import Manage from './pages/Manage/Manage';
 import Credit from './pages/Credit/Credit';
+<<<<<<< HEAD
 import EventProfile from './pages/EventProfile/EventProfile';
 import ClassList from './pages/ClassList/ClassList';
 import AddClass from './pages/AddClass/AddClass';
@@ -20,6 +21,13 @@ import Schedule from './pages/Schedule/Schedule';
 import ChatList from './pages/ChatList/ChatList';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
 import Calculate from './pages/Calculate/Calculate';
+=======
+import KAKAOcredit from './pages/Credit/KAKAOcredit';
+import KAKAOuser from './pages/Login/KAKAOuser';
+import KAKAOevent from './pages/Login/KAKAOevent';
+import AdminLogin from './pages/AdminLogin/AdminLogin';
+import Admin from './pages/Admin/Admin';
+>>>>>>> main
 
 const Router = () => {
   return (
@@ -35,6 +43,7 @@ const Router = () => {
         <Route path="/my-page-user" element={<MyPageUser />} />
         <Route path="/manage" element={<Manage />} />
         <Route path="/credit" element={<Credit />} />
+<<<<<<< HEAD
         <Route path="/my-page-event" element={<MyPageEvent />} />
         <Route path="/my-page-event-profile" element={<EventProfile />} />
         <Route path="/my-page-event-classlist" element={<ClassList />} />
@@ -47,6 +56,13 @@ const Router = () => {
         <Route path="/my-page-event-chatlist" element={<ChatList />} />
         <Route path="/my-page-event-chatroom/:chatId" element={<ChatRoom />} />
         <Route path="/my-page-event-calculate" element={<Calculate />} />
+=======
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/credit/KAKAOcredit" element={<KAKAOcredit />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/users/signup" element={<KAKAOuser />} />
+        <Route path="/hosts/signup" element={<KAKAOevent />} />
+>>>>>>> main
       </Routes>
       <Footer />
     </BrowserRouter>
