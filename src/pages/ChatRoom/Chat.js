@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import { useParams } from 'react-router-dom';
+import './Chat.scss';
 
-const ChatRoom = () => {
+const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [roomCreated, setRoomCreated] = useState(false);
+  const [chatId, setChatId] = useState(null);
   const [socket, setSocket] = useState(null);
-  const { chatId } = useParams();
 
   useEffect(() => {
     // 소켓 연결
@@ -60,7 +60,7 @@ const ChatRoom = () => {
       });
 
       // 기존의 fetch를 사용하여 메시지 저장
-      fetch(`http://34.64.172.211:8000/message/${chatId}`, {
+      fetch(`http://34.64.172.211:8000/message`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,7 +88,8 @@ const ChatRoom = () => {
     }
   };
 
-  useEffect(() => {
+  // 방 생성 API 호출
+  const createRoom = () => {
     fetch('http://34.64.172.211:8000/chat', {
       method: 'POST',
       headers: {
@@ -98,30 +99,30 @@ const ChatRoom = () => {
       },
       body: JSON.stringify({
         userId: 10,
-        hostId: 29,
+        hostId: 34,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
+        setChatId(data.chatId); // 생성된 채팅방의 chatId를 설정
         setRoomCreated(true);
       })
       .catch((error) => {
         console.error('Error creating room:', error);
       });
-  });
+  };
 
   return (
     <div className="chat">
       <div className="chat-header">
         <div>실시간 채팅</div>
+        {!roomCreated && <button onClick={createRoom}>방 생성하기</button>}
       </div>
       <div className="chat-messages">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`message ${
-              !message.isCurrentUser ? 'sent' : 'received'
-            }`}
+            className={`message ${message.isCurrentUser ? 'sent' : 'received'}`}
           >
             <span className="username">
               {message.isCurrentUser ? '나' : '김문영'}
@@ -146,4 +147,4 @@ const ChatRoom = () => {
   );
 };
 
-export default ChatRoom;
+export default Chat;

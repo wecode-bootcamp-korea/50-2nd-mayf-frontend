@@ -9,7 +9,7 @@ const ClassList = ({ setTab, setSelectedClassId }) => {
   const navigate = useNavigate();
 
   const getClassList = () => {
-    fetch(`http://10.58.52.84:8000/classes/hostclass`, {
+    fetch(`http://34.64.172.211:8000/classes/hostclass`, {
       headers: {
         Authorization:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
@@ -26,7 +26,7 @@ const ClassList = ({ setTab, setSelectedClassId }) => {
   }, []);
 
   const deleteClass = (id) => {
-    fetch(`http://10.58.52.84:8000/classes/delete/${id}`, {
+    fetch(`http://34.64.172.211:8000/classes/delete/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

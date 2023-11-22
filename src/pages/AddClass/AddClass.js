@@ -1,16 +1,95 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Post from '../../components/Post/Post';
 import MyPageEventHeader from '../../components/MyPageEventHeader/MyPageEventHeader';
 import MyPageEventTab from '../../components/MyPageEventTab/MyPageEventTab';
-import SelectBox from '../SelectBox/SelectBox';
 import './AddClass.scss';
 import { useNavigate } from 'react-router-dom';
 
-// const TOP_CATEGORIES = [
-//   { category: '운동', subCategories: [{ category: '헬스' }] },
-// ];
+const categories = [
+  {
+    name: '상위 카테고리',
+    subcategories: ['하위 카테고리'],
+  },
+  {
+    name: '운동',
+    subcategories: [
+      '하위 카테고리',
+      '헬스',
+      '필라테스',
+      '요가',
+      '크로스핏',
+      '축구',
+      '기타',
+    ],
+  },
+  {
+    name: '예술',
+    subcategories: [
+      '하위 카테고리',
+      '엔터테인먼트',
+      '미술',
+      '사진/영상',
+      '기타',
+    ],
+  },
+  {
+    name: '공예',
+    subcategories: [
+      '하위 카테고리',
+      '주얼리',
+      '비누',
+      '향수',
+      '목공',
+      '가죽',
+      '기타',
+    ],
+  },
+  {
+    name: '외국어',
+    subcategories: [
+      '하위 카테고리',
+      '영어',
+      '한국어',
+      '중국어',
+      '일본어',
+      '스페인어',
+      '기타',
+    ],
+  },
+  {
+    name: '요리',
+    subcategories: [
+      '하위 카테고리',
+      '베이킹',
+      '한식',
+      '양식',
+      '일식',
+      '중식',
+      '기타',
+    ],
+  },
+  {
+    name: '게임',
+    subcategories: ['하위 카테고리', 'RTS', 'FPS', '스포츠', '캐주얼', '기타'],
+  },
+  {
+    name: '프로그래밍',
+    subcategories: [
+      '하위 카테고리',
+      'Javascript',
+      'Java',
+      'C/C++/C#',
+      'Python',
+      '기타',
+    ],
+  },
+  {
+    name: '기타',
+    subcategories: ['하위 카테고리', '기타'],
+  },
+];
 
-function AddClass({ setTab }) {
+const AddClass = () => {
   const navigate = useNavigate();
   const [userInput, setUserInput] = useState({
     title: '',
@@ -23,12 +102,33 @@ function AddClass({ setTab }) {
     subImageSource: null,
     address: '',
   });
-
-  useEffect(() => {
-    SelectBox();
-  }, []);
-
   const [popup, setPopup] = useState(false);
+
+  const [selectedTopCategory, setSelectedTopCategory] = useState('');
+  const [selectedSubCategory, setSelectedSubCategory] = useState('');
+
+  const setTopCategory = (event) => {
+    const { value } = event.target;
+    setSelectedTopCategory(value);
+
+    const subCategories =
+      categories.find((category) => category.name === value)?.subcategories ||
+      [];
+    setUserInput({
+      ...userInput,
+      topCategoryName: value,
+      subCategoryName: subCategories[0] || '',
+    });
+  };
+
+  const setSubCategory = (event) => {
+    const { value } = event.target;
+    setSelectedSubCategory(value);
+    setUserInput({
+      ...userInput,
+      subCategoryName: value,
+    });
+  };
 
   const setChangeUserInput = (event) => {
     const newUserInput = {
@@ -47,7 +147,7 @@ function AddClass({ setTab }) {
     formData.append('images', image);
 
     try {
-      const response = await fetch('http://10.58.52.84:8000/images/', {
+      const response = await fetch('http://34.64.172.211:8000/images/', {
         method: 'POST',
         headers: {
           Authorization:
@@ -80,7 +180,7 @@ function AddClass({ setTab }) {
   };
 
   const addClassButton = () => {
-    fetch('http://10.58.52.84:8000/classes/createclass', {
+    fetch('http://34.64.172.211:8000/classes/createclass', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -143,15 +243,31 @@ function AddClass({ setTab }) {
                     className="topCategory"
                     name="topCategoryName"
                     id="topCategoryName"
-                    value={userInput.topCategoryName}
-                  />
+                    value={selectedTopCategory}
+                    onChange={setTopCategory}
+                  >
+                    {categories.map((category) => (
+                      <option key={category.name} value={category.name}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
 
                   <select
                     className="subCategory"
                     name="subCategoryName"
                     id="subCategoryName"
-                    value={userInput.subCategoryName}
-                  />
+                    value={selectedSubCategory}
+                    onChange={setSubCategory}
+                  >
+                    {categories
+                      .find((category) => category.name === selectedTopCategory)
+                      ?.subcategories.map((subCategory) => (
+                        <option key={subCategory} value={subCategory}>
+                          {subCategory}
+                        </option>
+                      ))}
+                  </select>
                 </div>
               </div>
 
@@ -233,14 +349,16 @@ function AddClass({ setTab }) {
                   />
                 </div>
               </div>
-            </div>
 
-            <button onClick={addClassButton}>강의 추가</button>
+              <button className="btnRegister" onClick={addClassButton}>
+                등록
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default AddClass;

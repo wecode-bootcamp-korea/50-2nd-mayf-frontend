@@ -1,0 +1,28 @@
+/* 추가 및 수정된 CSS 스타일 */
+.message {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.sent {
+  background-color: #4caf50;
+  /* 사용자가 보낸 메시지의 배경색 */
+  color: #fff;
+  margin-left: auto;
+  /* 오른쪽 정렬 */
+}
+
+.received {
+  background-color: #f1f1f1;
+  /* 다른 사용자가 보낸 메시지의 배경색 */
+  margin-right: auto;
+  /* 왼쪽 정렬 */
+}
+
+.username {
+  font-weight: bold;
+  margin-right: 8px;
+}

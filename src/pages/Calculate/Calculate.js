@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './Calculate.scss';
-import { useNavigate } from 'react-router-dom';
 
 const Calculate = () => {
   const [credit, setCredit] = useState();
-  const navigate = useNavigate();
+  const [useCredit, setUseCredit] = useState(0);
 
-  const setChangeCredit = (event) => {
-    setCredit(event.target.value);
+  const setChangeUseCredit = (event) => {
+    setUseCredit(event.target.value);
   };
 
-  useEffect(() => {
-    fetch('http://10.58.52.84:8000/hosts', {
+  const getCredit = () => {
+    fetch('http://34.64.172.211:8000/hosts', {
       headers: {
         'Content-Type': 'application/json',
         Authorization:
@@ -22,10 +21,14 @@ const Calculate = () => {
       .then((data) => {
         setCredit(data.hostInfoList[0].credit);
       });
+  };
+
+  useEffect(() => {
+    getCredit();
   }, []);
 
   const completeCal = () => {
-    fetch('http://10.58.52.84:8000/orders/adjust', {
+    fetch('http://34.64.172.211:8000/orders/adjust', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -33,14 +36,15 @@ const Calculate = () => {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
       },
       body: JSON.stringify({
-        amount: credit,
+        amount: useCredit,
       }),
     })
       .then((res) => res.json())
-      .then((res) => {
-        if (res.ok) {
+      .then((data) => {
+        if (data.message === 'ADJUST_COMPLETED') {
           alert('정산이 완료되었습니다.');
-          // navigate('/my-page-event');
+          getCredit();
+          setUseCredit(0);
         }
       });
   };
@@ -49,16 +53,13 @@ const Calculate = () => {
     <div className="calculate">
       <div className="container">
         <div className="credit">
-          <input type="text" />
+          <input type="text" value={useCredit} onChange={setChangeUseCredit} />
           <div>보유 크레딧 : {credit}P</div>
           <div>수수료 20% 적용</div>
-          <div>예상 정산가 : {credit * 0.8}원</div>
-          <button
-            className="completeBtn"
-            onClick={completeCal}
-            value={credit}
-            onChange={setChangeCredit}
-          >
+          <div>
+            예상 정산가 : {useCredit === undefined ? 0 : useCredit * 0.8}원
+          </div>
+          <button className="completeBtn" onClick={completeCal}>
             정산하기
           </button>
         </div>

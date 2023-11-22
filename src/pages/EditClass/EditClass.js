@@ -2,13 +2,92 @@ import React, { useEffect, useState } from 'react';
 import Post from '../../components/Post/Post';
 import MyPageEventHeader from '../../components/MyPageEventHeader/MyPageEventHeader';
 import MyPageEventTab from '../../components/MyPageEventTab/MyPageEventTab';
-import SelectBox from '../SelectBox/SelectBox';
 import './EditClass.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 
-// const TOP_CATEGORIES = [
-//   { category: '운동', subCategories: [{ category: '헬스' }] },
-// ];
+const categories = [
+  {
+    name: '상위 카테고리',
+    subcategories: ['하위 카테고리'],
+  },
+  {
+    name: '운동',
+    subcategories: [
+      '하위 카테고리',
+      '헬스',
+      '필라테스',
+      '요가',
+      '크로스핏',
+      '축구',
+      '기타',
+    ],
+  },
+  {
+    name: '예술',
+    subcategories: [
+      '하위 카테고리',
+      '엔터테인먼트',
+      '미술',
+      '사진/영상',
+      '기타',
+    ],
+  },
+  {
+    name: '공예',
+    subcategories: [
+      '하위 카테고리',
+      '주얼리',
+      '비누',
+      '향수',
+      '목공',
+      '가죽',
+      '기타',
+    ],
+  },
+  {
+    name: '외국어',
+    subcategories: [
+      '하위 카테고리',
+      '영어',
+      '한국어',
+      '중국어',
+      '일본어',
+      '스페인어',
+      '기타',
+    ],
+  },
+  {
+    name: '요리',
+    subcategories: [
+      '하위 카테고리',
+      '베이킹',
+      '한식',
+      '양식',
+      '일식',
+      '중식',
+      '기타',
+    ],
+  },
+  {
+    name: '게임',
+    subcategories: ['하위 카테고리', 'RTS', 'FPS', '스포츠', '캐주얼', '기타'],
+  },
+  {
+    name: '프로그래밍',
+    subcategories: [
+      '하위 카테고리',
+      'Javascript',
+      'Java',
+      'C/C++/C#',
+      'Python',
+      '기타',
+    ],
+  },
+  {
+    name: '기타',
+    subcategories: ['하위 카테고리', '기타'],
+  },
+];
 
 const EditClass = () => {
   const navigate = useNavigate();
@@ -20,19 +99,14 @@ const EditClass = () => {
     summary: '',
     content: '',
     price: '',
-    mainImageSource: '',
-    subImageSource: '',
+    mainImageSource: null,
+    subImageSource: null,
     address: '',
   });
 
   const [classData, setClassData] = useState([]);
-
   useEffect(() => {
-    SelectBox();
-  }, []);
-
-  useEffect(() => {
-    fetch(`http://10.58.52.84:8000/classes/${classId}`, {
+    fetch(`http://34.64.172.211:8000/classes/${classId}`, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization:
@@ -44,6 +118,72 @@ const EditClass = () => {
         setClassData(data.message);
       });
   }, [classId]);
+
+  const [selectedTopCategory, setSelectedTopCategory] = useState(
+    categories[0].name,
+  );
+
+  const [selectedSubCategory, setSelectedSubCategory] = useState('');
+
+  useEffect(() => {
+    // 서버에서 받아온 classData의 sub_category_name을 선택된 상위 카테고리의 서브 카테고리 목록 중에서 찾습니다.
+    const subCategories = categories.find(
+      (category) => category.name === selectedTopCategory,
+    )?.subcategories;
+
+    // 찾은 subCategories 중에 classData의 sub_category_name이 있다면 해당 값을 사용하고,
+    // 없다면 subCategories의 첫 번째 값을 사용합니다.
+    setSelectedSubCategory(
+      subCategories?.includes(classData.sub_category_name)
+        ? classData.sub_category_name
+        : subCategories?.[0] || '',
+    );
+  }, [selectedTopCategory, classData.sub_category_name]);
+
+  const setTopCategory = (event) => {
+    const { value } = event.target;
+    console.log('selected Top Category:', value);
+    setSelectedTopCategory(value);
+
+    const subCategories =
+      categories.find((category) => category.name === value)?.subcategories ||
+      [];
+
+    setSelectedSubCategory(classData.sub_category_name || ''); // 수정된 부분
+    setUserInput((prevUserInput) => {
+      const subCategories =
+        categories.find((category) => category.name === value)?.subcategories ||
+        [];
+
+      return {
+        ...prevUserInput,
+        topCategoryName: value,
+        subCategoryName: subCategories.includes(classData.sub_category_name)
+          ? classData.sub_category_name
+          : subCategories[0] || '', // 수정된 부분
+      };
+    });
+  };
+
+  const setSubCategory = (event) => {
+    const { value } = event.target;
+    setSelectedSubCategory(value);
+    setUserInput((prevUserInput) => ({
+      ...prevUserInput,
+      subCategoryName: value,
+    }));
+
+    // 비동기적 업데이트로 인한 지연을 고려하여 setTimeout 사용
+    setTimeout(() => {
+      console.log('Selected Sub Category After Set:', selectedSubCategory);
+    }, 0);
+  };
+
+  useEffect(() => {
+    setSubCategory({
+      target: { value: classData.sub_category_name || '' },
+    });
+  }, []);
 
   useEffect(() => {
     setUserInput((prevUserInput) => ({
@@ -58,6 +198,8 @@ const EditClass = () => {
       subImageSource: classData.sub_image_source || '',
       address: classData.address || '',
     }));
+    // 여기에서 setSelectedTopCategory 설정 추가
+    setSelectedTopCategory(classData.top_category_name || '');
   }, [classData]);
 
   const [popup, setPopup] = useState(false);
@@ -79,7 +221,7 @@ const EditClass = () => {
     formData.append('images', image);
 
     try {
-      const response = await fetch('http://10.58.52.84:8000/images/', {
+      const response = await fetch('http://34.64.172.211:8000/images/', {
         method: 'POST',
         headers: {
           Authorization:
@@ -112,7 +254,7 @@ const EditClass = () => {
   };
 
   const editClassButton = () => {
-    fetch(`http://10.58.52.84:8000/classes/update/${classId}`, {
+    fetch(`http://34.64.172.211:8000/classes/update/${classId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -175,15 +317,31 @@ const EditClass = () => {
                     className="topCategory"
                     name="topCategoryName"
                     id="topCategoryName"
-                    value={userInput.topCategoryName}
-                  />
+                    value={selectedTopCategory}
+                    onChange={setTopCategory}
+                  >
+                    {categories.map((category) => (
+                      <option key={category.name} value={category.name}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
 
                   <select
                     className="subCategory"
                     name="subCategoryName"
                     id="subCategoryName"
-                    value={userInput.subCategoryName}
-                  />
+                    value={selectedSubCategory}
+                    onChange={setSubCategory}
+                  >
+                    {categories
+                      .find((category) => category.name === selectedTopCategory)
+                      ?.subcategories.map((subCategory) => (
+                        <option key={subCategory} value={subCategory}>
+                          {subCategory}
+                        </option>
+                      ))}
+                  </select>
                 </div>
               </div>
 
@@ -234,11 +392,11 @@ const EditClass = () => {
                 <div className="label">메인 사진</div>
                 <div className="infoInput">
                   <input
-                    type="text"
+                    type="file"
                     name="mainImageSource"
                     onChange={(e) => handleImageChange(e, 'mainImageSource')}
                     multiple
-                    value={userInput.mainImageSource}
+                    accept="image/*"
                   />
                 </div>
               </div>
@@ -247,11 +405,11 @@ const EditClass = () => {
                 <div className="label">서브 사진</div>
                 <div className="infoInput">
                   <input
-                    type="text"
+                    type="file"
                     name="subImageSource"
                     onChange={(e) => handleImageChange(e, 'subImageSource')}
                     multiple
-                    value={userInput.subImageSource}
+                    accept="image/*"
                   />
                 </div>
               </div>
