@@ -87,21 +87,19 @@ const Profile = () => {
       </div>
       <div className="name">
         <p>이름 : {userData.name}</p>
-        <input
-          disabled={!isUpdate}
-          name="name"
-          value={userInfo.name}
-          onChange={handleChange}
-        />
+        {isUpdate && (
+          <input name="name" value={userInfo.name} onChange={handleChange} />
+        )}
       </div>
       <div className="phone">
         <p>전화번호 : {userData.phone_number}</p>
-        <input
-          disabled={!isUpdate}
-          name="phone_number"
-          value={userInfo.phone_number}
-          onChange={handleChange}
-        />
+        {isUpdate && (
+          <input
+            name="phone_number"
+            value={userInfo.phone_number}
+            onChange={handleChange}
+          />
+        )}
       </div>
       <div className="button">
         {isUpdate ? (

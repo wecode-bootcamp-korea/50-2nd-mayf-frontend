@@ -6,10 +6,10 @@ const Credit = () => {
   const amountList = [
     { id: 1, amount: '5,000' },
     { id: 2, amount: '10,000' },
-    { id: 3, amount: '15,000' },
-    { id: 4, amount: '20,000' },
-    { id: 5, amount: '30,000' },
-    { id: 6, amount: '50,000' },
+    { id: 3, amount: '20,000' },
+    { id: 4, amount: '30,000' },
+    { id: 5, amount: '50,000' },
+    { id: 6, amount: '100,000' },
   ];
   const [amount, setAmount] = useState(0);
   const [credit, setCredit] = useState(0);

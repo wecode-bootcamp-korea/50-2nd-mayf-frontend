@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
 
 .profile {
+  margin-left: 50px;
   .info {
     font-size: 45px;
   }
@@ -9,14 +10,14 @@
     min-height: 40px;
     min-width: 300px;
     align-items: center;
-    margin: 10px 10px 10px 10px;
+    margin: 10px 10px 30px 10px;
     font-size: 30px;
   }
 
   .name {
     display: flex;
     flex-direction: column;
-    min-height: 40px;
+    min-height: 70px;
     min-width: 300px;
     margin: 10px 10px 10px 10px;
     padding: 10px 0 10px 0;
@@ -24,14 +25,13 @@
 
     & p {
       margin-bottom: 15px;
-      overflow: auto;
     }
   }
 
   .phone {
     display: flex;
     flex-direction: column;
-    min-height: 40px;
+    min-height: 60px;
     min-width: 300px;
     margin: 10px 10px 10px 10px;
     padding: 10px 0 10px 0;
