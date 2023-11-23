@@ -6,7 +6,8 @@ import './ChatRoom.scss';
 const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
-  const [roomCreated, setRoomCreated] = useState(false);
+  const [roomCreated, setRoomCreated] = useState(true);
+  const [chatData, setChatData] = useState([]);
   const [socket, setSocket] = useState(null);
   const { chatId } = useParams();
   const navigate = useNavigate();
@@ -41,13 +42,16 @@ const ChatRoom = () => {
 
       // 서버로부터 메시지 수신
       // 채팅 메시지 전송 시
+      // 클라이언트 측 코드
       socket.on('message', (msg) => {
         console.log('Received message:', msg);
 
+        // 메시지의 송신자가 현재 사용자인지를 판별하여 isCurrentUser 설정
+        // const isCurrentUser = msg.userId === socket.id;
+
         // 메시지 객체에 isCurrentUser 추가
-        const messageWithUser = { ...msg, isCurrentUser: false };
+        const messageWithUser = { ...msg, isCurrentUser: msg.isCurrentUser };
         setMessages((prevMessages) => [...prevMessages, messageWithUser]);
-        console.log(messages);
       });
 
       // 서버로부터 저장된 메시지 수신
@@ -57,19 +61,19 @@ const ChatRoom = () => {
     }
   }, [socket, roomCreated]);
 
-  // useEffect(() => {
-  //   fetch(`http://34.64.172.211:8000/chat/${chatId}`, {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization:
-  //         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwNTYzNjY5LCJleHAiOjE3MDEyODM2Njl9.Ibm3Hpn3HvqZZJMnWl3FX04vaKwf0zfS1JCModJr51E',
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setData(data);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(`http://34.64.172.211:8000/chat/host/${chatId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setChatData(data.room[0]);
+      });
+  }, []);
 
   // 메시지 전송
   // 메시지 전송 시
@@ -89,7 +93,7 @@ const ChatRoom = () => {
           Authorization:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwNTYzNjY5LCJleHAiOjE3MDEyODM2Njl9.Ibm3Hpn3HvqZZJMnWl3FX04vaKwf0zfS1JCModJr51E',
         },
-        body: JSON.stringify({ content: newMessage, chatId: 14 }),
+        body: JSON.stringify({ content: newMessage, chatId }),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -114,28 +118,6 @@ const ChatRoom = () => {
     }
   };
 
-  useEffect(() => {
-    fetch('http://34.64.172.211:8000/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwNTYzNjY5LCJleHAiOjE3MDEyODM2Njl9.Ibm3Hpn3HvqZZJMnWl3FX04vaKwf0zfS1JCModJr51E',
-      },
-      body: JSON.stringify({
-        userId: 10,
-        hostId: 29,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setRoomCreated(true);
-      })
-      .catch((error) => {
-        console.error('Error creating room:', error);
-      });
-  });
-
   return (
     <div className="myPageChat">
       <div className="chatHeader">
@@ -150,7 +132,7 @@ const ChatRoom = () => {
             className={`message ${message.isCurrentUser ? 'sent' : 'received'}`}
           >
             <span className="username">
-              {message.isCurrentUser ? '나' : '상대방'}
+              {message.isCurrentUser ? '나' : chatData.user_name}
             </span>
             {message.content}
           </div>

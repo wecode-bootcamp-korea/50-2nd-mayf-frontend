@@ -31,10 +31,9 @@
 
   .chatMessages {
     width: 800px;
-    height: 300px;
+    max-height: 300px;
     overflow-y: scroll;
     border: 1px solid #999;
-
     border-radius: 8px;
     padding: 35px 40px;
 
