@@ -203,7 +203,6 @@ const Detail = () => {
                 강의 신청
               </button>
               <button className="addWish" onClick={addWishList}>
-                찜
                 <FontAwesomeIcon
                   icon={faHeart}
                   style={{ color: isWishListed ? 'red' : 'white' }}
