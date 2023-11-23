@@ -140,6 +140,12 @@
           &:hover {
             opacity: 0.7;
           }
+
+          .addWish {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
         }
       }
     }
