@@ -20,7 +20,7 @@ const KAKAOuser = () => {
         if (data.message === 'LOGIN_SUCCESS') {
           localStorage.setItem('token', data.jwtToken);
           localStorage.setItem('role', data.role);
-          navigate('/');
+          window.location.href = '/';
         } else {
           if (data.message === 'CODE ERROR') {
             alert('로그인 과정에서 오류가 발생했습니다');
