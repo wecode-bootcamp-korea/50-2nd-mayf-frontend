@@ -61,7 +61,7 @@ const Detail = () => {
         classDetail.latitude,
         classDetail.longitude,
       ),
-      level: 3,
+      level: 1,
     };
     const map = new kakao.maps.Map(container.current, options);
 
