@@ -5,13 +5,13 @@ const Login = () => {
   const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
 
   const handleClickUser = () => {
-    const REDIRECT_URI = 'http://mayfly.asia:3000/users/signup';
+    const REDIRECT_URI = 'http://mayfly.asia/users/signup';
     const KAKAO_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,name,phone_number,talk_message`;
     window.location.href = KAKAO_URL;
   };
 
   const handleClickEvent = () => {
-    const REDIRECT_URI = 'http://mayfly.asia:3000/hosts/signup';
+    const REDIRECT_URI = 'http://mayfly.asia/hosts/signup';
     const KAKAO_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,name,phone_number`;
     window.location.href = KAKAO_URL;
   };
