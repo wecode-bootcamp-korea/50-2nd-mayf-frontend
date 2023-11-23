@@ -25,9 +25,6 @@ import KAKAOuser from './pages/Login/KAKAOuser';
 import KAKAOevent from './pages/Login/KAKAOevent';
 import AdminLogin from './pages/AdminLogin/AdminLogin';
 import Admin from './pages/Admin/Admin';
-import Profile from './components/Profile/Profile';
-import Reservation from './components/Reservation/Reservation';
-import WishList from './components/WishList/WishList';
 
 const Router = () => {
   return (
@@ -41,9 +38,6 @@ const Router = () => {
         <Route path="/list" element={<List />} />
         <Route path="/check" element={<Check />} />
         <Route path="/my-page-user" element={<MyPageUser />} />
-        <Route path="/my-page-user-profile" element={<Profile />} />
-        <Route path="/my-page-user-reservation" element={<Reservation />} />
-        <Route path="/my-page-user-wishlist" element={<WishList />} />
         <Route path="/manage" element={<Manage />} />
         <Route path="/credit" element={<Credit />} />
         <Route path="/my-page-event" element={<MyPageEvent />} />
