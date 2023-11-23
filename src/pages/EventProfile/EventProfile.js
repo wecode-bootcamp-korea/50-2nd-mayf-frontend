@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import MyPageEventHeader from '../../components/MyPageEventHeader/MyPageEventHeader';
 import MyPageEventTab from '../../components/MyPageEventTab/MyPageEventTab';
 import './EventProfile.scss';
+import { useNavigate } from 'react-router-dom';
 
 const EventProfile = () => {
+  const navigate = useNavigate();
   const [userInput, setUserInput] = useState({
     name: '',
     email: '',
@@ -47,6 +49,8 @@ const EventProfile = () => {
     }).then((res) => {
       if (res.ok) {
         alert('회원탈퇴 완료');
+        localStorage.clear();
+        navigate('/');
       }
     });
   };
