@@ -11,6 +11,7 @@ const Nav = () => {
   const navigate = useNavigate();
   const [credit, setCredit] = useState('');
   const [hostCredit, setHostCredit] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
   //유저 아이콘 클릭시 컴포넌트 실행 사이드바 구현
@@ -39,6 +40,7 @@ const Nav = () => {
         } else if (endpoint === 'hosts') {
           setHostCredit(result.hostInfoList[0].credit);
         }
+        setDataLoaded(true);
       });
   };
 
@@ -48,7 +50,7 @@ const Nav = () => {
     } else if (role === 'hosts') {
       fetchData('hosts');
     }
-  }, []);
+  }, [role]);
 
   return (
     <div className="nav">
@@ -87,9 +89,10 @@ const Nav = () => {
             로그인
           </p>
         )}
-        {isOpen && (
-          <UserSideBar credit={role === 'users' ? credit : hostCredit} />
-        )}
+        {isOpen &&
+          dataLoaded(
+            <UserSideBar credit={role === 'users' ? credit : hostCredit} />,
+          )}
       </div>
     </div>
   );
