@@ -30,7 +30,9 @@ const Modal = ({ closeModal, itemData }) => {
         </div>
         <div className="row">
           <div className="label">가격</div>
-          <div className="data">{parseInt(itemData.price)} 크레딧</div>
+          <div className="data">
+            {parseInt(itemData.price).toLocaleString('ko-kr')} C
+          </div>
         </div>
       </div>
     </div>
