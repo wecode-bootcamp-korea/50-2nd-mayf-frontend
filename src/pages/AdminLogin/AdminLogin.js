@@ -24,6 +24,7 @@ const AdminLogin = () => {
         .then((data) => {
           if (data.message === 'login_success') {
             localStorage.setItem('token', data.accessToken);
+            localStorage.setItem('role', data.role);
             navigate('/admin');
           } else {
             if (data.message === 'key_error')
