@@ -23,7 +23,7 @@ const KAKAOcredit = () => {
         if (data.message === 'CREDIT_CHARGED') {
           alert('충전이 완료되었습니다');
           localStorage.removeItem('tid');
-          navigate('/');
+          window.location.href = '/';
         } else {
           alert('충전 과정에서 오류가 발생했습니다. 고객센터에 문의해주세요');
           navigate('/credit');

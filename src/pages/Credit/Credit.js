@@ -17,7 +17,7 @@ const Credit = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('http://34.64.172.211:8000/users/credit', {
+    fetch('http://34.64.172.211:8000/users', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -31,7 +31,7 @@ const Credit = () => {
         return res.json();
       })
       .then((data) => {
-        const tmp = data.userCreditList[0].credit;
+        const tmp = data.userGetInfoList[0].credit;
         if (tmp !== 0) {
           const result = String(tmp).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
           setCredit(result);

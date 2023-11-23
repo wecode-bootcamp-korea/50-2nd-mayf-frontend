@@ -45,6 +45,7 @@ const Calculate = () => {
           alert('정산이 완료되었습니다.');
           getCredit();
           setUseCredit(0);
+          window.location.href = '/my-page-event-calculate';
         }
       });
   };

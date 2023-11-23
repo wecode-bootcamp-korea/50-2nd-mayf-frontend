@@ -7,6 +7,7 @@ import Credit from '../../components/Credit/Credit';
 import { useNavigate } from 'react-router-dom';
 
 const MyPageUser = () => {
+  const role = localStorage.getItem('role');
   const [tab, setTab] = useState(0);
   const navigate = useNavigate();
   const menuArr = [
@@ -20,11 +21,11 @@ const MyPageUser = () => {
     setTab(index);
   };
 
-  return (
+  return role === 'users' ? (
     <div className="myPageUser">
       <div className="container">
         <div className="header">
-          <div className="headerTitle">My Page</div>
+          <div className="headerTitle">하루의 공간</div>
         </div>
 
         <div className="contents">
@@ -45,6 +46,8 @@ const MyPageUser = () => {
         </div>
       </div>
     </div>
+  ) : (
+    (window.location.href = '/')
   );
 };
 
