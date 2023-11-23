@@ -121,7 +121,7 @@ const Detail = () => {
       .then((data) => {
         if (data.message === 'ORDER_COMPLETED') {
           alert('강의를 신청하였습니다.');
-          navigate('/');
+          window.location.href = '/';
         } else if (data.message === 'NO_SEATS_LEFT') {
           alert('마감인원을 초과하였습니다.');
         } else if (data.message === 'NOT_ENOUGH_CREDITS') {
