@@ -29,7 +29,6 @@ const UserSideBar = ({ credit }) => {
           >
             충전하기
           </li>
-          <li className="menu">WISH LIST</li>
         </ul>
       </div>
     ),

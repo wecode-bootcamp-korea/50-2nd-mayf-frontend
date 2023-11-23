@@ -19,12 +19,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 200px;
+      height: 300px;
+      padding: 40px 0;
       background-color: rgb(140, 177, 230, 0.6);
       align-self: stretch;
 
       .headerTitle {
-        font-size: 110px;
+        font-size: 120px;
+        color: white;
+        letter-spacing: 3px;
       }
     }
 
