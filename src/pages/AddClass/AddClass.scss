@@ -69,6 +69,47 @@
             margin-top: 30px;
           }
 
+          .fileBox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+
+            .chooseFile {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 100%;
+              min-width: 130px;
+              max-width: 130px;
+              padding: 27px;
+              height: 54px;
+              font-family: 'Dongle', sans-serif;
+              font-size: 27px;
+              background-color: rgb(140, 177, 230, 0.6);
+              border: none;
+              border-radius: 10px;
+              cursor: pointer;
+            }
+
+            input[type='file'] {
+              display: none;
+            }
+
+            .fileName {
+              width: 100%;
+              max-width: 550px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              display: flex;
+              align-items: center;
+              align-self: stretch;
+              font-size: 30px;
+              border: none;
+            }
+          }
+
           .infoInput {
             display: flex;
             flex-direction: column;
@@ -81,7 +122,6 @@
               align-self: stretch;
               font-size: 30px;
               border: none;
-              border-bottom: 1px solid #999;
             }
           }
 

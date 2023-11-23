@@ -314,25 +314,43 @@ const AddClass = () => {
 
               <div className="info">
                 <div className="label">메인 사진</div>
-                <div className="infoInput">
+                <div className="fileBox">
+                  <label className="chooseFile" htmlFor="mainImageSource">
+                    파일 선택
+                  </label>
                   <input
+                    id="mainImageSource"
                     type="file"
                     name="mainImageSource"
-                    onChange={(e) => handleImageChange(e, 'mainImageSource')}
                     multiple
+                    onChange={(e) => handleImageChange(e, 'mainImageSource')}
                   />
+                  <div className="fileName">
+                    {userInput.mainImageSource
+                      ? userInput.mainImageSource
+                      : '파일을 선택해주세요'}
+                  </div>
                 </div>
               </div>
 
               <div className="info">
                 <div className="label">서브 사진</div>
-                <div className="infoInput">
+                <div className="fileBox">
+                  <label className="chooseFile" htmlFor="subImageSource">
+                    파일 선택
+                  </label>
                   <input
+                    id="subImageSource"
                     type="file"
                     name="subImageSource"
-                    onChange={(e) => handleImageChange(e, 'subImageSource')}
                     multiple
+                    onChange={(e) => handleImageChange(e, 'subImageSource')}
                   />
+                  <div className="fileName">
+                    {userInput.subImageSource
+                      ? userInput.subImageSource
+                      : '파일을 선택해주세요'}
+                  </div>
                 </div>
               </div>
 
