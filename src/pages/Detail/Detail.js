@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Refund from '../../components/Refund/Refund';
 import CalendarApp from '../../components/CalendarApp/CalendarApp';
 import Chat from './Chat';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import './Detail.scss';
 
 const { kakao } = window;
@@ -14,6 +16,7 @@ const Detail = () => {
   const [classDetail, setClassDetail] = useState({});
   const [userData, setUserData] = useState([]);
   const [scheduleId, setScheduleId] = useState('');
+  const [isWishListed, setIsWishListed] = useState(false);
   const container = useRef();
   const navigate = useNavigate();
   const userRole = localStorage.getItem('role');
@@ -145,11 +148,12 @@ const Detail = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.message === 'REQUEST_ACCEPTED') {
-          if (data.result.insertId === 0) {
-            alert('위시리스트에서 삭제하였습니다.');
-          } else {
-            alert('위시리스트에 추가하였습니다.');
-          }
+          setIsWishListed(data.result.insertId !== 0);
+          alert(
+            data.result.insertId !== 0
+              ? '위시리스트에 추가하였습니다.'
+              : '위시리스트에서 삭제하였습니다.',
+          );
         }
       });
   };
@@ -200,6 +204,10 @@ const Detail = () => {
               </button>
               <button className="addWish" onClick={addWishList}>
                 찜
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  style={{ color: isWishListed ? 'red' : 'white' }}
+                />
               </button>
             </div>
           </div>
