@@ -19,12 +19,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 200px;
+      height: 300px;
+      padding: 40px 0;
       background-color: rgb(140, 177, 230, 0.6);
       align-self: stretch;
 
       .headerTitle {
-        font-size: 110px;
+        font-size: 120px;
+        color: white;
+        letter-spacing: 3px;
       }
     }
 
@@ -37,6 +40,7 @@
 
       .contentCategory {
         display: flex;
+        width: 150px;
         flex-direction: column;
         align-items: flex-start;
         border-right: 1px solid #999;
@@ -45,17 +49,18 @@
 
         button {
           display: flex;
+          width: 135px;
           align-items: flex-start;
           font-size: 30px;
           border: none;
           background-color: white;
           align-self: stretch;
-          width: 100px;
           font-family: 'Dongle', sans-serif;
 
           &:hover {
-            font-size: 30px;
+            font-size: 35px;
             text-decoration: underline;
+            cursor: pointer;
           }
 
           &:active {

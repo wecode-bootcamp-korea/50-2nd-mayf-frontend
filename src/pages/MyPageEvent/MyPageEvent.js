@@ -4,7 +4,8 @@ import MyPageEventTab from '../../components/MyPageEventTab/MyPageEventTab';
 import './MyPageEvent.scss';
 
 const MyPageEvent = () => {
-  return (
+  const role = localStorage.getItem('role');
+  return role === 'hosts' ? (
     <div className="myPageEvent">
       <div className="container">
         <MyPageEventHeader />
@@ -15,6 +16,8 @@ const MyPageEvent = () => {
         </div>
       </div>
     </div>
+  ) : (
+    (window.location.href = '/')
   );
 };
 
