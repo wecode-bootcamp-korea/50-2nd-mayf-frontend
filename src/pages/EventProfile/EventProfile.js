@@ -81,6 +81,10 @@ const EventProfile = () => {
     });
   };
 
+  const numWithComma = (a) => {
+    return a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   return (
     <div className="eventProfile">
       <div className="container" onChange={setChangeUserInput}>
@@ -115,7 +119,15 @@ const EventProfile = () => {
               <div className="info">
                 <div className="label">보유 크레딧</div>
                 <div className="infoInput">
-                  <input type="text" value={hostData.credit} readOnly />
+                  <input
+                    type="text"
+                    value={
+                      hostData.credit !== undefined
+                        ? hostData.credit.toLocaleString('ko-KR')
+                        : 0
+                    }
+                    readOnly
+                  />
                 </div>
               </div>
 

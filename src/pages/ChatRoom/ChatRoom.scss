@@ -1,18 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
 
 .myPageChat {
+  height: 100%;
+  min-height: 1000px;
+  margin-top: 130px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 
   .chatHeader {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: flex-start;
+    width: 800px;
 
-    .label {
-      font-size: 40px;
+    button {
+      display: flex;
+      font-family: 'Dongle', sans-serif;
+      font-size: 25px;
+      border: none;
+      background-color: white;
     }
 
     .chatRoomBtn {
@@ -30,8 +38,9 @@
   }
 
   .chatMessages {
+    font-family: 'Dongle', sans-serif;
     width: 800px;
-    height: 300px;
+    height: 600px;
     overflow-y: scroll;
     border: 1px solid #999;
     padding: 35px 40px;

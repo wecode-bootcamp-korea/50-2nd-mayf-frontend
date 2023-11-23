@@ -14,12 +14,12 @@ const Nav = () => {
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
   //유저 아이콘 클릭시 컴포넌트 실행 사이드바 구현
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
   //햄버거 버튼 카테고리 구현
-  const [showCategories, setShowCategories] = useState(true);
+  const [showCategories, setShowCategories] = useState(false);
   const handleLogoClick = () => {
     setShowCategories(!showCategories);
   };

@@ -6,7 +6,7 @@ const Chat = ({ host, hostId, userId }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [roomCreated, setRoomCreated] = useState(false);
-  const [chatId, setChatId] = useState(null);
+  const [chatId, setChatId] = useState();
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
@@ -30,6 +30,20 @@ const Chat = ({ host, hostId, userId }) => {
       newSocket.disconnect();
     };
   }, []);
+
+  const getChatData = () => {
+    fetch(`http://34.64.172.211:8000/chat`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setChatId(data.room[data.room.length - 1].id);
+      });
+  };
 
   // 클라이언트 측 코드 수정
   useEffect(() => {
@@ -58,14 +72,14 @@ const Chat = ({ host, hostId, userId }) => {
       });
 
       // 기존의 fetch를 사용하여 메시지 저장
-      fetch(`http://34.64.172.211:8000/message/14`, {
+      fetch(`http://34.64.172.211:8000/message/${chatId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
         },
-        body: JSON.stringify({ content: newMessage, chatId: 14 }),
+        body: JSON.stringify({ content: newMessage, chatId }),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -109,7 +123,7 @@ const Chat = ({ host, hostId, userId }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setChatId(data.chatId); // 생성된 채팅방의 chatId를 설정
+        getChatData(); // 생성된 채팅방의 chatId를 설정
         setRoomCreated(true);
       })
       .catch((error) => {
