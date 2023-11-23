@@ -8,7 +8,7 @@ const Chat = ({ host, hostId, userId }) => {
   const [roomCreated, setRoomCreated] = useState(false);
   const [chatId, setChatId] = useState();
   const [socket, setSocket] = useState(null);
-
+  const userRole = localStorage.getItem('role');
   useEffect(() => {
     // 소켓 연결
     const newSocket = io('http://34.64.172.211:8000', {
@@ -128,7 +128,7 @@ const Chat = ({ host, hostId, userId }) => {
       });
   };
 
-  return (
+  return userRole === 'users' ? (
     <div className="detailPageChat">
       <div className="chatHeader">
         <div className="label">문의하기</div>
@@ -164,6 +164,8 @@ const Chat = ({ host, hostId, userId }) => {
         </div>
       )}
     </div>
+  ) : (
+    (window.location.href = '/')
   );
 };
 
