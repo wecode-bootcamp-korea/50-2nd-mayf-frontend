@@ -11,8 +11,7 @@ const ChatList = () => {
   const getChatRooms = () => {
     fetch('http://34.64.172.211:8000/chat/host', {
       headers: {
-        Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg
-        `,
+        Authorization: localStorage.getItem('token'),
       },
     })
       .then((response) => {

@@ -35,8 +35,7 @@ const Chat = ({ host, hostId, userId }) => {
     fetch(`http://34.64.172.211:8000/chat`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
+        Authorization: localStorage.getItem('token'),
       },
     })
       .then((res) => res.json())
@@ -76,8 +75,7 @@ const Chat = ({ host, hostId, userId }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
+          Authorization: localStorage.getItem('token'),
         },
         body: JSON.stringify({ content: newMessage, chatId }),
       })
@@ -113,8 +111,7 @@ const Chat = ({ host, hostId, userId }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         userId,

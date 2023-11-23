@@ -65,8 +65,7 @@ const ChatRoom = () => {
     fetch(`http://34.64.172.211:8000/chat/host/${chatId}`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
+        Authorization: localStorage.getItem('token'),
       },
     })
       .then((res) => res.json())
@@ -90,8 +89,7 @@ const ChatRoom = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtNTcwNC04NDg0Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwNTYzNjY5LCJleHAiOjE3MDEyODM2Njl9.Ibm3Hpn3HvqZZJMnWl3FX04vaKwf0zfS1JCModJr51E',
+          Authorization: localStorage.getItem('token'),
         },
         body: JSON.stringify({ content: newMessage, chatId }),
       })

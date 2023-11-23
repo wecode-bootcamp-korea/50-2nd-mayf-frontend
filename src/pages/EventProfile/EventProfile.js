@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import MyPageEventHeader from '../../components/MyPageEventHeader/MyPageEventHeader';
 import MyPageEventTab from '../../components/MyPageEventTab/MyPageEventTab';
 import './EventProfile.scss';
+import { useNavigate } from 'react-router-dom';
 
 const EventProfile = () => {
+  const navigate = useNavigate();
   const [userInput, setUserInput] = useState({
     name: '',
     email: '',
@@ -18,8 +20,7 @@ const EventProfile = () => {
   useEffect(() => {
     fetch(`http://34.64.172.211:8000/hosts`, {
       headers: {
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
+        Authorization: localStorage.getItem('token'),
       },
     })
       .then((res) => res.json())
@@ -43,12 +44,13 @@ const EventProfile = () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
+        Authorization: localStorage.getItem('token'),
       },
     }).then((res) => {
       if (res.ok) {
         alert('회원탈퇴 완료');
+        localStorage.clear();
+        navigate('/');
       }
     });
   };
@@ -66,8 +68,7 @@ const EventProfile = () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsIm5hbWUiOiLstZzrr7zsp4AiLCJlbWFpbCI6ImFsc3dsODE4NEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTExMS05OTk5Iiwicm9sZSI6Imhvc3RzIiwiaWF0IjoxNzAwNTQ1NjgyLCJleHAiOjE3MDEyNjU2ODJ9.8V1tTOzgJOFcCdmBiiJGtIkE298k7BsQhUbk733D3pg',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         name: userInput.name,
