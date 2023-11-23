@@ -31,7 +31,7 @@ const Credit = () => {
         return res.json();
       })
       .then((data) => {
-        const tmp = data.userCreditList[0].credit;
+        const tmp = data.userGetInfoList[0].credit;
         if (tmp !== 0) {
           const result = String(tmp).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
           setCredit(result);
