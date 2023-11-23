@@ -58,9 +58,9 @@ const Credit = () => {
           quantity: 1,
           total_amount: parseInt(amount) * 1000,
           tax_free_amount: 0,
-          approval_url: 'http://localhost:3000/credit/KAKAOcredit',
-          fail_url: 'http://localhost:3000/credit',
-          cancel_url: 'http://localhost:3000/credit',
+          approval_url: 'http://mayfly.asia:3000/credit/KAKAOcredit',
+          fail_url: 'http://mayfly.asia:3000/credit',
+          cancel_url: 'http://mayfly.asia:3000/credit',
         }),
       })
         .then((res) => {
