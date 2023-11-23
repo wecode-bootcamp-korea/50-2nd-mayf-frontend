@@ -242,6 +242,7 @@ const Detail = () => {
           <div className="label">위치</div>
           <div className="map" id="map" ref={container} />
         </div>
+
         {userRole === 'users' ? (
           <Chat
             host={classDetail.name}
@@ -250,7 +251,7 @@ const Detail = () => {
             userName={userData.name}
           />
         ) : (
-          alert('로그인을 하셔야 이용 가능합니다.')
+          <div onClick={() => alert('로그인을 하셔야 이용 가능합니다.')}></div>
         )}
 
         <Refund />
