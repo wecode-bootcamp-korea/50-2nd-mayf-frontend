@@ -145,7 +145,11 @@ const Detail = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.message === 'REQUEST_ACCEPTED') {
-          alert('위시리스트에 추가하였습니다.');
+          if (data.result.insertId === 0) {
+            alert('위시리스트에서 삭제하였습니다.');
+          } else {
+            alert('위시리스트에 추가하였습니다.');
+          }
         }
       });
   };
