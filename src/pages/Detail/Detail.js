@@ -16,6 +16,7 @@ const Detail = () => {
   const [scheduleId, setScheduleId] = useState('');
   const container = useRef();
   const navigate = useNavigate();
+  const userRole = localStorage.getItem('role');
 
   const reserveSubmit = (reservation) => {
     setReservations([...reservations, reservation]);
@@ -241,13 +242,16 @@ const Detail = () => {
           <div className="label">위치</div>
           <div className="map" id="map" ref={container} />
         </div>
-
-        <Chat
-          host={classDetail.name}
-          hostId={classDetail.hostId}
-          userId={userData.id}
-          userName={userData.name}
-        />
+        {userRole === 'users' ? (
+          <Chat
+            host={classDetail.name}
+            hostId={classDetail.hostId}
+            userId={userData.id}
+            userName={userData.name}
+          />
+        ) : (
+          alert('로그인을 하셔야 이용 가능합니다.')
+        )}
 
         <Refund />
       </div>
