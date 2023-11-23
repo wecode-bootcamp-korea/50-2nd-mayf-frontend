@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Schedule.scss';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Schedule = () => {
+  const navigate = useNavigate();
   const { classId } = useParams();
   const [scheduleData, setScheduleData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -222,92 +223,99 @@ const Schedule = () => {
   };
 
   return (
-    <div className="calendarContainer">
-      <Calendar
-        onChange={handleDateChange}
-        value={selectedDate}
-        tileContent={tileContent}
-      />
-      <div>
-        <h2>강의 일정</h2>
-        <div>
-          <label>시간 선택: </label>
-          {[9, 11, 13, 15, 17, 19].map((time) => (
-            <button key={time} onClick={() => handleTimeSelect(time)}>
-              {time}:00
-            </button>
-          ))}
-        </div>
-        {selectedDate && selectedTime && (
-          <p>
-            선택된 날짜 및 시간: {selectedDate.toDateString()} {selectedTime}
-            :00 -{' '}
-            {calculateEndTime(
-              `${selectedDate.toDateString()} ${selectedTime}:00:00.000000`,
-              2,
-            )}
-            에 끝남
-          </p>
-        )}
-        <label>
-          최대 수강 인원:
-          <input
-            type="number"
-            value={selectedMaxMember}
-            onChange={handleMaxMemberChange}
+    <div className="schedule">
+      <div className="container">
+        <div className="mainLabel">스케줄 관리</div>
+        <div className="calendarContainer">
+          <Calendar
+            onChange={handleDateChange}
+            value={selectedDate}
+            tileContent={tileContent}
           />
-        </label>
-        <ul className="schedule-list">
-          {scheduleData
-            .filter((schedule) => schedule.status === 1)
-            .map((schedule, index) => (
-              <li key={index}>
-                {schedule.classDay} -{' '}
-                {calculateEndTime(schedule.classDay, schedule.classHour)} (최대
-                수강 인원: {schedule.maxMember}, 등록된 수강 인원:{' '}
-                {schedule.enrolledMember})
-                <button onClick={() => handleUpdateClick(index, schedule)}>
-                  수정
+          <div className="scheduleInfo">
+            <div className="timeSelect">
+              {[9, 11, 13, 15, 17, 19].map((time) => (
+                <button
+                  className="time"
+                  key={time}
+                  onClick={() => handleTimeSelect(time)}
+                >
+                  {time}:00
                 </button>
-                <button onClick={() => deleteSchedule(index)}>삭제</button>
-              </li>
-            ))}
-        </ul>
+              ))}
+            </div>
+            {selectedDate && selectedTime && (
+              <p>
+                선택된 날짜 및 시간: {selectedDate.toDateString()}{' '}
+                {selectedTime}
+                :00
+              </p>
+            )}
+            <label className="countMax">
+              최대 수강 인원:
+              <input
+                type="number"
+                value={selectedMaxMember}
+                onChange={handleMaxMemberChange}
+              />
+              <button onClick={addSchedule}>일정 추가</button>
+            </label>
+            <label className="title">기존 강의</label>
+            <ul className="schedule-list">
+              {scheduleData
+                .filter((schedule) => schedule.status === 1)
+                .map((schedule, index) => (
+                  <li key={index}>
+                    {schedule.classDay} -{' '}
+                    {calculateEndTime(schedule.classDay, schedule.classHour)}{' '}
+                    (최대 수강 인원: {schedule.maxMember}, 등록된 수강 인원:{' '}
+                    {schedule.enrolledMember})
+                    <button onClick={() => handleUpdateClick(index, schedule)}>
+                      수정
+                    </button>
+                    <button onClick={() => deleteSchedule(index)}>삭제</button>
+                  </li>
+                ))}
+            </ul>
 
-        <ul className="plusSchedule">
-          {plusSchedule.map((schedule, index) => (
-            <li key={index}>
-              {schedule.classDay.slice(0, 16)} -{' '}
-              {calculateEndTime(schedule.classDay, schedule.classHour)} (최대
-              수강 인원: {schedule.maxMember}, 등록된 수강 인원:{' '}
-              {schedule.enrolledMember})
-              <button onClick={() => handleUpdateClick(index, schedule)}>
-                수정
-              </button>
-              <button onClick={() => deleteSchedule(index)}>삭제</button>
-            </li>
-          ))}
-          <button onClick={addSchedule}>일정 추가</button>
-        </ul>
+            {plusSchedule.length > 0 && (
+              <label className="title">추가 강의</label>
+            )}
+            <ul className="schedule-list new">
+              {plusSchedule.map((schedule, index) => (
+                <li key={index}>
+                  {schedule.classDay.slice(0, 16)} -{' '}
+                  {calculateEndTime(schedule.classDay, schedule.classHour)}{' '}
+                  (최대 수강 인원: {schedule.maxMember}, 등록된 수강 인원: 0)
+                </li>
+              ))}
+            </ul>
+            {plusSchedule.length > 0 && (
+              <div className="addButtons">
+                <button onClick={completEdit}>추가 완료</button>
+              </div>
+            )}
 
-        <ul className="schedule-list">
-          지난 강의들
-          {scheduleData
-            .filter((schedule) => schedule.status === 0)
-            .map((schedule, index) => (
-              <li key={index}>
-                {schedule.classDay} -{' '}
-                {calculateEndTime(schedule.classDay, schedule.classHour)} (최대
-                수강 인원: {schedule.maxMember}, 등록된 수강 인원:{' '}
-                {schedule.enrolledMember})
-              </li>
-            ))}
-        </ul>
-        {selectedIndex !== null && (
-          <button onClick={updateSchedule}>수정 내용 저장</button>
-        )}
+            {scheduleData.filter((schedule) => schedule.status === 0).length >
+              0 && <label className="title">지난 강의</label>}
+            <ul className="schedule-list">
+              {scheduleData
+                .filter((schedule) => schedule.status === 0)
+                .map((schedule, index) => (
+                  <li key={index}>
+                    {schedule.classDay} -{' '}
+                    {calculateEndTime(schedule.classDay, schedule.classHour)}{' '}
+                    (최대 수강 인원: {schedule.maxMember}, 등록된 수강 인원:{' '}
+                    {schedule.enrolledMember})
+                  </li>
+                ))}
+            </ul>
+            {selectedIndex !== null && (
+              <button onClick={updateSchedule}>수정 내용 저장</button>
+            )}
+          </div>
+        </div>
       </div>
-      <button onClick={completEdit}>수정 완료</button>
     </div>
   );
 };
