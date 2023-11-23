@@ -13,8 +13,6 @@ const Profile = () => {
   const [userInfo, setUserInfo] = useState(DEFAULT_USER_INFO);
   const [userData, setUserData] = useState({});
   const [isUpdate, setIsUpdate] = useState(false);
-  // const token =
-  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiLquYDrrLjsmIEiLCJlbWFpbCI6Im1uNTJpbEBuYXZlci5jb20iLCJwaG9uZV9udW1iZXIiOiIwMTAtMTIzNC01NTU1Iiwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzAwMTk2NDMwLCJleHAiOjE3MDA5MTY0MzB9.WVYdWKjcFjLTyFQdPEKhLsy-XcmUa1B-cNfEcr1WOeI';
   const token = localStorage.getItem('token');
   useEffect(() => {
     getUser();
