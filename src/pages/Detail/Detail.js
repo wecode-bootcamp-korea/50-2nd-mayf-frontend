@@ -206,6 +206,8 @@ const Detail = () => {
               </button>
               <button className="addWish" onClick={addWishList}>
                 <FontAwesomeIcon
+                  className="addWish"
+                  onClick={addWishList}
                   icon={faHeart}
                   style={{ color: isWishListed ? 'red' : 'white' }}
                 />
