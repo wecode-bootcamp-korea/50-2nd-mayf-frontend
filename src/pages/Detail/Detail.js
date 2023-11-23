@@ -188,7 +188,9 @@ const Detail = () => {
                 >
                   주소 복사
                 </div>
-                <div className="classprice">{classDetail.price + ' C'}</div>
+                <div className="classprice">
+                  {parseFloat(classDetail.price).toLocaleString('ko-KR') + ' C'}
+                </div>
               </div>
             </div>
 
