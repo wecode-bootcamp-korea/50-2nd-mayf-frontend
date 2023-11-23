@@ -128,7 +128,7 @@ const Chat = ({ host, hostId, userId }) => {
       });
   };
 
-  return userRole === 'users' ? (
+  return (
     <div className="detailPageChat">
       <div className="chatHeader">
         <div className="label">문의하기</div>
@@ -164,8 +164,6 @@ const Chat = ({ host, hostId, userId }) => {
         </div>
       )}
     </div>
-  ) : (
-    (window.location.href = '/')
   );
 };
 
