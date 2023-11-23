@@ -46,7 +46,7 @@ const Reservation = () => {
   };
 
   const handleDelete = (itemId) => {
-    fetch(`http://34.64.172.211:8000/orders/${itemId}`, {
+    fetch(`http://34.64.172.211:8000/orders/detail/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
