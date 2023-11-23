@@ -149,6 +149,10 @@ const Detail = () => {
       });
   };
 
+  const numWithComma = (a) => {
+    return a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   return (
     <div className="detail">
       <div className="container">
@@ -180,7 +184,7 @@ const Detail = () => {
                   주소 복사
                 </div>
                 <div className="classprice">
-                  {classDetail.price.toLocaleString('ko-KR') + ' C'}
+                  {numWithComma(classDetail.price) + ' C'}
                 </div>
               </div>
             </div>
