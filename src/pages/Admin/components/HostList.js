@@ -104,7 +104,9 @@ const HostList = () => {
                 {item.name}
                 {isDeleted && '(삭제됨)'}
               </p>
-              <p className="cell num">{item.credit}</p>
+              <p className="cell num">
+                {item.credit.toLocaleString('ko-kr')} C
+              </p>
               <p className="cell email">{item.email}</p>
               <p className="cell phone">{item.phone_number}</p>
               <p className="cell account">{item.bank_account}</p>

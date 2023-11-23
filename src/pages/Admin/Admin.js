@@ -27,7 +27,7 @@ const Admin = () => {
   const userRole = localStorage.getItem('role');
   const [categoryId, setCategoryId] = useState(ADMIN_TAB_LIST[0].id);
 
-  return userRole === 'admin' ? (
+  return userRole === 'user' || 'host' ? (
     <div className="Admin">
       <div className="category">
         {ADMIN_TAB_LIST.map(({ id, btnText }) => (
