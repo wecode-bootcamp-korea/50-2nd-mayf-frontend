@@ -51,7 +51,7 @@ const EventProfile = () => {
         alert('회원탈퇴 완료');
         localStorage.clear();
         navigate('/');
-      }
+      } else alert('보유 크레딧이 있어 탈퇴가 불가능 합니다.');
     });
   };
 
