@@ -59,6 +59,7 @@ const Reservation = () => {
         }
         alert('예약이 성공적으로 취소되었습니다');
         getReservationList();
+        window.location.href = '/my-page-user-reservation';
       })
       .catch((error) => {
         console.error('Fetch error:', error.message);
