@@ -77,7 +77,7 @@ const Credit = () => {
         .catch((error) => {
           console.error('Error during payment preparation:', error);
           alert('카카오페이 결제 준비 중 오류가 발생했습니다.');
-          window.location.href = 'http://localhost:3000/credit';
+          window.location.href = 'http://mayfly.asia:3000/credit';
         });
     }
   };
