@@ -11,23 +11,20 @@ const MyPageUser = () => {
   const [tab, setTab] = useState(0);
   const navigate = useNavigate();
   const menuArr = [
-    { name: '정보 수정', url: '/my-page-user-profile', content: <Profile /> },
+    { name: '정보 수정', content: <Profile /> },
     {
       name: '예약 내역',
-      url: '/my-page-user-reservation',
       content: <Reservation />,
     },
     {
       name: '위시 리스트',
-      url: '/my-page-user-wishlist',
       content: <WishList />,
     },
-    { name: '크레딧', url: '/credit', content: <Credit /> },
+    { name: '크레딧', content: <Credit /> },
   ];
 
   const selectMenu = (index) => {
     setTab(index);
-    navigate(menuArr[tab].url);
   };
 
   return role === 'users' ? (
