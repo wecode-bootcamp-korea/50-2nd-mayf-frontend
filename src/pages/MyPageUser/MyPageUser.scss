@@ -40,6 +40,7 @@
 
       .contentCategory {
         display: flex;
+        width: 150px;
         flex-direction: column;
         align-items: flex-start;
         border-right: 1px solid #999;
@@ -48,17 +49,18 @@
 
         button {
           display: flex;
+          width: 135px;
           align-items: flex-start;
           font-size: 30px;
           border: none;
           background-color: white;
           align-self: stretch;
-          width: 100px;
           font-family: 'Dongle', sans-serif;
 
           &:hover {
-            font-size: 30px;
+            font-size: 35px;
             text-decoration: underline;
+            cursor: pointer;
           }
 
           &:active {
