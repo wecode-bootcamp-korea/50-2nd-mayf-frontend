@@ -6,10 +6,10 @@ const Credit = () => {
   const amountList = [
     { id: 1, amount: '5,000' },
     { id: 2, amount: '10,000' },
-    { id: 3, amount: '15,000' },
-    { id: 4, amount: '20,000' },
-    { id: 5, amount: '30,000' },
-    { id: 6, amount: '50,000' },
+    { id: 3, amount: '20,000' },
+    { id: 4, amount: '30,000' },
+    { id: 5, amount: '50,000' },
+    { id: 6, amount: '100,000' },
   ];
   const [amount, setAmount] = useState(0);
   const [credit, setCredit] = useState(0);
@@ -17,7 +17,7 @@ const Credit = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('http://10.58.52.84:8000/users/credit', {
+    fetch('http://34.64.172.211:8000/users/credit', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -100,7 +100,7 @@ const Credit = () => {
                 name="radio"
                 value={list.amount}
               />
-              {list.amount}
+              {list.amount} C
             </label>
           </div>
         ))}
@@ -112,7 +112,11 @@ const Credit = () => {
 
       <div className="chargeBtnBox">
         <button type="button" className="btn" onClick={handlePay}>
-          <img src="/images/payment_icon_yellow_large.png" alt="pay_btn" />
+          <img
+            className="kakaopay"
+            src="/images/payment_icon_yellow_large.png"
+            alt="pay_btn"
+          />
         </button>
       </div>
     </div>

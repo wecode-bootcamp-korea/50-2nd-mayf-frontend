@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './AdminLogin.scss';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const AdminLogin = () => {
     e.preventDefault();
 
     if (adminUserInfo.admin_id && adminUserInfo.password) {
-      fetch('http://10.58.52.84:8000/admins/login', {
+      fetch('http://34.64.172.211:8000/admins/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -41,7 +42,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="Admin">
+    <div className="AdminLogin">
       <form onSubmit={handleLogin} onChange={handleChange}>
         <div>
           <span>관리자 ID : </span>
@@ -51,7 +52,7 @@ const AdminLogin = () => {
           <span>비밀번호 : </span>
           <input className="adminPw" type="password" name="password" />
         </div>
-        <button>로그인</button>
+        <button className="btn">로그인</button>
       </form>
     </div>
   );

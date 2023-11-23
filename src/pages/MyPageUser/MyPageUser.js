@@ -24,7 +24,7 @@ const MyPageUser = () => {
     <div className="myPageUser">
       <div className="container">
         <div className="header">
-          <div className="headerTitle">헤더 타이틀</div>
+          <div className="headerTitle">My Page</div>
         </div>
 
         <div className="contents">

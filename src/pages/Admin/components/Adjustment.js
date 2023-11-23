@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Adjustment.scss';
 
 const Adjustment = () => {
   const [charge, setCharge] = useState(20.0);
@@ -10,7 +11,7 @@ const Adjustment = () => {
   // const token = localStorage.getItem('token')
 
   useEffect(() => {
-    fetch('http://10.58.52.84:8000/admins/hostlist', {
+    fetch('http://34.64.172.211:8000/admins/hostlist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -35,10 +36,13 @@ const Adjustment = () => {
         <input
           placeholder="변경할 수수료율"
           type="number"
+          className="charge"
           value={num}
           onChange={(e) => setNum(e.target.value)}
         />
-        <button onClick={handleClick}>변경</button>
+        <button className="btn" onClick={handleClick}>
+          변경
+        </button>
       </div>
       <div>
         <span>현재 정산 대기중인 금액 : </span>

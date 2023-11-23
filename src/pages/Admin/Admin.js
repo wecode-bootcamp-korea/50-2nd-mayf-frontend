@@ -24,10 +24,10 @@ const Admin = () => {
       component: <Adjustment />,
     },
   ];
-
+  const userRole = localStorage.getItem('role');
   const [categoryId, setCategoryId] = useState(ADMIN_TAB_LIST[0].id);
 
-  return (
+  return userRole === 'admin' ? (
     <div className="Admin">
       <div className="category">
         {ADMIN_TAB_LIST.map(({ id, btnText }) => (
@@ -40,7 +40,7 @@ const Admin = () => {
         {ADMIN_TAB_LIST.find(({ id }) => id === categoryId).component}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default Admin;

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Pen+Script&family=Noto+Sans+KR&display=swap');
+
 .myPageUser {
   display: flex;
   width: 100%;
@@ -5,7 +7,7 @@
   justify-content: center;
   align-self: stretch;
   flex-direction: column;
-
+  font-family: 'Dongle', sans-serif;
   .container {
     display: flex;
     flex-direction: column;
@@ -18,11 +20,11 @@
       align-items: center;
       justify-content: center;
       height: 200px;
-      background-color: beige;
+      background-color: rgb(140, 177, 230, 0.6);
       align-self: stretch;
 
       .headerTitle {
-        font-size: 50px;
+        font-size: 110px;
       }
     }
 
@@ -44,14 +46,15 @@
         button {
           display: flex;
           align-items: flex-start;
-          font-size: 20px;
+          font-size: 30px;
           border: none;
           background-color: white;
           align-self: stretch;
-          width: 135px;
+          width: 100px;
+          font-family: 'Dongle', sans-serif;
 
           &:hover {
-            font-size: 22px;
+            font-size: 30px;
             text-decoration: underline;
           }
 

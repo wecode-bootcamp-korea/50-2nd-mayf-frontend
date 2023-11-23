@@ -20,7 +20,7 @@ const UserList = () => {
   }, []);
 
   const getUserList = () => {
-    fetch('http://10.58.52.84:8000/admins/userlist', {
+    fetch('http://34.64.172.211:8000/admins/userlist', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -44,7 +44,7 @@ const UserList = () => {
   const handleDelete = (itemId) => {
     const ok = window.confirm('정말 삭제하시겠습니까?');
     if (ok) {
-      fetch(`http://10.58.52.84:8000/admins/users/${itemId}`, {
+      fetch(`http://34.64.172.211:8000/admins/users/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -72,7 +72,7 @@ const UserList = () => {
 
     if (!isDeleted) return;
 
-    fetch(`http://10.58.52.84:8000/admins/users/update/${itemId}`, {
+    fetch(`http://34.64.172.211:8000/admins/users/update/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -94,37 +94,42 @@ const UserList = () => {
 
   return (
     <div className="userList">
-      {currentItems.map((item) => {
-        const isDeleted = item.deleted_at !== null;
+      <div>
+        {currentItems.map((item) => {
+          const isDeleted = item.deleted_at !== null;
 
-        return (
-          <div className="container" key={item.id}>
-            <p className="cell">
-              {item.name}
-              {isDeleted && '(삭제됨)'}
-            </p>
-            <p className="cell">{item.credit}</p>
-            <p className="cell">{item.email}</p>
-            <p className="cell">{item.phone_number}</p>
-            <p className="cell">
-              <button
-                disabled={isDeleted}
-                onClick={() => handleDelete(item.id)}
-              >
-                삭제
-              </button>
-            </p>
-            <p className="cell">
-              <button
-                disabled={!isDeleted}
-                onClick={() => handleRestore(item.id)}
-              >
-                복구
-              </button>
-            </p>
-          </div>
-        );
-      })}
+          return (
+            <div className="container" key={item.id}>
+              <p className="cell user">
+                {item.name}
+                {isDeleted && '(삭제됨)'}
+              </p>
+              <p className="cell num">{item.credit}</p>
+              <p className="cell email">{item.email}</p>
+              <p className="cell phone">{item.phone_number}</p>
+              <p className="cell">
+                <button
+                  disabled={isDeleted}
+                  onClick={() => handleDelete(item.id)}
+                  className="btn"
+                >
+                  삭제
+                </button>
+              </p>
+              <p className="cell">
+                <button
+                  disabled={!isDeleted}
+                  onClick={() => handleRestore(item.id)}
+                  className="btn"
+                >
+                  복구
+                </button>
+              </p>
+            </div>
+          );
+        })}
+      </div>
+
       <div className="pageContainer">
         <Pagination
           itemsPerPage={itemsPerPage}
