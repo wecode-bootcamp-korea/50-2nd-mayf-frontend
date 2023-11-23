@@ -31,6 +31,7 @@
 
     .content {
       display: flex;
+      width: 1105px;
       align-items: center;
       gap: 60px;
       padding: 35px 40px;
@@ -182,8 +183,11 @@
 
     .images {
       display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 50px;
       padding: 30px 40px;
+      width: 1105px;
       border: 1px solid #999;
 
       img {
