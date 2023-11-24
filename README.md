@@ -14,7 +14,7 @@
 
 ### [BE](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-backend)
 - [유진서](http://github.com/coderjins)
-- [이주현]
+- [이주현](http://github.com/2juhyunju)
 - [김문영](https://github.com/kimmunyeong)
 - [노범석](https://github.com/prodigy0831)
 
