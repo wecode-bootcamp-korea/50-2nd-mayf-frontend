@@ -21,7 +21,7 @@
 ## Tech Stack
 - React
 - HTML5
-- CSS3
+- Sass
 - Javascript(ES6)
 - GitHub
 - Trello
