@@ -95,13 +95,15 @@ const Detail = () => {
     }
   };
 
-  const copyClipBoard = async (text) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert('클립보드에 링크가 복사되었습니다.');
-    } catch (error) {
-      alert('클립보드 복사에 실패하였습니다.');
-    }
+  const copyClipBoard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        alert('클립보드에 링크가 복사되었습니다.');
+      })
+      .catch((error) => {
+        alert('클립보드 복사에 실패하였습니다.');
+      });
   };
 
   const joinClass = () => {
@@ -266,7 +268,7 @@ const Detail = () => {
             userName={userData.name}
           />
         ) : (
-          <div onClick={() => alert('로그인을 하셔야 이용 가능합니다.')}></div>
+          <div onClick={() => alert('로그인을 하셔야 이용 가능합니다.')} />
         )}
 
         <Refund />
