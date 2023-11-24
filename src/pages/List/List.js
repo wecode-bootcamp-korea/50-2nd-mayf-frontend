@@ -112,7 +112,7 @@ const List = () => {
           </div>
           <div className="recentlyBox">
             <div className="recentlyViewedImages">
-              <p className="recentlyWatched">최근 본 상품</p>
+              <p className="recentlyWatched">최근 본 클래스</p>
               {recentlyViewedImages.map((product) => (
                 <div className="recentlyBox" key={product.id}>
                   <Link to={`/detail/${product.id}`}>
