@@ -10,7 +10,7 @@
 ### [FE](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend)
 - [신희현](http://github.com/hxxhyun) : 상세 페이지 및 호스트 마이 페이지
 - 최민지
-- [임시현](http://github.com/jsm00929) : 카카오 소셜로그인, 카카오페이 충전, 유저 마이 페이지, 관리자 페이지
+- [임시현](http://github.com/jsm00929) : 소셜로그인, 충전, 유저 마이 페이지, 관리자 페이지
 
 ### [BE](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-backend)
 - [유진서](http://github.com/coderjins)
