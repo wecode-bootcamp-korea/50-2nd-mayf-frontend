@@ -37,19 +37,16 @@
 - 호스트 마이페이지 : 호스트의 개인 정보 수정, 강의 내역 표시 - 추가 - 수정 기능, 보유 크레딧을 현금화 시킬 수 있는 정산 기능(실제 현금화 X), 유저와의 실시간 채팅 기능 구현
 
 ## Preview
-- 상세 페이지
-<img width="1512" alt="스크린샷 2023-11-24 오후 1 23 32" src="https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/cef4aea6-0406-4491-9454-1af969886071">
-<img width="1512" alt="스크린샷 2023-11-24 오후 1 23 39" src="https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/095bc914-ebf8-4b34-bf77-a984ef678248">
-<img width="1512" alt="스크린샷 2023-11-24 오후 1 23 56" src="https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/30371cce-0995-46c2-8e1f-ceda2c72d2b1">
+### User
 
-- 호스트 마이 페이지
+### Host
 
 ## User Scenario
 ### 1. 회원가입 및 로그인
 1. 하루살이 웹사이트 접속
 2. 하루 로그인
 
-### 2. 상품 주문
+### 2. 강의 신청
 1. 로그인 시 이동하는 강의 리스트 페이지 이동
 2. 원하는 강의 클릭
 3. 상세 페이지에서 수강할 인원 수 변경
