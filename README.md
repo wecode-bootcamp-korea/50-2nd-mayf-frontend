@@ -53,7 +53,7 @@
 [Youtube Link](https://www.youtube.com/watch?v=cVoA37Jss4o)
 
 ### User
-<img src="https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/d7c67f8e-4e5d-40d9-aeb2-5dd1851e3043" width = "300" height = "200"/>
+<img src="https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/d7c67f8e-4e5d-40d9-aeb2-5dd1851e3043" width = "1600" height = "900"/>
 
 ### Host
 ![호스트 프리뷰(고품질)](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/1adcaaae-cfc6-4b30-b4af-8bf5a616208b)
