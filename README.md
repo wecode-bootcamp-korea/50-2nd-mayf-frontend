@@ -10,7 +10,7 @@
 ## Contributors
 ### [FE](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend)
 - [최민지(Project Manager)](http://github.com/fullminji) : Nav, 메인 페이지, 상품리스트 페이지
-- [신희현](http://github.com/hxxhyun) : 상세 페이지 및 호스트 마이 페이지
+- [신희현](http://github.com/hxxhyun) : 상세 페이지 호스트 마이 페이지
 - [임시현](http://github.com/jsm00929) : 소셜로그인, 충전, 유저 마이 페이지, 관리자 페이지
 
 ### [BE](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-backend)
