@@ -43,13 +43,13 @@
 [Youtube Link](https://www.youtube.com/watch?v=cVoA37Jss4o)
 
 ### User
-![유저 프리뷰](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/1db5b49f-ddc3-4887-9def-59bed317057f)
+![유저 프리뷰(고품질)](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/d7c67f8e-4e5d-40d9-aeb2-5dd1851e3043)
 
 ### Host
-![호스트 프리뷰](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/0f7be9ed-9cda-4485-b979-eb622af23dbb)
+![호스트 프리뷰(고품질)](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/1adcaaae-cfc6-4b30-b4af-8bf5a616208b)
 
 ### Admin
-![개인정보 가린 풀버전](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/9bf6233b-c3a9-4e72-9b21-5ad310f91d3c)
+![관리자 프리뷰(고품질)](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/b235d8ea-2b41-48db-a12f-ee6b13e71df5)
 
 
 ## User Scenario
