@@ -35,7 +35,7 @@
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
   <img src="http://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">
   <img src="http://img.shields.io/badge/trello-0052CC?style=for-the-badge&logo=trello&logoColor=white">
-  <img src="http://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=black">
+  <img src="http://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
 </div>
 
 ## Features
