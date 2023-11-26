@@ -56,10 +56,10 @@
 <img src="https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/d7c67f8e-4e5d-40d9-aeb2-5dd1851e3043" width = "1600" height = "900"/>
 
 ### Host
-![호스트 프리뷰(고품질)](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/1adcaaae-cfc6-4b30-b4af-8bf5a616208b)
+<img src="https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/1adcaaae-cfc6-4b30-b4af-8bf5a616208b" width = "1600" height = "900"/>
 
 ### Admin
-![관리자 프리뷰(고품질)](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/b235d8ea-2b41-48db-a12f-ee6b13e71df5)
+<img src = "https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend/assets/96459468/b235d8ea-2b41-48db-a12f-ee6b13e71df5" width = "1600" height = "900"/>
 
 
 ## User Scenario
