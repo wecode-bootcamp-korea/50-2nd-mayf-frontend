@@ -9,12 +9,12 @@
 
 ## Contributors
 ### [FE](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend)
-- [최민지](http://github.com/fullminji)(Project-Manager) : Nav, 메인 페이지, 상품리스트 페이지
+- [최민지(Project Manager)](http://github.com/fullminji) : Nav, 메인 페이지, 상품리스트 페이지
 - [신희현](http://github.com/hxxhyun) : 상세 페이지 및 호스트 마이 페이지
 - [임시현](http://github.com/jsm00929) : 소셜로그인, 충전, 유저 마이 페이지, 관리자 페이지
 
 ### [BE](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-backend)
-- [유진서](http://github.com/coderjins)(Product-Manager) : 강의 및 스케줄 관련 API
+- [유진서(Product-Manager)](http://github.com/coderjins) : 강의 및 스케줄 관련 API
 - [이주현](http://github.com/juhyunju) : 이미지, 채팅 관련 API
 - [김문영](https://github.com/kimmunyeong) : 강사, 수강생, 관리자 관련 API
 - [노범석](https://github.com/prodigy0831) : 결제 및 QR코드 전송, 위시리스트 관련 API
