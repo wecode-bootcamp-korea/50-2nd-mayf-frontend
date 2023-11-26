@@ -19,7 +19,16 @@
 - [김문영](https://github.com/kimmunyeong)
 - [노범석](https://github.com/prodigy0831)
 
-## Tech Stack
+<div align=center><h1>📚 TECH STACKS</h1></div>
+<div align=center>
+  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+  <img src="https://img.shields.io/badge/sass-CC6699?style=fot-the-badge&logo=sass&logoColor=white">
+  <img src="https://img.shields.io/badge/socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white">
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 - React
 - HTML5
 - Sass
@@ -28,6 +37,7 @@
 - Trello
 - Slack
 - Notion
+</div>
 
 ## Features
 - 로그인(회원가입 포함) 페이지 : 카카오 소셜로그인 API를 통해 가입, 로그인 동시에 되도록 구현
