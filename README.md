@@ -9,15 +9,15 @@
 
 ## Contributors
 ### [FE](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-frontend)
+- [최민지](http://github.com/fullminji)(Project-Manager) : Nav, 메인 페이지, 상품리스트 페이지
 - [신희현](http://github.com/hxxhyun) : 상세 페이지 및 호스트 마이 페이지
-- [최민지](http://github.com/fullminji) : Nav, 메인 페이지, 상품리스트 페이지
 - [임시현](http://github.com/jsm00929) : 소셜로그인, 충전, 유저 마이 페이지, 관리자 페이지
 
 ### [BE](https://github.com/wecode-bootcamp-korea/50-3rd-mayfly-backend)
-- [유진서](http://github.com/coderjins)
-- [이주현](http://github.com/juhyunju)
-- [김문영](https://github.com/kimmunyeong)
-- [노범석](https://github.com/prodigy0831)
+- [유진서](http://github.com/coderjins)(Product-Manager) : 강의 및 스케줄 관련 API
+- [이주현](http://github.com/juhyunju) : 이미지, 채팅 관련 API
+- [김문영](https://github.com/kimmunyeong) : 강사, 수강생, 관리자 관련 API
+- [노범석](https://github.com/prodigy0831) : 결제 및 QR코드 전송, 위시리스트 관련 API
 
 <div align=center><h1>📚 TECH STACKS</h1></div>
 <div align=center>
@@ -46,7 +46,7 @@
 - 관리자 페이지 : 유저 목록 조회/삭제/복구, 호스트 목록 조회/삭제/복구, 클래스 목록 조회/삭제/복구/클래스별 상세 정보 모달창을 통해 조회 구현
 - 리스트 페이지 : Nav에서 메인 카테고리 클릭시 해당되는 상품 리스트 페이지, 최근 본 상품 기능 구현, 정렬 및 검색바 기능 구현, 서브 카테고리 필터 기능 구현
 - 상세 페이지 : 원데이 클래스에 대한 상세 내용 표시, 카카오 지도 API를 통해 지도 구현, 소켓을 활용한 실시간 채팅 문의 기능, 스케줄과 인원수를 통한 강의 신청
-- 호스트 마이페이지 : 호스트의 개인 정보 수정, 강의 내역 표시 / 추가 / 수정 기능, 보유 크레딧을 현금화 시킬 수 있는 정산 기능(실제 현금화 X), 유저와의 실시간 채팅 기능 구현
+- 호스트 마이페이지 : 호스트의 개인 정보 수정, 강의 내역 표시 / 추가(이미지 S3 업로드 후 S3에서 받은 URL 업로드) / 수정 기능(이미지 S3업로드 후 S3에서 받은 URL 업로드), 보유 크레딧을 현금화 시킬 수 있는 정산 기능(실제 현금화 X), 유저와의 실시간 채팅 기능 구현
 
 ## Preview
 [Youtube Link](https://www.youtube.com/watch?v=cVoA37Jss4o)
